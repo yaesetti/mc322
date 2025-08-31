@@ -1,4 +1,4 @@
-package lab01;
+package lab01.src;
 import java.util.Random;
 
 public abstract class Character {
@@ -29,7 +29,7 @@ public abstract class Character {
         System.out.printf("Name: %s\n", this.name);
         System.out.printf("Heatlh Points: %d\n", this.healthPoints);
         System.out.printf("Will Points: %d\n", this.willPoints);
-        System.out.printf("strength: %d\n", this.strength);
+        System.out.printf("Strength: %d\n", this.strength);
     }
 
     public void attack(Character target) {
