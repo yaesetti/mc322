@@ -1,5 +1,4 @@
 package lab01.src;
-import java.util.Random;
 
 public abstract class Character {
     private String name;
@@ -32,9 +31,5 @@ public abstract class Character {
         System.out.printf("Strength: %d\n", this.strength);
     }
 
-    public void attack(Character target) {
-        Random randomNumber = new Random();
-        int d6 = randomNumber.nextInt(6);
-        target.receiveDamage(d6 + strength);
-    }
+    public abstract void attack(Character target);
 }
