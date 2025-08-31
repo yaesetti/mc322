@@ -31,7 +31,6 @@ public abstract class Character {
         return this.strength;
     }
 
-
     public void receiveDamage(int damage) {
         if (this.healthPoints - damage <= 0) {
             this.healthPoints = 0;
