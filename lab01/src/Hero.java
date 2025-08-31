@@ -13,6 +13,10 @@ public abstract class Hero extends Character {
         super(name, healthPoints, willPoints, strength);
     }
 
+    public int getLevel() {
+        return this.level;
+    }
+
     public void gainExp(int exp) {
         this.exp += exp;
 
@@ -20,7 +24,7 @@ public abstract class Hero extends Character {
         
         // It needs to be a loop because the player can level up multiple times
         // if the amount of exp gained is big enough.
-        while (this.exp >= expPerLevel[this.level]) {
+        while (this.exp >= expPerLevel[this.level + 1]) {
             this.level++;
         }
     }
