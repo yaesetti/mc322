@@ -18,3 +18,4 @@ public abstract class Monster extends Character{
         System.out.printf("Experience Value: %d\n", this.expValue);
     }
 }
+//teste
