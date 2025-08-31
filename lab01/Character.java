@@ -1,4 +1,5 @@
 package lab01;
+import java.util.Random;
 
 public abstract class Character {
     private String name;
@@ -32,6 +33,8 @@ public abstract class Character {
     }
 
     public void attack(Character target) {
-        target.receiveDamage(4 + strength);
+        Random randomNumber = new Random();
+        int d6 = randomNumber.nextInt(6);
+        target.receiveDamage(d6 + strength);
     }
 }
