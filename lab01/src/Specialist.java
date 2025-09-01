@@ -3,13 +3,15 @@ import java.util.Random;
 
 public class Specialist extends Hero{
     private String[] weaponList = {"Sword", "Bow", "Pistol", "Boomerang"};
-    private String weapon;
-
+    private int weaponIndex;
+    
     public Specialist(String nome, int healthPoints, int willPoints,
-                      int strength, int weaponIndex) {
+    int strength, int weaponIndex) {
         super(nome, healthPoints, willPoints, strength);
-        this.weapon = weaponList[weaponIndex];
+        this.weaponIndex = weaponIndex;
     }
+    
+    private String weapon = weaponList[weaponIndex];
 
     @Override
     public void attack(Character target) {
@@ -33,7 +35,19 @@ public class Specialist extends Hero{
         else {
             damage = d6/2;
         }
-        
+
         target.receiveDamage(damage);
+    }
+
+    @Override
+    public void useSpecialSkill(Character target) {
+        this.weaponIndex++;
+
+        if (this.weaponIndex > 3) {
+            this.weaponIndex = 0;
+        }
+
+        target.receiveDamage(2);
+        attack(target);
     }
 }
