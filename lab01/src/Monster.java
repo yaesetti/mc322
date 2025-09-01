@@ -5,7 +5,7 @@ public abstract class Monster extends Character{
     private int expValue;
 
     public Monster(String name, int healthPoints, int willPoints, int strength,
-                   int dangerRating,int expValue) {
+                   int dangerRating, int expValue) {
         super(name, healthPoints, willPoints, strength);
         this.dangerRating = dangerRating;
         this.expValue = expValue;

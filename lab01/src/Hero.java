@@ -1,8 +1,8 @@
 package lab01.src;
 
 public abstract class Hero extends Character {
-    private int level = 1;
-    private int exp = 0;
+    private int level;
+    private int exp;
 
     // Array that indicates the amount of exp a Hero needs to be the level it's position
     // indicates. For example: 2700 exp is necessary to be at level 4.
@@ -11,6 +11,8 @@ public abstract class Hero extends Character {
 
     public Hero(String name, int healthPoints, int willPoints, int strength) {
         super(name, healthPoints, willPoints, strength);
+        this.level = 1;
+        this.exp = 0;
     }
 
     public int getLevel() {

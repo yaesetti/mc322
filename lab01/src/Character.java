@@ -15,6 +15,10 @@ public abstract class Character {
         this.strength = strength;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public int getHealthPoints() {
         return this.healthPoints;
     }
