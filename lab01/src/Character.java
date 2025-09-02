@@ -3,8 +3,8 @@ package lab01.src;
 public abstract class Character {
     private String name;
     private int healthPoints;
-    private boolean isKnocked;
-    private int willPoints; // Kind of the Mana/Energy that will be used.
+    private boolean isKnocked; // If a character's HP is <= 0.
+    private int willPoints; // Kind of the Mana/Energy that will be used. WIP.
     private int strength;
 
     public Character(String name, int healthPoints, int willPoints, int strength) {
@@ -32,6 +32,8 @@ public abstract class Character {
     }
 
     public void receiveDamage(int damage) {
+        // If the damage is enough to knock a character, the healthPoints will be set to 0,
+        // because the HP can not go below 0, and the atribute isKnocked will be set to true.
         if (this.healthPoints - damage <= 0) {
             this.healthPoints = 0;
             this.isKnocked = true;
@@ -40,6 +42,7 @@ public abstract class Character {
         this.healthPoints -= damage;
     }
 
+    // Its not necessary to print the isKnocked atribute.
     public void printStatus() {
         System.out.printf("Name: %s\n", this.name);
         System.out.printf("Heatlh Points: %d\n", this.healthPoints);

@@ -1,8 +1,16 @@
 package lab01.src;
 import java.util.Random;
 
+// Specialists are humans that, even without having any super powers, fight for what
+// is right. They normally depend on weapons, and are proficient in many of them.
+// Real life examples would be: Batman, Hawkeye, Green Arrow...
+
+// This whole class depends on the weapons.
 public class Specialist extends Hero{
-    private String[] weaponList = {"Sword", "Bow", "Pistol", "Boomerang"};
+    // Altough this list is not necessary for the funtionalities. It makes
+    // it easier to imagine and keep track of what is happening.
+    private final String[] weaponList = {"Sword", "Bow", "Pistol", "Boomerang"};
+
     private int weaponIndex;
     
     public Specialist(String nome, int healthPoints, int willPoints,
@@ -11,6 +19,7 @@ public class Specialist extends Hero{
         this.weaponIndex = weaponIndex;
     }
 
+    // Each weapon will cause damage differently.
     @Override
     public void attack(Character target) {
         int damage;
@@ -39,9 +48,14 @@ public class Specialist extends Hero{
 
     @Override
     public void useSpecialSkill(Character target) {
-        this.weaponIndex++;
+        // Name: Versatility
+        // Description: Surprise an enemy by suddenly changing the kind of weapon
+        //              being used, while also dealing 2 damage.
 
-        if (this.weaponIndex > 3) {
+        this.weaponIndex++;
+        
+        // Verifies if the weaponIndex is bigger than the amount of possible weapons.
+        if (this.weaponIndex > this.weaponList.length - 1) {
             this.weaponIndex = 0;
         }
 
