@@ -5,8 +5,11 @@ public class Main {
         Mutant hero = new Mutant("Singed", 30, 25, 2);
 
         // Monsters
-        Monster enemies[];
-        enemies[0] = new Monster();
+        Monster[] enemies = {
+        new Thug("Garen", 7, 7, 1),
+        new CorruptedMutant("Jax", 8, 5, 2);
+        new Thug("Darius", 7, 7, 1);
+        };
 
         String story = """
 
@@ -31,7 +34,7 @@ public class Main {
         hero.printStatus();
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
 
-        outerLoop: for (int i = 0; i < 3; i++) {
+        outerLoop: for (int i = 0; i < enemies.lenght; i++) {
             Monster enemy = enemies[i];
             System.out.printf("Oh no! The %s is comming!\n", enemy.getName());
             while (!enemy.getIsKnocked()) {
@@ -45,6 +48,13 @@ public class Main {
 
                     break outerLoop;
                 }
+                System.out.println("++++++++++++++++++++ HERO ++++++++++++++++++++");
+                hero.printStatus();
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+
+                System.out.println("++++++++++++++++++++ ENEMY +++++++++++++++++++");
+                enemy.printStatus();
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
             }
 
             hero.gainExp(enemy.getExpValue());
