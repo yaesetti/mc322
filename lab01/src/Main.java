@@ -34,7 +34,7 @@ public class Main {
         hero.printStatus();
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
 
-        outerLoop: for (int i = 0; i < enemies.lenght; i++) {
+        outerLoop: for (int i = 0; i < enemies.length; i++) {
             Monster enemy = enemies[i];
             System.out.printf("Oh no! The %s is comming!\n", enemy.getName());
             while (!enemy.getIsKnocked()) {
@@ -59,5 +59,11 @@ public class Main {
 
             hero.gainExp(enemy.getExpValue());
         }
+        System.out.println("                     -=[VICTORY]=-");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        System.out.printf ("%s won the battle, knocked all 3 monsters and\n", hero.getName());
+        System.out.printf ("saved the old lady's life! What a hero!\n\n");
+        System.out.printf ("%s finished this conflict at Level %d\n", hero.getName(), hero.getLevel());
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
 }
