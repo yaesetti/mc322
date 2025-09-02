@@ -3,10 +3,12 @@ import java.util.Random;
 
 public class Mutant extends Hero {
     private int mutantEnergy;
+    private int maxMutantEnergy;
 
     public Mutant(String name, int healthPoints, int willPoints, int strength) {
         super(name, healthPoints, willPoints, strength);
         this.mutantEnergy = 2 * getLevel();
+        this.maxMutantEnergy = this.mutantEnergy;
     }
 
     @Override
@@ -25,7 +27,13 @@ public class Mutant extends Hero {
 
     @Override
     public void useSpecialSkill(Character target) {
-        this.mutantEnergy += 2;
+        if (this.mutantEnergy + 2 > this.maxMutantEnergy) {
+            this.mutantEnergy = this.maxMutantEnergy;
+        }
+        else {
+            this.mutantEnergy += 2;
+        }
+
         target.receiveDamage(2);
     }
 }

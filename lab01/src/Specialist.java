@@ -10,8 +10,6 @@ public class Specialist extends Hero{
         super(nome, healthPoints, willPoints, strength);
         this.weaponIndex = weaponIndex;
     }
-    
-    private String weapon = weaponList[weaponIndex];
 
     @Override
     public void attack(Character target) {
@@ -20,16 +18,16 @@ public class Specialist extends Hero{
 
         int d6 = randomNumber.nextInt(6) + 1;
         
-        if (this.weapon.equals("Sword")) {
+        if (this.weaponList[weaponIndex].equals("Sword")) {
             damage = d6 + getStrength();
         }
-        else if (this.weapon.equals("Bow")) {
+        else if (this.weaponList[weaponIndex].equals("Bow")) {
             damage = d6;
         }
-        else if (this.weapon.equals("Pistol")) {
+        else if (this.weaponList[weaponIndex].equals("Pistol")) {
             damage = d6 + 1;
         }
-        else if (this.weapon.equals("Boomerang")) {
+        else if (this.weaponList[weaponIndex].equals("Boomerang")) {
             damage = d6/2 + 2 + getStrength();
         }
         else {

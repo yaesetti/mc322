@@ -23,6 +23,10 @@ public abstract class Character {
         return this.healthPoints;
     }
 
+    public boolean getIsKnocked() {
+        return this.isKnocked;
+    }
+
     public int getStrength() {
         return this.strength;
     }

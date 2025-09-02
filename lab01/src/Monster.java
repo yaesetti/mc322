@@ -11,6 +11,10 @@ public abstract class Monster extends Character{
         this.expValue = expValue;
     }
 
+    public int getExpValue() {
+        return this.expValue;
+    }
+
     @Override
     public void printStatus() {
         super.printStatus();
