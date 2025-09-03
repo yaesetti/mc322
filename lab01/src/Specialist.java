@@ -22,6 +22,11 @@ public class Specialist extends Hero{
     // Each weapon will cause damage differently.
     @Override
     public void attack(Character target) {
+        if(this.getIsKnocked()) {
+            System.out.printf("&s is knocked, so they can't attack!\n", this.getName());
+            return;
+        }
+        
         int damage;
         Random randomNumber = new Random();
 
@@ -44,6 +49,8 @@ public class Specialist extends Hero{
         }
 
         target.receiveDamage(damage);
+        System.out.printf("%s dealt %d point(s) of damage to %s!\n",
+                          this.getName(), damage, target.getName());
     }
 
     @Override

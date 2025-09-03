@@ -2,13 +2,13 @@ package lab01.src;
 
 public class Main {
     public static void main(String[] args) {
-        Mutant hero = new Mutant("Singed", 30, 25, 2);
+        Mutant hero = new Mutant("Singed", 30, 25, 3);
 
         // Monsters
         Monster[] enemies = {
-        new Thug("Garen", 7, 7, 1),
-        new CorruptedMutant("Jax", 8, 5, 2);
-        new Thug("Darius", 7, 7, 1);
+        new ThugGang("BlackPink", 7, 7, 2, 1, 200, 2),
+        new TwistedMutant("Jax", 8, 5, 2, 1, 100),
+        new ThugGang("NewJeans", 7, 7, 1, 1, 200, 3),
         };
 
         String story = """
@@ -56,9 +56,14 @@ public class Main {
                 enemy.printStatus();
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
             }
-
-            hero.gainExp(enemy.getExpValue());
+            if (hero instanceof Mutant && enemy instanceof TwistedMutant) {
+                hero.gainExp(enemy.getExpValue() * 2);
+            }
+            else {
+                hero.gainExp(enemy.getExpValue());
+            }
         }
+
         System.out.println("                     -=[VICTORY]=-");
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.printf ("%s won the battle, knocked all 3 monsters and\n", hero.getName());

@@ -15,18 +15,19 @@ public abstract class Hero extends Character {
         this.exp = 0;
     }
 
-    public int getLevel() {
+    public final int getLevel() {
         return this.level;
     }
 
     public void gainExp(int exp) {
         this.exp += exp;
 
-        // Verify if after gaining exp the Hero can level up.
+        // Verify if after gaining exp the Hero can level up, and if the Hero isn't
+        // already max level.
         
         // It needs to be a loop because the player can level up multiple times
         // if the amount of exp gained is big enough.
-        while (this.exp >= expPerLevel[this.level + 1]) {
+        while (this.exp >= expPerLevel[this.level + 1] && this.level < this.expPerLevel.length - 1) {
             this.level++;
         }
     }

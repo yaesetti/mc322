@@ -1,8 +1,10 @@
 package lab01.src;
 import java.util.Random;
 
+//"Twisted mutants are those who tampered with their own
+// genes in a ruthless quest for power."
 public class TwistedMutant extends Monster {
-    //"Twisted mutants are those who tampered with their own genes in a ruthless quest for power."
+
     private final int maxHealthPoints;
 
     public TwistedMutant (String name, int healthPoints, int willPoints, int strength,
@@ -13,6 +15,11 @@ public class TwistedMutant extends Monster {
 
     @Override
     public void attack(Character target) {
+        if(this.getIsKnocked()) {
+            System.out.printf("&s is knocked, so they can't attack!\n", this.getName());
+            return;
+        }
+        
         int damage;
 
         Random randomNumber = new Random();
@@ -24,5 +31,7 @@ public class TwistedMutant extends Monster {
             damage = d6 + this.getStrength();
         }
         target.receiveDamage(damage);
+        System.out.printf("%s dealt %d point(s) of damage to %s!\n",
+                          this.getName(), damage, target.getName());
     }
 }
