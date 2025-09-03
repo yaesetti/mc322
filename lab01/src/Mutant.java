@@ -46,6 +46,10 @@ public class Mutant extends Hero {
         target.receiveDamage(damage);
         System.out.printf("%s dealt %d point(s) of damage to %s!\n",
                           this.getName(), damage, target.getName());
+        
+        if (target.getHealthPoints() == 0) {
+            System.out.printf("%s knocked %s!\n", this.getName(), target.getName());
+        }
     }
 
     @Override

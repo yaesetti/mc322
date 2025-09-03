@@ -18,7 +18,7 @@ public abstract class Monster extends Character{
     @Override
     public void printStatus() {
         super.printStatus();
-        System.out.printf("Danger Rating: %d\n", this,dangerRating);
+        System.out.printf("Danger Rating: %d\n", this.dangerRating);
         System.out.printf("Experience Value: %d\n", this.expValue);
     }
 }
