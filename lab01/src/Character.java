@@ -1,7 +1,7 @@
 package lab01.src;
 
 public abstract class Character {
-    private String name;
+    private final String name;
     private int healthPoints;
     private boolean isKnocked; // If a character's HP is <= 0.
     private int willPoints; // Kind of the Mana/Energy that will be used. WIP.
