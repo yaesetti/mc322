@@ -33,7 +33,7 @@ public class TwistedMutant extends Monster {
         Random randomNumber = new Random();
         int d6 = randomNumber.nextInt(6) + 1;
 
-        if (this.healthPoints == 04.maxHealth) {
+        if (this.healthPoints == 0.4 * maxHealth) {
             damage = d6 + getStrength() + 4;
         } else {
             damage = d6 + getStrength;
