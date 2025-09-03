@@ -16,7 +16,7 @@ public class TwistedMutant extends Monster {
     @Override
     public void attack(Character target) {
         if(this.getIsKnocked()) {
-            System.out.printf("&s is knocked, so they can't attack!\n", this.getName());
+            System.out.printf("%s is knocked, so they can't attack!\n", this.getName());
             return;
         }
         
