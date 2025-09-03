@@ -6,7 +6,7 @@ public abstract class Hero extends Character {
 
     // Array that indicates the amount of exp a Hero needs to be the level it's position
     // indicates. For example: 2700 exp is necessary to be at level 4.
-    private int[] expPerLevel = {0, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000,
+    private final int[] expPerLevel = {0, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000,
                                  64000};
 
     public Hero(String name, int healthPoints, int willPoints, int strength) {
