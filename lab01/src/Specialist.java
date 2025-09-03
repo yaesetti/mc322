@@ -44,6 +44,9 @@ public class Specialist extends Hero{
         }
 
         target.receiveDamage(damage);
+
+        System.out.printf("-> %s caused %d point(s) of damage to %s!\n", 
+        this.getName(), damage, target.getName());
     }
 
     @Override

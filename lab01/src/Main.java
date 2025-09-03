@@ -37,10 +37,17 @@ public class Main {
         outerLoop: for (int i = 0; i < enemies.length; i++) {
             Monster enemy = enemies[i];
             System.out.printf("Oh no! The %s is comming!\n", enemy.getName());
+
+            int turnCounter = 0;
             while (!enemy.getIsKnocked()) {
+                System.out.printf("---------------- TURN %d ----------------\n", turnCounter);
+
                 hero.attack(enemy);
                 enemy.attack(hero);
 
+                System.out.printf("-----------------------------------------\n");
+                turnCounter++;
+                
                 if (hero.getIsKnocked()) {
                     System.out.println("XXXXXXXXXXXXXXXXX");
                     System.out.println("X   GAME OVER   X");
