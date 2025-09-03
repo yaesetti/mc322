@@ -1,8 +1,8 @@
 package lab01.src;
 
 public abstract class Monster extends Character{
-    private int dangerRating;
-    private int expValue;
+    private final int dangerRating;
+    private final int expValue;
 
     public Monster(String name, int healthPoints, int willPoints, int strength,
                    int dangerRating, int expValue) {
