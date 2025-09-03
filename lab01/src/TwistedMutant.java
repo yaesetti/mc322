@@ -5,7 +5,8 @@ public class TwistedMutant extends Monster {
     //"Twisted mutants are those who tampered with their own genes in a ruthless quest for power."
     private final int maxHealthPoints;
 
-    public TwistedMutant (String name, int healthPoints, int willPoints, int strength, int dangerRanting, int expValue, int maxHealth) {
+    public TwistedMutant (String name, int healthPoints, int willPoints, int strength,
+                          int dangerRanting, int expValue) {
         super(name, healthPoints, willPoints, strength, dangerRanting, expValue);
         this.maxHealthPoints = healthPoints;
     }
