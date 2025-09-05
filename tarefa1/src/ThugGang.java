@@ -1,8 +1,8 @@
-package lab01.src;
 import java.util.Random;
 
+// Thugs always stick together!
 public class ThugGang extends Monster {
-    private int groupSize;
+    private int groupSize; // How many members in the Gang
 
     public ThugGang(String name, int healthPoints, int willPoints, int strength,
                  int dangerRanting, int expValue, int groupSize) {

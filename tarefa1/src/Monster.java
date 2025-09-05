@@ -1,5 +1,3 @@
-package lab01.src;
-
 public abstract class Monster extends Character{
     private final int dangerRating;
     protected int expValue;

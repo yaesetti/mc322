@@ -1,4 +1,3 @@
-package lab01.src;
 import java.util.Random;
 
 // Specialists are humans that, even without having any super powers, fight for what

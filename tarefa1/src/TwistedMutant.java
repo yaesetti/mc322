@@ -1,4 +1,3 @@
-package lab01.src;
 import java.util.Random;
 
 //"Twisted mutants are those who tampered with their own
@@ -25,6 +24,7 @@ public class TwistedMutant extends Monster {
         Random randomNumber = new Random();
         int d6 = randomNumber.nextInt(6) + 1;
 
+        // When it's life is bellow 40%, it deals 4 points of damage more
         if (this.getHealthPoints() <= 0.4 * this.maxHealthPoints) {
             damage = d6 + this.getStrength() + 4;
         } else {

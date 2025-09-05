@@ -1,0 +1,10 @@
+# Ignore compiled Java class files
+*.class
+
+# Ignore the bin directory (compiler output)
+bin/
+
+# Ignore common OS/editor junk
+.DS_Store
+*.swp
+*.log

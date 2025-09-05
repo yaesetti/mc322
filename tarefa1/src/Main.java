@@ -1,8 +1,6 @@
-package lab01.src;
-
 public class Main {
     public static void main(String[] args) {
-        Mutant hero = new Mutant("Singed", 10, 25, 3);
+        Mutant hero = new Mutant("Singed", 20, 25, 3);
 
         // Monsters
         Monster[] enemies = {
@@ -31,21 +29,25 @@ public class Main {
         System.out.println(story);
 
         System.out.println();
-        System.out.println("++++++++++++++++++++ HERO ++++++++++++++++++++");
+        System.out.println("-=-=-=-=-=-=-=-=- HERO STATS =-=-=-=-=-=-=-=-=-");
         hero.printStatus();
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
 
         int turnCounter = 1;
+        // Loops for the amount of enemies
         for (int i = 0; i < enemies.length; i++) {
             Monster enemy = enemies[i];
             System.out.printf("Oh no! The %s is comming!\n", enemy.getName());
+
+            // Loops while the enemy still has HP.
             while (!enemy.getIsKnocked()) {
                 System.out.println();
                 System.out.printf("--------------------[TURN %d]---------------------\n", turnCounter);
                 hero.attack(enemy);
                 enemy.attack(hero);
 
+                // If hero's HP == 0 -> Game Over
                 if (hero.getIsKnocked()) {
                     System.out.println();
                     System.out.println("          XXXXXXXXXXXXXXXXX");
@@ -55,6 +57,8 @@ public class Main {
 
                     return;
                 }
+
+                // Prints the status of both fighters after every round
                 System.out.println();
                 System.out.println("++++++++++++++++++++ HERO ++++++++++++++++++++");
                 hero.printStatus();
@@ -68,7 +72,10 @@ public class Main {
 
                 turnCounter++;
             }
-            if (hero instanceof Mutant && enemy instanceof TwistedMutant) {
+
+            // If a Mutant knocks a TwistedMutant, the Mutant gain more Exp
+            if (hero.getClass().equals(Mutant.class) &&
+                enemy.getClass().equals(TwistedMutant.class)) {
                 hero.gainExp(enemy.getExpValue() * 2);
             }
             else {

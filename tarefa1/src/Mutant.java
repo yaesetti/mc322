@@ -1,4 +1,3 @@
-package lab01.src;
 import java.util.Random;
 
 // Mutants are meta-humans that, for whatever reason, have habilities and power

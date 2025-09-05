@@ -1,5 +1,3 @@
-package lab01.src;
-
 public abstract class Hero extends Character {
     private int level;
     private int exp;
