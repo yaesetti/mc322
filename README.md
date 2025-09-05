@@ -1,10 +1,7 @@
 # MC322
 
-# TODO:
-  -> Main.java<br>
-    -> Character creation<br>
-    -> Challange presentation<br>
-    -> Turn simulation loop (3 turns)<br>
-    -> Challange conclusion<br>
-  -> Another concrete Hero class<br>
-  -> Both concrete Monster classes<br>
+Super-hero themed RPG<br>
+<br>
+Hero Classes: Mutant, Specialist<br>
+<br>
+Monster Classes: TwistedMutant, ThugGang<br>
