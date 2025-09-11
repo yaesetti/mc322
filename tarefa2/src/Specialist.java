@@ -1,21 +1,21 @@
-import java.util.Random;
-
-// Specialists are humans that, even without having any super powers, fight for what
 // is right. They normally depend on weapons, and are proficient in many of them.
 // Real life examples would be: Batman, Hawkeye, Green Arrow...
 
 // This whole class depends on the weapons.
 public class Specialist extends Hero{
-    // Altough this list is not necessary for the funtionalities. It makes
-    // it easier to imagine and keep track of what is happening.
-    private final String[] weaponList = {"Sword", "Bow", "Pistol", "Boomerang"};
-
+    private WeaponType prefferedWeapon;
     private int weaponIndex;
-    
+    private final Weapon[] specialistWeapons = {
+        new Sword(1, 4, this),
+        new Gauntlet(1, 4, this),
+        new Pistol(1, this)
+    };
+
     public Specialist(String nome, int healthPoints, int willPoints,
-    int strength, int weaponIndex) {
+                      int strength, WeaponType prefferedWeapon) {
         super(nome, healthPoints, willPoints, strength);
-        this.weaponIndex = weaponIndex;
+        this.weaponIndex = 0;
+        this.prefferedWeapon = prefferedWeapon;
     }
 
     // Each weapon will cause damage differently.
@@ -25,27 +25,12 @@ public class Specialist extends Hero{
             System.out.printf("%s is knocked, so they can't attack!\n", this.getName());
             return;
         }
-        
-        int damage;
-        Random randomNumber = new Random();
 
-        int d6 = randomNumber.nextInt(6) + 1;
-        
-        if (this.weaponList[weaponIndex].equals("Sword")) {
-            damage = d6 + getStrength();
+        if (this.getWeapon().getClass().equals()) {
+
         }
-        else if (this.weaponList[weaponIndex].equals("Bow")) {
-            damage = d6;
-        }
-        else if (this.weaponList[weaponIndex].equals("Pistol")) {
-            damage = d6 + 1;
-        }
-        else if (this.weaponList[weaponIndex].equals("Boomerang")) {
-            damage = d6/2 + 2 + getStrength();
-        }
-        else {
-            damage = d6/2;
-        }
+
+        int damage = this.getWeapon().getDamage();
 
         target.receiveDamage(damage);
         System.out.printf("%s dealt %d point(s) of damage to %s!\n",
@@ -53,6 +38,13 @@ public class Specialist extends Hero{
 
         if (target.getHealthPoints() == 0) {
             System.out.printf("%s knocked %s!\n", this.getName(), target.getName());
+        }
+
+        if (Dice.roll(1, 100) >= 70) {
+            this.setLuck(true);
+        }
+        else {
+            this.setLuck(false);
         }
     }
 
@@ -62,10 +54,14 @@ public class Specialist extends Hero{
         // Description: Surprise an enemy by suddenly changing the kind of weapon
         //              being used, while also dealing 2 damage.
 
+        if (this.getLuck() && this.specialistWeapons[this.weaponIndex] != ) {
+
+        }
+
         this.weaponIndex++;
         
         // Verifies if the weaponIndex is bigger than the amount of possible weapons.
-        if (this.weaponIndex > this.weaponList.length - 1) {
+        if (this.weaponIndex > this.specialistWeapons.length - 1) {
             this.weaponIndex = 0;
         }
 

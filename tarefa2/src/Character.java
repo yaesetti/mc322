@@ -2,18 +2,17 @@ public abstract class Character {
     private final String name;
     private int healthPoints;
     private boolean isKnocked; // If a character's HP is <= 0.
-    private int willPoints; // Kind of the Mana/Energy that will be used. WIP.
-    private final int strength;
+    private final int willPoints; // Kind of the Mana/Energy that will be used. WIP.
+    private int strength;
     private Weapon weapon;
 
     public Character(String name, int healthPoints, int willPoints,
-                     int strength, Weapon weapon) {
+                     int strength) {
         this.name = name;
         this.healthPoints = healthPoints;
         this.isKnocked = false; // A Character can not be created already knocked.
         this.willPoints = willPoints;
         this.strength = strength;
-        this.weapon = weapon;
     }
 
     public String getName() {
@@ -32,8 +31,20 @@ public abstract class Character {
         return this.strength;
     }
 
+    public void setStrength(int newStrength) {
+        this.strength = newStrength;
+    }
+
+    public void setHealthPoints(int newHealthPoints) {
+        this.healthPoints = newHealthPoints;
+    }
+
     public Weapon getWeapon() {
         return this.weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
     public void receiveDamage(int damage) {

@@ -39,6 +39,18 @@ public class Mutant extends Hero {
         if (target.getHealthPoints() == 0) {
             System.out.printf("%s knocked %s!\n", this.getName(), target.getName());
         }
+
+        // Reduce sword sharpness if the Hero is not lucky this turn
+        if (this.getWeapon().getClass().equals(Sword.class) && !this.getLuck()) {
+            this.getWeapon().setSharpness(this.getWeapon().getSharpness() - 1);
+        }
+
+        if (Dice.roll(1, 100) >= 70) {
+            this.setLuck(true);
+        }
+        else {
+            this.setLuck(false);
+        }
     }
 
     @Override
@@ -49,14 +61,23 @@ public class Mutant extends Hero {
 
         // If by using this skill the amount of Mutant Energy would bypass the limit
         // the energy is capped at the maximun instead.
-        if (this.mutantEnergy + 2 > this.maxMutantEnergy) {
+
+        if (this.getLuck()) {
             this.mutantEnergy = this.maxMutantEnergy;
+            target.receiveDamage(4);
         }
         else {
+            if (this.mutantEnergy + 2 > this.maxMutantEnergy) {
+            this.mutantEnergy = this.maxMutantEnergy;
+            }
+            else {
             this.mutantEnergy += 2;
-        }
+            }
 
-        // Causes the damage to the enemy.
-        target.receiveDamage(2);
+            // Causes the damage to the enemy.
+            if (this.getLuck()) {
+                target.receiveDamage(2);
+            }
+        }
     }
 }

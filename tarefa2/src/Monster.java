@@ -1,12 +1,14 @@
 public abstract class Monster extends Character{
     private final int dangerRating;
-    protected int expValue;
+    private final int[] expValueList = {75, 150, 225, 375, 750, 900, 1100,
+                                        1400, 1600, 1900};
+    private final int expValue;
 
     public Monster(String name, int healthPoints, int willPoints, int strength,
-                   int dangerRating, int expValue) {
+                   int dangerRating) {
         super(name, healthPoints, willPoints, strength);
         this.dangerRating = dangerRating;
-        this.expValue = expValue;
+        this.expValue = expValueList[this.dangerRating];
     }
 
     public int getExpValue() {

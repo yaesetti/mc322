@@ -1,12 +1,20 @@
 public class Main {
     public static void main(String[] args) {
         Mutant hero = new Mutant("Singed", 20, 25, 3);
+        Gauntlet poisonGauntlet = new Gauntlet(1, 3, hero);
+        hero.setWeapon(poisonGauntlet);
 
         // Monsters
         Monster[] enemies = {
-        new ThugGang("Ionia Gang", 7, 7, 2, 1, 200, 2),
-        new TwistedMutant("Jax", 8, 5, 2, 1, 100),
-        new ThugGang("Zaun Gang", 7, 7, 1, 1, 200, 3),
+        new ThugGang("Ionia Gang", 7, 7, 2, 1, 2),
+        new TwistedMutant("Jax", 8, 5, 2, 1),
+        new ThugGang("Zaun Gang", 7, 7, 1, 1, 3),
+        };
+
+        Weapon[] weapons = {
+            new Sword(1, 3, enemies[0]),
+            new Pistol(1, enemies[1]),
+            new Fists(enemies[2])
         };
 
         String story = """
@@ -38,6 +46,7 @@ public class Main {
         // Loops for the amount of enemies
         for (int i = 0; i < enemies.length; i++) {
             Monster enemy = enemies[i];
+            enemy.setWeapon(weapons[i]);
             System.out.printf("Oh no! The %s is comming!\n", enemy.getName());
 
             // Loops while the enemy still has HP.

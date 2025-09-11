@@ -7,8 +7,8 @@ public class TwistedMutant extends Monster {
     private final int maxHealthPoints;
 
     public TwistedMutant (String name, int healthPoints, int willPoints, int strength,
-                          int dangerRanting, int expValue) {
-        super(name, healthPoints, willPoints, strength, dangerRanting, expValue);
+                          int dangerRanting) {
+        super(name, healthPoints, willPoints, strength, dangerRanting);
         this.maxHealthPoints = healthPoints;
     }
 

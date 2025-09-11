@@ -22,4 +22,8 @@ public abstract class Weapon {
     public DamageType getDamageType() {
         return this.damageType;
     }
+
+    public void setUser(Character new_user) {
+        this.user = new_user;
+    }
 }
