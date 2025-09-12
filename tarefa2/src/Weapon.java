@@ -1,5 +1,5 @@
 public abstract class Weapon {
-    private final int damage;
+    private int damage;
     private final int minLevel;
     private final DamageType damageType;
     private Character user;
@@ -13,6 +13,10 @@ public abstract class Weapon {
 
     public int getDamage() {
         return this.damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public int getMinLevel() {

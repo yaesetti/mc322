@@ -11,6 +11,12 @@ public class Pistol extends Weapon {
     }
 
     public void setBullet(int bullets) {
-        this.bullets = bullets;
+        if (bullets <= 0) {
+            this.bullets = 0;
+            this.setDamage(Dice.roll(1, 3) + this.getUser().getStrength());
+        }
+        else {
+            this.bullets = bullets;
+        }
     }
 }
