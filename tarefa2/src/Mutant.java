@@ -41,10 +41,19 @@ public class Mutant extends Hero {
         }
 
         // Reduce sword sharpness if the Hero is not lucky this turn
-        if (this.getWeapon().getClass().equals(Sword.class) && !this.getLuck()) {
-            this.getWeapon().setSharpness(this.getWeapon().getSharpness() - 1);
+        if (this.getWeapon().getClass().equals(Sword.class) && 
+            !this.getLuck()) {
+            Sword sword = (Sword)this.getWeapon();
+            sword.setSharpnesss(sword.getSharpness() - 1);
         }
 
+        // Spend one bullet per attack
+        if (this.getWeapon().getClass().equals(Pistol.class)) {
+                Pistol pistol = (Pistol)this.getWeapon();
+                pistol.setBullet(pistol.getBullet() - 1);
+            }
+
+        // Rolls luck
         if (Dice.roll(1, 100) >= 70) {
             this.setLuck(true);
         }

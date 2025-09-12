@@ -23,6 +23,10 @@ public abstract class Weapon {
         return this.damageType;
     }
 
+    public Character getUser() {
+        return this.user;
+    }
+
     public void setUser(Character new_user) {
         this.user = new_user;
     }

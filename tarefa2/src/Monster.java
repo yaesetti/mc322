@@ -4,6 +4,12 @@ public abstract class Monster extends Character{
                                         1400, 1600, 1900};
     private final int expValue;
 
+    private final Weapon[] droppableWeapons = {
+        new Sword(2, 4, null),
+        new Gauntlet(3, 3, null),
+        new Pistol(3, null)
+    };
+    
     public Monster(String name, int healthPoints, int willPoints, int strength,
                    int dangerRating) {
         super(name, healthPoints, willPoints, strength);
@@ -13,6 +19,10 @@ public abstract class Monster extends Character{
 
     public int getExpValue() {
         return this.expValue;
+    }
+
+    public Weapon dropWeapon() {
+        return droppableWeapons[Dice.roll(1, 3) - 1];
     }
 
     @Override
