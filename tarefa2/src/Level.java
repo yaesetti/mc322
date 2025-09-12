@@ -1,12 +1,12 @@
-import java.util.List;
+import java.util.ArrayList;
 
-public abstract class Level {
+public class Level {
     private final int challenge;
     private final String name;
     private final String description;
-    private final List<Monster> monsters;
+    private final ArrayList<Monster> monsters;
 
-    public Level (int challenge, String name, String description, List<Monster> monsters) {
+    public Level (int challenge, String name, String description, ArrayList<Monster> monsters) {
         this.challenge = challenge;
         this.name = name;
         this.description = description;
@@ -25,7 +25,17 @@ public abstract class Level {
         return this.description;
     }
 
-    public List<Monster> getMonsters() {
+    public ArrayList<Monster> getMonsters() {
         return this.monsters;
+    }
+
+    public void printInfos() {
+        System.out.printf("Level Challange: %d\n", this.challenge);
+        System.out.printf("Level Name: %s\n", this.name);
+        System.out.printf("Level Description: %s\n", this.description);
+        System.out.printf("Number of Monsters: %d", this.monsters.size());
+        for (Monster monster: monsters) {
+            System.out.printf("-> %s\n", monster.getName());
+        }
     }
 }

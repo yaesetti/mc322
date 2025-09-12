@@ -5,9 +5,9 @@ public abstract class Monster extends Character{
     private final int expValue;
 
     private final Weapon[] droppableWeapons = {
-        new Sword(2, 4, null),
-        new Gauntlet(3, 3, null),
-        new Pistol(3, null)
+        new Sword(2, 4, this),
+        new Gauntlet(3, 3, this),
+        new Pistol(3, this)
     };
     
     public Monster(String name, int healthPoints, int willPoints, int strength,

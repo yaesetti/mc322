@@ -45,6 +45,7 @@ public abstract class Character {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+        weapon.setUser(this);
     }
 
     public void receiveDamage(int damage) {

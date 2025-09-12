@@ -1,40 +1,10 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         Mutant hero = new Mutant("Singed", 20, 25, 3);
         Gauntlet poisonGauntlet = new Gauntlet(1, 3, hero);
         hero.setWeapon(poisonGauntlet);
-
-        // Monsters
-        Monster[] enemies = {
-        new ThugGang("Ionia Gang", 7, 7, 2, 1, 2),
-        new TwistedMutant("Jax", 8, 5, 2, 1),
-        new ThugGang("Zaun Gang", 7, 7, 1, 1, 3),
-        };
-
-        Weapon[] weapons = {
-            new Sword(1, 3, enemies[0]),
-            new Pistol(1, enemies[1]),
-            new Fists(enemies[2])
-        };
-
-        String story = """
-
-                -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-                In a world full of crime and violence only a true hero could save us...
-
-                Maybe he is not the one we want, but the one we need...
-
-
-                During a dark night, right when a poor old lady was about to get
-                attacked by three awlfull monsters, our hero was there!
-
-                %s!!
-
-                -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-                """.formatted(hero.getName());
-        
-        System.out.println(story);
 
         System.out.println();
         System.out.println("-=-=-=-=-=-=-=-=- HERO STATS =-=-=-=-=-=-=-=-=-");
@@ -42,54 +12,68 @@ public class Main {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
 
-        int turnCounter = 1;
-        // Loops for the amount of enemies
-        for (int i = 0; i < enemies.length; i++) {
-            Monster enemy = enemies[i];
-            enemy.setWeapon(weapons[i]);
-            System.out.printf("Oh no! The %s is comming!\n", enemy.getName());
+        ArrayList<Level> levels = LevelBuilder.generateLevels(3); 
 
-            // Loops while the enemy still has HP.
-            while (!enemy.getIsKnocked()) {
-                System.out.println();
-                System.out.printf("--------------------[TURN %d]---------------------\n", turnCounter);
-                hero.attack(enemy);
-                enemy.attack(hero);
+        // Loops for the amount of levels
+        int levelCounter = 0;
+        for (Level level: levels) {
+            System.out.printf("                 -={LEVEL %d}=-\n", levelCounter);
+            level.printInfos();
+            int turnCounter = 0;
+            ArrayList<Monster> levelMonsters = level.getMonsters();
+            for (int i = 0; i < levelMonsters.size() - 1; i++){
+                Monster enemy = levelMonsters.get(i);
 
-                // If hero's HP == 0 -> Game Over
-                if (hero.getIsKnocked()) {
+                // Loops while the enemy still has HP.
+                while (!enemy.getIsKnocked()) {
                     System.out.println();
-                    System.out.println("          XXXXXXXXXXXXXXXXX");
-                    System.out.println("          X   GAME OVER   X");
-                    System.out.println("          XXXXXXXXXXXXXXXXX");
+                    System.out.printf("--------------------[TURN %d]---------------------\n", turnCounter);
+                    hero.attack(enemy);
+                    enemy.attack(hero);
+
+                    // If hero's HP == 0 -> Game Over
+                    if (hero.getIsKnocked()) {
+                        System.out.println();
+                        System.out.println("          XXXXXXXXXXXXXXXXX");
+                        System.out.println("          X   GAME OVER   X");
+                        System.out.println("          XXXXXXXXXXXXXXXXX");
+                        System.out.println();
+
+                        return;
+                    }
+
+                    // Prints the status of both fighters after every round
+                    System.out.println();
+                    System.out.println("++++++++++++++++++++ HERO ++++++++++++++++++++");
+                    hero.printStatus();
+                    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println();
 
-                    return;
+                    System.out.println("#################### ENEMY ###################");
+                    enemy.printStatus();
+                    System.out.println("##############################################");
+                    System.out.println();
+
+                    turnCounter++;
                 }
 
-                // Prints the status of both fighters after every round
-                System.out.println();
-                System.out.println("++++++++++++++++++++ HERO ++++++++++++++++++++");
-                hero.printStatus();
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-                System.out.println();
-
-                System.out.println("#################### ENEMY ###################");
-                enemy.printStatus();
-                System.out.println("##############################################");
-                System.out.println();
-
-                turnCounter++;
+                // If a Mutant knocks a TwistedMutant, the Mutant gain more Exp
+                if (hero.getClass().equals(Mutant.class) &&
+                    enemy.getClass().equals(TwistedMutant.class)) {
+                    hero.gainExp(enemy.getExpValue() * 2);
+                }
+                else {
+                    hero.gainExp(enemy.getExpValue());
+                }
+                
+                if (hero.getLuck()) {
+                    Weapon droppedWeapon = enemy.dropWeapon();
+                    if (droppedWeapon.getDamage() > hero.getWeapon().getDamage()) {
+                        hero.setWeapon(droppedWeapon);
+                    }
+                }
             }
-
-            // If a Mutant knocks a TwistedMutant, the Mutant gain more Exp
-            if (hero.getClass().equals(Mutant.class) &&
-                enemy.getClass().equals(TwistedMutant.class)) {
-                hero.gainExp(enemy.getExpValue() * 2);
-            }
-            else {
-                hero.gainExp(enemy.getExpValue());
-            }
+            levelCounter++;
         }
 
         System.out.println();

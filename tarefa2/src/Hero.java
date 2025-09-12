@@ -59,7 +59,9 @@ public abstract class Hero extends Character {
         if (this.getLevel() >= weapon.getMinLevel()) {
             super.setWeapon(weapon);
         }
-        System.out.println("Level too low to equip this weapon.");
+        else {
+            System.out.println("-> Level too low to equip this weapon.");
+        }
     }
 
     public abstract void useSpecialSkill(Character target);
