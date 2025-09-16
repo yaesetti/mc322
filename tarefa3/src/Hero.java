@@ -16,7 +16,6 @@ public abstract class Hero extends Character {
         this.level = 1; // All heros start at level 1
         this.exp = 0;
         this.luck = false;
-        this.actions.add(new CombatAction());
     }
 
     public int getLevel() {
@@ -73,5 +72,5 @@ public abstract class Hero extends Character {
     @Override
     public CombatAction chooseAction(Character target) {
 
-    } 
+    }
 }

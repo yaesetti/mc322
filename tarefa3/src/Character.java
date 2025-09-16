@@ -83,6 +83,11 @@ public abstract class Character implements Combatant{
         this.healthPoints -= damage;
     }
 
+    @Override
+    public void receiveHealing(int healing) {
+        this.healthPoints += healing;
+    }
+
     // Its not necessary to print the isKnocked atribute.
     public void printStatus() {
         System.out.printf("Name: %s\n", this.name);

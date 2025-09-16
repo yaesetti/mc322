@@ -21,6 +21,5 @@ public class Attack implements CombatAction {
         else {
             System.out.printf("%s is knocked, so they can't attack!\n", this.getName());
         }
-            
     }
 }
