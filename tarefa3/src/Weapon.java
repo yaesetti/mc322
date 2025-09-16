@@ -1,14 +1,21 @@
-public abstract class Weapon {
+public abstract class Weapon implements Item{
+    private final String name;
     private int damage;
     private final int minLevel;
     private final DamageType damageType;
     private Character user;
 
-    public Weapon(int damage, int minLevel, DamageType damageType, Character user) {
+    public Weapon(String name, int damage, int minLevel, DamageType damageType, Character user) {
+        this.name = name;
         this.damage = damage;
         this.minLevel = minLevel;
         this.damageType = damageType;
         this.user = user;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     public int getDamage() {

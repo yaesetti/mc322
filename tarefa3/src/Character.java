@@ -1,4 +1,4 @@
-public abstract class Character {
+public abstract class Character implements Combatant{
     private final String name;
     private int healthPoints;
     private boolean isKnocked; // If a character's HP is <= 0.
@@ -15,18 +15,22 @@ public abstract class Character {
         this.strength = strength;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public int getHealthPoints() {
         return this.healthPoints;
     }
 
+    @Override
     public boolean getIsKnocked() {
         return this.isKnocked;
     }
 
+    @Override
     public int getStrength() {
         return this.strength;
     }
@@ -48,6 +52,7 @@ public abstract class Character {
         weapon.setUser(this);
     }
 
+    @Override
     public void receiveDamage(int damage) {
         // If the damage is enough to knock a character, the healthPoints will be set to 0,
         // because the HP can not go below 0, and the atribute isKnocked will be set to true.
@@ -68,4 +73,6 @@ public abstract class Character {
     }
 
     public abstract void attack(Character target);
+
+    public abstract CombatAction chooseAction(Character target);
 }

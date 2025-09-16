@@ -1,7 +1,10 @@
+import java.util.List;
+
 public abstract class Hero extends Character {
     private int level;
     private int exp;
     private boolean luck;
+    private List<CombatAction> actions;
 
     // Array that indicates the amount of exp a Hero needs to be the level it's position
     // indicates. For example: 2700 exp is necessary to be at level 4.
@@ -65,4 +68,9 @@ public abstract class Hero extends Character {
     }
 
     public abstract void useSpecialSkill(Character target);
+
+    @Override
+    public CombatAction chooseAction(Character target) {
+
+    } 
 }
