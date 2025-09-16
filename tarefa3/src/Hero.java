@@ -1,10 +1,10 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Hero extends Character {
     private int level;
     private int exp;
     private boolean luck;
-    private List<CombatAction> actions;
+    private ArrayList<CombatAction> actions = new ArrayList<>();
 
     // Array that indicates the amount of exp a Hero needs to be the level it's position
     // indicates. For example: 2700 exp is necessary to be at level 4.
@@ -16,6 +16,7 @@ public abstract class Hero extends Character {
         this.level = 1; // All heros start at level 1
         this.exp = 0;
         this.luck = false;
+        this.actions.add(new CombatAction());
     }
 
     public int getLevel() {

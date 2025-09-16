@@ -2,7 +2,7 @@ public abstract class Character implements Combatant{
     private final String name;
     private int healthPoints;
     private boolean isKnocked; // If a character's HP is <= 0.
-    private final int willPoints; // Kind of the Mana/Energy that will be used. WIP.
+    private int willPoints; // Kind of the Mana/Energy that will be used. WIP.
     private int strength;
     private Weapon weapon;
 
@@ -31,22 +31,41 @@ public abstract class Character implements Combatant{
     }
 
     @Override
+    public void setIsKnocked(boolean newIsKnocked) {
+        this.isKnocked = newIsKnocked;
+    }
+
+    @Override
+    public int getWillPoints() {
+        return this.willPoints;
+    }
+
+    @Override
+    public void setWillPoints(int newWillPoints) {
+        this.willPoints = newWillPoints;
+    }
+
+    @Override
     public int getStrength() {
         return this.strength;
     }
 
+    @Override
     public void setStrength(int newStrength) {
         this.strength = newStrength;
     }
 
+    @Override
     public void setHealthPoints(int newHealthPoints) {
         this.healthPoints = newHealthPoints;
     }
 
+    @Override
     public Weapon getWeapon() {
         return this.weapon;
     }
 
+    @Override
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
         weapon.setUser(this);

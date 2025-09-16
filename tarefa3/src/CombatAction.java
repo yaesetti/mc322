@@ -1,9 +1,7 @@
 public interface CombatAction {
-    public void executeAction(Combatant user, Combatant target);
+    public String getName();
 
-    public void attack(Combatant target);
+    public boolean canExecute(Combatant actor);
 
-    public void useSpecialSkill(Combatant target);
-
-    public void heal(Combatant target);
+    public void execute(Combatant actor, Combatant target);
 }
