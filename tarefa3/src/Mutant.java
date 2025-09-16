@@ -1,3 +1,4 @@
+// Mutants are meta-humans that, for whatever reason, have habilities and power
 // beyond the common beings and use them to save people.
 // Real life examples would be: Flash, Superman, Cyclops, Storm...
 
@@ -10,6 +11,9 @@ public class Mutant extends Hero {
         super(name, healthPoints, willPoints, strength);
         this.mutantEnergy = 2 * this.getLevel();
         this.maxMutantEnergy = mutantEnergy;
+
+        this.getActions().add(new MutantAttack());
+        this.getActions().add(new MutantSpecialSkill());
     }
 
     @Override
@@ -18,48 +22,16 @@ public class Mutant extends Hero {
         maxMutantEnergy = 2 * this.getLevel(); // Updates the maxMutantEnergy per level.
     }
 
-    @Override
-    public void attack(Character target) {
-        if(this.getIsKnocked()) {
-            System.out.printf("%s is knocked, so they can't attack!\n", this.getName());
-            return;
-        }
+    public int getMutantEnergy() {
+        return this.mutantEnergy;
+    }
 
-        int damage = this.getWeapon().getDamage();
-        // If a Mutant have enough energy to buff it's damage, it will
-        if (this.mutantEnergy >= 1) {
-            damage += 2;
-            this.mutantEnergy -= 1;
-        }
+    public void setMutantEnergy(int newMutantEnergy) {
+        this.mutantEnergy = newMutantEnergy;
+    }
 
-        target.receiveDamage(damage);
-        System.out.printf("%s dealt %d point(s) of damage to %s!\n",
-                          this.getName(), damage, target.getName());
-        
-        if (target.getHealthPoints() == 0) {
-            System.out.printf("%s knocked %s!\n", this.getName(), target.getName());
-        }
-
-        // Reduce sword sharpness if the Hero is not lucky this turn
-        if (this.getWeapon().getClass().equals(Sword.class) && 
-            !this.getLuck()) {
-            Sword sword = (Sword)this.getWeapon();
-            sword.setSharpnesss(sword.getSharpness() - 1);
-        }
-
-        // Spend one bullet per attack
-        if (this.getWeapon().getClass().equals(Pistol.class)) {
-                Pistol pistol = (Pistol)this.getWeapon();
-                pistol.setBullet(pistol.getBullet() - 1);
-            }
-
-        // Rolls luck
-        if (Dice.roll(1, 100) >= 70) {
-            this.setLuck(true);
-        }
-        else {
-            this.setLuck(false);
-        }
+    public int getMaxMutantEnergy() {
+        return this.maxMutantEnergy;
     }
 
     @Override

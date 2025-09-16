@@ -96,7 +96,6 @@ public abstract class Character implements Combatant{
         System.out.printf("Strength: %d\n", this.strength);
     }
 
-    public abstract void attack(Character target);
-
-    public abstract CombatAction chooseAction(Character target);
+    @Override
+    public abstract CombatAction chooseAction(Combatant target);
 }

@@ -1,4 +1,4 @@
-public class SpecialSkill implements CombatAction{
+public abstract class SpecialSkill implements CombatAction{
     @Override
     public String getName() {
         return "Special Skill";
@@ -8,9 +8,7 @@ public class SpecialSkill implements CombatAction{
     public boolean canExecute(Combatant actor) {
         return actor.getWillPoints() >= 2;
     }
-    
+
     @Override
-    public void execute(Combatant actor, Combatant target) {
-        
-    }
+    public abstract void execute(Combatant actor, Combatant target);
 }

@@ -11,7 +11,7 @@ public class Sword extends Weapon {
         return this.sharpness;
     }
 
-    public void setSharpnesss(int sharpness) {
+    public void setSharpness(int sharpness) {
         this.sharpness = sharpness;
     }
 }

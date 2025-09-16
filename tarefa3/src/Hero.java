@@ -4,7 +4,7 @@ public abstract class Hero extends Character {
     private int level;
     private int exp;
     private boolean luck;
-    private ArrayList<CombatAction> actions = new ArrayList<>();
+    private final ArrayList<CombatAction> actions = new ArrayList<>();
 
     // Array that indicates the amount of exp a Hero needs to be the level it's position
     // indicates. For example: 2700 exp is necessary to be at level 4.
@@ -16,6 +16,8 @@ public abstract class Hero extends Character {
         this.level = 1; // All heros start at level 1
         this.exp = 0;
         this.luck = false;
+
+        actions.add(new Heal());
     }
 
     public int getLevel() {
@@ -28,6 +30,10 @@ public abstract class Hero extends Character {
 
     public void setLuck(boolean luck) {
         this.luck = luck;
+    }
+
+    public ArrayList<CombatAction> getActions() {
+        return this.actions;
     }
 
     public void gainExp(int exp) {
@@ -67,10 +73,9 @@ public abstract class Hero extends Character {
         }
     }
 
-    public abstract void useSpecialSkill(Character target);
-
     @Override
-    public CombatAction chooseAction(Character target) {
-
+    public CombatAction chooseAction(Combatant target) {
+        int actionIndex = Dice.roll(1, actions.size()) - 1;
+        return actions.get(actionIndex);
     }
 }
