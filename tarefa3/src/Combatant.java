@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public interface Combatant {
     public String getName();
 
@@ -20,6 +22,16 @@ public interface Combatant {
     public Weapon getWeapon();
 
     public void setWeapon(Weapon newWeapon);
+
+    public boolean getLuck();
+
+    public void setLuck(boolean newLuck);
+
+    public HashMap<String, CombatAction> getActions();
+
+    public int getAttackDamage();
+
+    public void useSpecialSkill(Combatant target);
 
     public void receiveDamage(int damage);
 

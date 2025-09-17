@@ -3,12 +3,12 @@
 
 // This whole class depends on the weapons.
 public class Specialist extends Hero{
-    private int prefferedWeapon;
+    private final int prefferedWeapon;
     private int weaponIndex;
     private final Weapon[] specialistWeapons = {
-        new Sword(1, 4, this),
-        new Gauntlet(1, 4, this),
-        new Pistol(1, this)
+        new Sword("Specialist Sword", 1, 4, this),
+        new Gauntlet("Specialist Gauntlets", 1, 4, this),
+        new Pistol("Specialist Pistol", 1, this)
     };
 
     public Specialist(String nome, int healthPoints, int willPoints,
@@ -18,53 +18,20 @@ public class Specialist extends Hero{
         this.prefferedWeapon = prefferedWeapon;
     }
 
-    // Each weapon will cause damage differently.
     @Override
-    public void attack(Character target) {
-        if(this.getIsKnocked()) {
-            System.out.printf("%s is knocked, so they can't attack!\n", this.getName());
-            return;
-        }
-
+    public int getAttackDamage() {
         int damage = this.getWeapon().getDamage();
-
-        // If the Specialist is using their favorite weapon.
+        
         if (this.getWeapon().getClass().equals(this.specialistWeapons[
-            prefferedWeapon].getClass())) {damage += 4;}
-
-        target.receiveDamage(damage);
-
-        System.out.printf("%s dealt %d point(s) of damage to %s!\n",
-                          this.getName(), damage, target.getName());
-
-        if (target.getHealthPoints() == 0) {
-            System.out.printf("%s knocked %s!\n", this.getName(), target.getName());
-        }
-
-        // Reduce sword sharpness if the Hero is not lucky this turn
-        if (this.getWeapon().getClass().equals(Sword.class) && 
-            !this.getLuck()) {
-            Sword sword = (Sword)this.getWeapon();
-            sword.setSharpnesss(sword.getSharpness() - 1);
-        }
-
-        // Spend one bullet per attack
-        if (this.getWeapon().getClass().equals(Pistol.class)) {
-                Pistol pistol = (Pistol)this.getWeapon();
-                pistol.setBullet(pistol.getBullet() - 1);
+            prefferedWeapon].getClass())) {
+                damage += 4;
             }
 
-        // Rolls luck
-        if (Dice.roll(1, 100) >= 70) {
-            this.setLuck(true);
-        }
-        else {
-            this.setLuck(false);
-        }
+        return damage;
     }
 
     @Override
-    public void useSpecialSkill(Character target) {
+    public void useSpecialSkill(Combatant target) {
         // Name: Versatility
         // Description: Surprise an enemy by suddenly changing the kind of weapon
         //              being used, while also dealing 2 damage.
@@ -82,6 +49,6 @@ public class Specialist extends Hero{
         }
 
         target.receiveDamage(2);
-        attack(target);
+        this.actions.get("Attack").execute(this, target);
     }
 }

@@ -32,8 +32,8 @@ public class Level {
     public void printInfos() {
         System.out.printf("Level Challange: %d\n", this.challenge);
         System.out.printf("Level Name: %s\n", this.name);
-        System.out.printf("Level Description: %s\n", this.description);
-        System.out.printf("Number of Monsters: %d", this.monsters.size());
+        System.out.printf("Level Description: \n%s\n", this.description);
+        System.out.printf("Number of Monsters: %d\n", this.monsters.size());
         for (Monster monster: monsters) {
             System.out.printf("-> %s\n", monster.getName());
         }

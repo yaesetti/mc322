@@ -7,19 +7,29 @@ public class Mutant extends Hero {
     private int mutantEnergy;
     private int maxMutantEnergy;
 
+
     public Mutant(String name, int healthPoints, int willPoints, int strength) {
         super(name, healthPoints, willPoints, strength);
         this.mutantEnergy = 2 * this.getLevel();
         this.maxMutantEnergy = mutantEnergy;
-
-        this.getActions().add(new MutantAttack());
-        this.getActions().add(new MutantSpecialSkill());
     }
 
     @Override
     public void gainExp(int exp) {
         super.gainExp(exp);
         maxMutantEnergy = 2 * this.getLevel(); // Updates the maxMutantEnergy per level.
+    }
+
+    @Override
+    public int getAttackDamage() {
+        int damage = this.getWeapon().getDamage();
+            // If a Mutant have enough mutant energy to buff it's damage, it will
+            if (this.getMutantEnergy() >= 1) {
+                damage += 2;
+                this.setMutantEnergy(this.getMutantEnergy() - 1);
+            }
+
+        return damage;
     }
 
     public int getMutantEnergy() {
@@ -35,7 +45,7 @@ public class Mutant extends Hero {
     }
 
     @Override
-    public void useSpecialSkill(Character target) {
+    public void useSpecialSkill(Combatant target) {
         // Name: Restore Energy
         // Description: Focus your inner powers and restore 2 Mutant Energy while also
         //              dealing 2 damage to an enemy.
@@ -44,17 +54,16 @@ public class Mutant extends Hero {
         // the energy is capped at the maximun instead.
 
         if (this.getLuck()) {
-            this.mutantEnergy = this.maxMutantEnergy;
+            this.setMutantEnergy(this.getMaxMutantEnergy());
             target.receiveDamage(4);
         }
         else {
-            if (this.mutantEnergy + 2 > this.maxMutantEnergy) {
-            this.mutantEnergy = this.maxMutantEnergy;
+            if (this.getMutantEnergy() + 2 > this.getMaxMutantEnergy()) {
+                this.setMutantEnergy(this.getMaxMutantEnergy());
             }
             else {
-            this.mutantEnergy += 2;
+                this.setMutantEnergy(this.getMutantEnergy() + 2);
             }
-
             // Causes the damage to the enemy.
             if (this.getLuck()) {
                 target.receiveDamage(2);

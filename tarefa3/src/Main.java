@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         Mutant hero = new Mutant("Singed", 20, 25, 3);
-        Gauntlet poisonGauntlet = new Gauntlet(1, 3, hero);
+        Gauntlet poisonGauntlet = new Gauntlet("Singed's Poison Gauntlets",
+                                                1, 3, hero);
         hero.setWeapon(poisonGauntlet);
 
         System.out.println();
@@ -15,11 +16,11 @@ public class Main {
         ArrayList<Level> levels = LevelBuilder.generateLevels(3); 
 
         // Loops for the amount of levels
-        int levelCounter = 0;
+        int levelCounter = 1;
         for (Level level: levels) {
-            System.out.printf("                 -={LEVEL %d}=-\n", levelCounter);
+            System.out.printf("----------------------={LEVEL %d}=----------------\n", levelCounter);
             level.printInfos();
-            int turnCounter = 0;
+            int turnCounter = 1;
             ArrayList<Monster> levelMonsters = level.getMonsters();
             for (int i = 0; i < levelMonsters.size() - 1; i++){
                 Monster enemy = levelMonsters.get(i);
@@ -27,9 +28,9 @@ public class Main {
                 // Loops while the enemy still has HP.
                 while (!enemy.getIsKnocked()) {
                     System.out.println();
-                    System.out.printf("--------------------[TURN %d]---------------------\n", turnCounter);
-                    hero.attack(enemy);
-                    enemy.attack(hero);
+                    System.out.printf("--------------------[TURN %d]--------------------\n", turnCounter);
+                    hero.chooseAction(enemy).execute(hero, enemy);
+                    enemy.chooseAction(hero).execute(enemy, hero);
 
                     // If hero's HP == 0 -> Game Over
                     if (hero.getIsKnocked()) {
@@ -67,9 +68,12 @@ public class Main {
                 }
                 
                 if (hero.getLuck()) {
-                    Weapon droppedWeapon = enemy.dropWeapon();
-                    if (droppedWeapon.getDamage() > hero.getWeapon().getDamage()) {
-                        hero.setWeapon(droppedWeapon);
+                    Item droppedItem = enemy.dropLoot();
+
+                    if (droppedItem instanceof Weapon droppedWeapon) {
+                        if (droppedWeapon.getDamage() > hero.getWeapon().getDamage()) {
+                            hero.setWeapon(droppedWeapon);
+                        }
                     }
                 }
             }

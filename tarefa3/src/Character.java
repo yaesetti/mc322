@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public abstract class Character implements Combatant{
     private final String name;
     private int healthPoints;
@@ -5,6 +8,7 @@ public abstract class Character implements Combatant{
     private int willPoints; // Kind of the Mana/Energy that will be used. WIP.
     private int strength;
     private Weapon weapon;
+    protected final HashMap<String, CombatAction> actions = new HashMap<>();
 
     public Character(String name, int healthPoints, int willPoints,
                      int strength) {
@@ -13,6 +17,9 @@ public abstract class Character implements Combatant{
         this.isKnocked = false; // A Character can not be created already knocked.
         this.willPoints = willPoints;
         this.strength = strength;
+
+        actions.put("Attack", new Attack());
+        actions.put("Heal", new Heal());
     }
 
     @Override
@@ -72,6 +79,11 @@ public abstract class Character implements Combatant{
     }
 
     @Override
+    public HashMap<String, CombatAction> getActions() {
+        return this.actions;
+    }
+
+    @Override
     public void receiveDamage(int damage) {
         // If the damage is enough to knock a character, the healthPoints will be set to 0,
         // because the HP can not go below 0, and the atribute isKnocked will be set to true.
@@ -97,5 +109,9 @@ public abstract class Character implements Combatant{
     }
 
     @Override
-    public abstract CombatAction chooseAction(Combatant target);
+    public CombatAction chooseAction(Combatant target) {
+        ArrayList<CombatAction> actionsList = new ArrayList<>(this.getActions().values());
+        int actionIndex = Dice.roll(1, actionsList.size()) - 1;
+        return actionsList.get(actionIndex);
+    }
 }
