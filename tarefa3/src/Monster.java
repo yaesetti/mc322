@@ -5,7 +5,7 @@ public abstract class Monster extends Character implements Lootable{
     private final int[] expValueList = {75, 150, 225, 375, 750, 900, 1100,
                                         1400, 1600, 1900};
     private final int expValue;
-    private ArrayList<CombatAction> actions;
+    private final ArrayList<CombatAction> actions = new ArrayList<>();
 
     private final Item[] drops = {
         new Sword("Monster Sword", 2, 4, this),
@@ -18,6 +18,9 @@ public abstract class Monster extends Character implements Lootable{
         super(name, healthPoints, willPoints, strength);
         this.dangerRating = dangerRating;
         this.expValue = expValueList[this.dangerRating];
+
+        this.actions.add(new Heal());
+        this.actions.add(new Attack());
     }
 
     public int getExpValue() {
@@ -38,6 +41,11 @@ public abstract class Monster extends Character implements Lootable{
 
     @Override
     public CombatAction chooseAction(Combatant target) {
-
+        if (this.getHealthPoints() <= 2) {
+            return this.actions.get(0);
+        }
+        else {
+            return this.actions.get(1);
+        }
     }
 }
