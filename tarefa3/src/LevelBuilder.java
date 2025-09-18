@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class LevelBuilder {
+public class LevelBuilder implements LevelBuilder_I {
     private static final String NAME1 = "Downtown";
     private static final String DESCRIPTION1 = """
             In the heart of the most populated city of the contry\n
@@ -26,7 +26,9 @@ public class LevelBuilder {
     private static final String[] NAMEs = {NAME1, NAME2, NAME3};
     private static final String[] DESCRIPTIONs = {DESCRIPTION1, DESCRIPTION2, DESCRIPTION3};
 
-    public static ArrayList<Level> generateLevels(int num) {
+
+    @override
+    public List<Level> generateLevels(int num) {
         ArrayList<Level> levels = new ArrayList<>();
 
         for (int i = 1; i < num + 1; i++) {
