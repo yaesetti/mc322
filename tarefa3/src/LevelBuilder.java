@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class LevelBuilder implements LevelBuilder_I {
+public class LevelBuilder implements LevelBuilder_I, Setting {
     private static final String NAME1 = "Downtown";
     private static final String DESCRIPTION1 = """
             In the heart of the most populated city of the contry\n

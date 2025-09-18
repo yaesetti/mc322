@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Level {
+public class Level implements Level_I {
     private final int challenge;
     private final String name;
     private final String description;
@@ -27,6 +27,11 @@ public class Level {
 
     public ArrayList<Monster> getMonsters() {
         return this.monsters;
+    }
+
+    @Override
+    public getisCompleted (boolean completed) {
+        return this.completed;
     }
 
     public void printInfos() {
