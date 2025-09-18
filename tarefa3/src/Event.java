@@ -1,11 +1,9 @@
 public interface Event {
-    String getName();
-    String getDescription();
+    public String getName();
 
-    boolean CheckTrigger (Hero hero); // Engatilhar acao
-    void Run(); // Executar o evento
+    public String getDescription();
 
-    boolean isActived(); // Garantir se o evento esta acontecendo ou nao
-    
+    public boolean checkTrigger (Hero hero);
 
+    public void execute();
 }

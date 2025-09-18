@@ -13,11 +13,11 @@ public class Main {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
 
-        ArrayList<Level> levels = LevelBuilder.generateLevels(3); 
+        ArrayList<CombatLevel> levels = LevelBuilder.generateLevels(3); 
 
         // Loops for the amount of levels
         int levelCounter = 1;
-        for (Level level: levels) {
+        for (CombatLevel level: levels) {
             System.out.printf("----------------------={LEVEL %d}=----------------\n", levelCounter);
             level.printInfos();
             int turnCounter = 1;
