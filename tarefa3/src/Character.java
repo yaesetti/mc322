@@ -8,6 +8,10 @@ public abstract class Character implements Combatant{
     private int willPoints; // Kind of the Mana/Energy that will be used. WIP.
     private int strength;
     private Weapon weapon;
+    
+    // We are not using List<CombatAction>, intead, we are using
+    // HashMap<String, CombatAction> in order to make it easier and more
+    // scalable.
     protected final HashMap<String, CombatAction> actions = new HashMap<>();
 
     public Character(String name, int healthPoints, int willPoints,
@@ -108,6 +112,9 @@ public abstract class Character implements Combatant{
         System.out.printf("Strength: %d\n", this.strength);
     }
 
+    // Did not make it abstract, even with the document instructing
+    // to do so, because the behavior will be common to all characters,
+    // so it makes sense to be implemented here.
     @Override
     public CombatAction chooseAction(Combatant target) {
         ArrayList<CombatAction> actionsList = new ArrayList<>(this.getActions().values());

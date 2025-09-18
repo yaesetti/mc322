@@ -2,10 +2,7 @@ public abstract class Hero extends Character {
     private int level;
     private int exp;
     private boolean luck;
-    // We are not using List<CombatAction>, intead, we are using
-    // HashMap<String, CombatAction> in order to make it easier and more
-    // scalable.
-
+    
     // Array that indicates the amount of exp a Hero needs to be the level it's position
     // indicates. For example: 2700 exp is necessary to be at level 4.
     private final int[] expPerLevel = {0, 0, 300, 900, 2700, 6500, 14000, 23000,

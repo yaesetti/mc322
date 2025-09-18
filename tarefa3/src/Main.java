@@ -79,7 +79,7 @@ public class Main {
                 
                 // Verifies if the Enemy will drop loot and if
                 // it is worth it for the Hero to take it
-                if (hero.getLuck()) {
+                if (hero.getLuck() && enemy instanceof Lootable) {
                     Item droppedItem = enemy.dropLoot();
 
                     if (droppedItem instanceof Weapon droppedWeapon) {
