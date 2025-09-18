@@ -2,7 +2,7 @@
 
 Use the script to easily compile and run the rpg<br>
 ```console
-foo@bar:~$ ./src./run.sh
+foo@bar:~$ ./src/run.sh
 ```
 
 ## Super-hero themed RPG<br>
