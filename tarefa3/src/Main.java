@@ -13,14 +13,15 @@ public class Main {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
 
-        ArrayList<CombatLevel> levels = LevelBuilder.generateLevels(3); 
+        FixatedLevelBuilder levelBuilder = new FixatedLevelBuilder();
+        ArrayList<CombatLevel> levels = levelBuilder.generateLevels(hero, 3); 
 
         // Loops for the amount of levels
         int levelCounter = 1;
         for (CombatLevel level: levels) {
             System.out.printf("----------------------={LEVEL %d}=----------------\n", levelCounter);
             level.printInfos();
-            int turnCounter = 1;
+
             ArrayList<Monster> levelMonsters = level.getMonsters();
             for (int i = 0; i < levelMonsters.size() - 1; i++){
                 Monster enemy = levelMonsters.get(i);
@@ -28,7 +29,7 @@ public class Main {
                 // Loops while the enemy still has HP.
                 while (!enemy.getIsKnocked()) {
                     System.out.println();
-                    System.out.printf("--------------------[TURN %d]--------------------\n", turnCounter);
+                    System.out.printf("--------------------[TURN %d]--------------------\n", level.getTurnCounter());
                     hero.chooseAction(enemy).execute(hero, enemy);
                     enemy.chooseAction(hero).execute(enemy, hero);
 
@@ -55,7 +56,8 @@ public class Main {
                     System.out.println("##############################################");
                     System.out.println();
 
-                    turnCounter++;
+                    level.getScenario().getEvent().checkTrigger(hero, level);
+                    level.incrementTurnCounter();
                 }
 
                 // If a Mutant knocks a TwistedMutant, the Mutant gain more Exp

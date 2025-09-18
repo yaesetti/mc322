@@ -1,5 +1,5 @@
 import java.util.ArrayList;
 
 public interface LevelBuilder {
-    ArrayList<Level> generateLevels(int num);
+    public ArrayList<CombatLevel> generateLevels(Hero hero, int num);
 }

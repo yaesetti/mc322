@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 
 public class CombatLevel implements Level {
+    private final Hero hero;
     private final Scenario scenario;
     private final int challenge;
     private final ArrayList<Monster> monsters;
+    private int turnCounter;
 
-    public CombatLevel(Scenario scenario, int challenge, ArrayList<Monster> monsters) {
+    public CombatLevel(Hero hero, Scenario scenario, int challenge, ArrayList<Monster> monsters) {
+        this.hero = hero;
         this.scenario = scenario;
         this.challenge = challenge;
         this.monsters = monsters;
+        this.turnCounter = 1;
     }
 
     public int getChallenge() {
@@ -35,11 +39,17 @@ public class CombatLevel implements Level {
     }
 
     @Override
-    public void start(Hero hero) {
-
+    public int getTurnCounter() {
+        return this.turnCounter;
     }
 
-    public void printInfos() {
+    @Override
+    public void incrementTurnCounter() {
+        this.turnCounter++;
+    }
+
+    @Override
+    public void start() {
         System.out.printf("Level Challange: %d\n", this.challenge);
         System.out.printf("Level Name: %s\n", this.scenario.getName());
         System.out.printf("Level Description: \n%s\n", this.scenario.getDescription());
@@ -47,5 +57,7 @@ public class CombatLevel implements Level {
         for (Monster monster: monsters) {
             System.out.printf("-> %s\n", monster.getName());
         }
+
+        this.scenario.applyEffect(this.hero);
     }
 }

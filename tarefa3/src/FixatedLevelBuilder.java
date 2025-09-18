@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class FixatedLevelBuilder implements LevelBuilder{
     @Override
-    public ArrayList<Level> generateLevels(int num) {
-        ArrayList<Level> levels = new ArrayList<>();
+    public ArrayList<CombatLevel> generateLevels(Hero hero, int num) {
+        ArrayList<CombatLevel> levels = new ArrayList<>();
 
         for (int i = 1; i < num + 1; i++) { 
             // Generate a random array of monsters keeping in mind that
@@ -27,7 +27,7 @@ public class FixatedLevelBuilder implements LevelBuilder{
             // Random picker
             int rnd = Dice.roll(1, 3) - 1;
             
-             levels.add(new CombatLevel(scenarios[rnd], i, levelMonsters));
+             levels.add(new CombatLevel(hero, scenarios[rnd], i, levelMonsters));
         }
         return levels;
     }
