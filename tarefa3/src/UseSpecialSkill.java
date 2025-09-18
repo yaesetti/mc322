@@ -1,4 +1,4 @@
-public class SpecialSkill implements CombatAction{
+public class UseSpecialSkill implements CombatAction{
     @Override
     public String getName() {
         return "Special Skill";

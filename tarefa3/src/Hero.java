@@ -2,7 +2,7 @@ public abstract class Hero extends Character {
     private int level;
     private int exp;
     private boolean luck;
-    
+
     // Array that indicates the amount of exp a Hero needs to be the level it's position
     // indicates. For example: 2700 exp is necessary to be at level 4.
     private final int[] expPerLevel = {0, 0, 300, 900, 2700, 6500, 14000, 23000,
@@ -14,7 +14,7 @@ public abstract class Hero extends Character {
         this.exp = 0;
         this.luck = false;
 
-        this.actions.put("Special Skill", new SpecialSkill());
+        this.actions.put("Special Skill", new UseSpecialSkill());
     }
 
     public int getLevel() {
