@@ -5,7 +5,6 @@ public interface Event {
     boolean CheckTrigger (Hero hero); // Engatilhar acao
     void Run(); // Executar o evento
 
-    boolean isActived(); // Garantir se o evento esta acontecendo ou nao
-    
+    boolean isActived(); // Garantir se o evento esta acontecendo ou nao, para saber quando ele acabar
 
 }
