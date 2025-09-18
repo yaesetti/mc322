@@ -5,12 +5,15 @@ public class Level implements Level_I {
     private final String name;
     private final String description;
     private final ArrayList<Monster> monsters;
+    private final Setting setting;
+    private boolean completed;
 
-    public Level (int challenge, String name, String description, ArrayList<Monster> monsters) {
+    public Level (int challenge, String name, String description, ArrayList<Monster> monsters, Setting setting) {
         this.challenge = challenge;
         this.name = name;
         this.description = description;
         this.monsters = monsters;
+        this.completed = false; // comeca nao concluido
     }
 
     public int getChallenge() {
@@ -30,8 +33,19 @@ public class Level implements Level_I {
     }
 
     @Override
-    public getisCompleted (boolean completed) {
+    public void start (Hero hero) {
+        
+    }
+
+
+    @Override
+    public boolean isCompleted () {
         return this.completed;
+    }
+
+    @Override
+    public Setting getSettingType() {
+        return this.setting;
     }
 
     public void printInfos() {
