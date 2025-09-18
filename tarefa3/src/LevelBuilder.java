@@ -1,27 +1,17 @@
 import java.util.ArrayList;
 
 public class LevelBuilder implements LevelBuilder_I, Setting {
-    private static final String NAME1 = "Downtown";
-    private static final String DESCRIPTION1 = """
-            In the heart of the most populated city of the contry\n
-            the criminals run free! Violence is out of control!\n
-            litter, smoke and gray concrete are all you can see...
-            """;
+
+
+
+    private static final String NAME1 = Setting.Downtown.getName();
+    private static final String DESCRIPTION1 = Setting.Downtown.getDescription();
     
-    private static final String NAME2 = "Forest";
-    private static final String DESCRIPTION2 = """
-            The view is pretty and green, but the crime is evil and\n
-            red. Why the villains are here? Maybe camping? Not sure!\n
-            But you can not let them get away!
-            """;
+    private static final String NAME2 = Setting.Forest.getName();
+    private static final String DESCRIPTION2 = Setting.Forest.getDescription();
         
-    private static final String NAME3 = "Ice Cave";
-    private static final String DESCRIPTION3 = """
-            It's so cold you can see smoke comming out of your breath.\n
-            For sure the comfort of the bed would be 100 times better,\n
-            but the crime won't stop by itself. What are these bad guys\n
-            up to in a desert and cold place like this?
-            """;
+    private static final String NAME3 = Setting.Ice_Cave.getName();
+    private static final String DESCRIPTION3 = Setting.Ice_Cave.getDescription();
     
     private static final String[] NAMEs = {NAME1, NAME2, NAME3};
     private static final String[] DESCRIPTIONs = {DESCRIPTION1, DESCRIPTION2, DESCRIPTION3};
