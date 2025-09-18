@@ -6,13 +6,26 @@ public class Heal implements CombatAction {
 
     @Override
     public boolean canExecute(Combatant actor) {
-        return actor.getWillPoints() >= 1;
+        if (actor.getWillPoints() < 1) {
+            System.out.printf("%s doesn't have enough Will Points to heal!\n", this.getName());
+            return false;
+        }
+        if (actor.getIsKnocked()) {
+            System.out.printf("%s is knocked, so they can't heal!\n", this.getName());
+            return false;
+        }
+        return true;
     }
     
     @Override
     public void execute(Combatant actor, Combatant target) {
-        target.receiveHealing(Dice.roll(1, 6) + 6);
+        if (!this.canExecute(actor)) {
+            return;
+        }
+
+        int healing = Dice.roll(1, 6) + 2;
+        target.receiveHealing(healing);
         actor.setWillPoints(actor.getWillPoints() - 1);
-        System.out.printf("%s healed %s!\n", actor.getName(), target.getName());
+        System.out.printf("%s healed %s %d Health Points!\n", actor.getName(), target.getName(), healing);
     }
 }

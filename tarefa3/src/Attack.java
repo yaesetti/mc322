@@ -19,6 +19,10 @@ public class Attack implements CombatAction {
 
     @Override
     public void execute(Combatant actor, Combatant target) {
+        if (!this.canExecute(actor)) {
+            return;
+        }
+        
         // Attack Damage is calculated differently for each class of Combatant
         int damage = actor.getAttackDamage();
         target.receiveDamage(damage);
@@ -26,11 +30,11 @@ public class Attack implements CombatAction {
         // Print the ammount of damage dealt and if it was enough to get them knocked.
         if (target.getIsKnocked()) {
             System.out.printf("%s dealt %d point(s) of damage to %s and knocked them!\n",
-                                this.getName(), damage, target.getName());
+                                actor.getName(), damage, target.getName());
         }
         else {
             System.out.printf("%s dealt %d point(s) of damage to %s!\n",
-                                this.getName(), damage, target.getName());
+                                actor.getName(), damage, target.getName());
         }
 
         if (actor instanceof Hero) {

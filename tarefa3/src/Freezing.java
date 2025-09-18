@@ -1,9 +1,7 @@
 public class Freezing implements Event {
-    private final String name;
     private final String description;
 
     public Freezing() {
-        this.name = "Freezing";
         this.description = """
         It's been too long inside this cold cave,
         your body is starting to feel the damage...
@@ -20,7 +18,7 @@ public class Freezing implements Event {
 
     @Override
     public void execute(Hero hero, CombatLevel level) {
-        System.out.println("********** " + this.name + " **********");
+        System.out.println("************* Freezing **************");
         System.out.println();
         System.out.println(this.description);
         System.out.printf("%s recieved 3 points of Cold Damage\n", hero.getName());

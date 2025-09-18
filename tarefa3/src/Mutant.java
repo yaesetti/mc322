@@ -53,21 +53,32 @@ public class Mutant extends Hero {
         // If by using this skill the amount of Mutant Energy would bypass the limit
         // the energy is capped at the maximun instead.
 
+        int damage;
+        int restoredEnergy = this.mutantEnergy;
+
+        // Critical instance of the Special Skill because the Hero is lucky
         if (this.getLuck()) {
-            this.setMutantEnergy(this.getMaxMutantEnergy());
-            target.receiveDamage(4);
+            restoredEnergy = this.maxMutantEnergy;
+            damage = 4;
         }
+        // Normal instance of the Special Skill
         else {
+            damage = 2;
+
             if (this.getMutantEnergy() + 2 > this.getMaxMutantEnergy()) {
-                this.setMutantEnergy(this.getMaxMutantEnergy());
+                restoredEnergy = this.maxMutantEnergy;
             }
             else {
-                this.setMutantEnergy(this.getMutantEnergy() + 2);
-            }
-            // Causes the damage to the enemy.
-            if (this.getLuck()) {
-                target.receiveDamage(2);
+                restoredEnergy += 2;
             }
         }
+        // Causes the damage to the enemy
+        target.receiveDamage(damage);
+        
+        // Restores the Mutant Energy
+        this.mutantEnergy = restoredEnergy;
+
+        // Prints what happened
+        System.out.printf("%s restored %d Mutant Energy and dealt %d point(s) of damage to %s!\n", this.getName(), restoredEnergy, damage, target.getName());
     }
 }

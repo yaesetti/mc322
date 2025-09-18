@@ -19,7 +19,7 @@ public abstract class Character implements Combatant{
         this.strength = strength;
 
         actions.put("Attack", new Attack());
-        actions.put("Heal", new Heal());
+        actions.put("SelfHeal", new SelfHeal());
     }
 
     @Override

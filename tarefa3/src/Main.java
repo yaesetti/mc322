@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         // Instantiating our Hero Singed and his Weapon
-        Mutant hero = new Mutant("Singed", 20, 25, 3);
+        Mutant hero = new Mutant("Singed", 30, 25, 3);
         Gauntlet poisonGauntlet = new Gauntlet("Singed's Poison Gauntlets",
                                                 1, 3, hero);
         hero.setWeapon(poisonGauntlet);
@@ -34,6 +34,7 @@ public class Main {
                 while (!enemy.getIsKnocked()) {
                     System.out.println();
                     System.out.printf("--------------------[TURN %d]--------------------\n", level.getTurnCounter());
+
                     hero.chooseAction(enemy).execute(hero, enemy);
                     enemy.chooseAction(hero).execute(enemy, hero);
 
@@ -94,7 +95,7 @@ public class Main {
         System.out.println("                     -=[VICTORY]=-");
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
-        System.out.printf ("     %s saved the day once again!\n", hero.getName());
+        System.out.printf ("       %s saved the day once again!\n", hero.getName());
         System.out.println();
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();

@@ -53,11 +53,10 @@ public class CombatLevel implements Level {
         System.out.printf("Level Challange: %d\n", this.challenge);
         System.out.printf("Level Name: %s\n", this.scenario.getName());
         System.out.printf("Level Description: \n%s\n", this.scenario.getDescription());
+        this.scenario.applyEffect(this.hero);
         System.out.printf("Number of Monsters: %d\n", this.monsters.size());
         for (Monster monster: monsters) {
             System.out.printf("-> %s\n", monster.getName());
         }
-
-        this.scenario.applyEffect(this.hero);
     }
 }

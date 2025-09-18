@@ -49,7 +49,7 @@ public abstract class Monster extends Character implements Lootable {
     @Override
     public CombatAction chooseAction(Combatant target) {
         if (this.getHealthPoints() <= 2) {
-            return this.actions.get("Heal");
+            return this.actions.get("SelfHeal");
         }
         else {
             return this.actions.get("Attack");

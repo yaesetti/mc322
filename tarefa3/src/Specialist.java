@@ -36,9 +36,11 @@ public class Specialist extends Hero{
         // Description: Surprise an enemy by suddenly changing the kind of weapon
         //              being used, while also dealing 2 damage.
 
+        // Critical instance of the Special Skill because the Hero is lucky
         if (this.getLuck() && this.weaponIndex != this.prefferedWeapon) {
             this.weaponIndex = this.prefferedWeapon;
         }
+        // Normal instance of the Special Skill
         else {
             this.weaponIndex++;
             
@@ -48,7 +50,13 @@ public class Specialist extends Hero{
             }
         }
 
+        // Deals the 2 points of damage;
         target.receiveDamage(2);
+        
+        // Prints what happened
+        System.out.printf("%s changed to %s, dealt 2 points of damage to %s and will attack!\n", this.getName(), this.getWeapon().getName(), target.getName());
+
+        // Attacks
         this.actions.get("Attack").execute(this, target);
     }
 }
