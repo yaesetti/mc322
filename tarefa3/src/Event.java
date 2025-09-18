@@ -1,9 +1,5 @@
 public interface Event {
-    public String getName();
+    public void checkTrigger(Hero hero, CombatLevel level);
 
-    public String getDescription();
-
-    public boolean checkTrigger (Hero hero);
-
-    public void execute();
+    public void execute(Hero hero, CombatLevel level);
 }
