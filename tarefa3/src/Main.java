@@ -2,31 +2,35 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        // Instantiating our Hero Singed and his Weapon
         Mutant hero = new Mutant("Singed", 20, 25, 3);
         Gauntlet poisonGauntlet = new Gauntlet("Singed's Poison Gauntlets",
                                                 1, 3, hero);
         hero.setWeapon(poisonGauntlet);
 
+        // Prints Hero's Stats
         System.out.println();
         System.out.println("-=-=-=-=-=-=-=-=- HERO STATS =-=-=-=-=-=-=-=-=-");
         hero.printStatus();
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
 
+        // Generate the levels
         FixatedLevelBuilder levelBuilder = new FixatedLevelBuilder();
         ArrayList<CombatLevel> levels = levelBuilder.generateLevels(hero, 3); 
 
         // Loops for the amount of levels
-        int levelCounter = 1;
         for (CombatLevel level: levels) {
-            System.out.printf("----------------------={LEVEL %d}=----------------\n", levelCounter);
-            level.printInfos();
+            System.out.printf("----------------------={LEVEL %d}=----------------\n", levels.indexOf(level) + 1);
 
+            // Prints the informations of the level and apply the Scenario effect
+            level.start();
+
+            // Loops for the ammount of monsters
             ArrayList<Monster> levelMonsters = level.getMonsters();
-            for (int i = 0; i < levelMonsters.size() - 1; i++){
-                Monster enemy = levelMonsters.get(i);
+            for (Monster enemy: levelMonsters){
 
-                // Loops while the enemy still has HP.
+                // Loops while the enemy still is alive
                 while (!enemy.getIsKnocked()) {
                     System.out.println();
                     System.out.printf("--------------------[TURN %d]--------------------\n", level.getTurnCounter());
@@ -44,7 +48,7 @@ public class Main {
                         return;
                     }
 
-                    // Prints the status of both fighters after every round
+                    // Prints the status of both Combatants after every turn
                     System.out.println();
                     System.out.println("++++++++++++++++++++ HERO ++++++++++++++++++++");
                     hero.printStatus();
@@ -56,11 +60,14 @@ public class Main {
                     System.out.println("##############################################");
                     System.out.println();
 
+                    // Checks if the Event will happen or not
                     level.getScenario().getEvent().checkTrigger(hero, level);
+
+                    // Increments the Turn Counter
                     level.incrementTurnCounter();
                 }
 
-                // If a Mutant knocks a TwistedMutant, the Mutant gain more Exp
+                // If a Mutant knocks a TwistedMutant, the Mutant gains more Exp
                 if (hero.getClass().equals(Mutant.class) &&
                     enemy.getClass().equals(TwistedMutant.class)) {
                     hero.gainExp(enemy.getExpValue() * 2);
@@ -69,6 +76,8 @@ public class Main {
                     hero.gainExp(enemy.getExpValue());
                 }
                 
+                // Verifies if the Enemy will drop loot and if
+                // it is worth it for the Hero to take it
                 if (hero.getLuck()) {
                     Item droppedItem = enemy.dropLoot();
 
@@ -79,15 +88,14 @@ public class Main {
                     }
                 }
             }
-            levelCounter++;
         }
 
         System.out.println();
         System.out.println("                     -=[VICTORY]=-");
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-        System.out.printf ("%s won the battle, knocked all 3 monsters and\n", hero.getName());
-        System.out.printf ("saved the old lady's life! What a hero!\n\n");
-        System.out.printf ("%s finished this conflict at Level %d\n", hero.getName(), hero.getLevel());
+        System.out.println();
+        System.out.printf ("     %s saved the day once again!\n", hero.getName());
+        System.out.println();
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
     }
