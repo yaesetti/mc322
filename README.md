@@ -1,4 +1,7 @@
-# MC322
+# MC322<br>
+<br>
+A super-hero themed RPG in Java<br>
+<br>
 
 ## Authors:<br>
 <br>
@@ -13,8 +16,9 @@ Use the script to easily compile and run the RPG<br>
 foo@bar:~$ ./run.sh
 ```
 <br>
-s
-## Super-hero Themed RPG<br>
+<br>
+
+## Current Classes<br>
 <br>
 Hero Classes: Mutant, Specialist<br>
 <br>
