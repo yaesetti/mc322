@@ -1,25 +1,18 @@
-# MC322<br>
-<br>
+# MC322
 A super-hero themed RPG in Java<br>
-<br>
 
-## Authors:<br>
-<br>
+## Authors:
 Victor Yaegashi Setti  - RA: 206362<br>
 Iago Lucini da Silva   - RA: 281244<br>
-<br>
 
-## Run Script<br>
-<br>
+## Run Script
 Use the script to easily compile and run the RPG<br>
 ```console
 foo@bar:~$ ./run.sh
 ```
 <br>
-<br>
 
-## Current Classes<br>
-<br>
+## Current Classes
 Hero Classes: Mutant, Specialist<br>
 <br>
 Monster Classes: TwistedMutant, ThugGang<br>
