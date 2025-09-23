@@ -1,11 +1,17 @@
 # MC322
 
-Use the script to easily compile and run the rpg<br>
+Use the script to easily compile and run the RPG<br>
 ```console
-foo@bar:~$ ./src/run.sh
+foo@bar:~$ ./run.sh
 ```
 
-## Super-hero themed RPG<br>
+## Authors:<br>
+<br>
+Victor Yaegashi Setti  - RA: 206362<br>
+Iago Lucini da Silva   - RA: 281244<br>
+<br>
+
+## Super-hero Themed RPG<br>
 <br>
 Hero Classes: Mutant, Specialist<br>
 <br>
