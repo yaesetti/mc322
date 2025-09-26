@@ -10,7 +10,6 @@ Use the script to easily compile and run the RPG<br>
 ```console
 foo@bar:~$ ./run.sh
 ```
-<br>
 
 ## Current Classes
 Hero Classes: Mutant, Specialist<br>

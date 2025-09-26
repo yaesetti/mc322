@@ -8,7 +8,6 @@ import utils.Dice;
 public class Gauntlet extends Weapon {
 
     public Gauntlet(String name, int minLevel, int strengthAmp, Character user) {
-        super(name, Dice.roll(1, 6) + user.getStrength() * strengthAmp,
-              minLevel, DamageType.Bludgeoning, user);
+        super(name, Dice.roll(1, 6) + user.getStrength() * strengthAmp + 1 * minLevel, minLevel, DamageType.Bludgeoning, user);
     }
 }

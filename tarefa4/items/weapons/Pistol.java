@@ -9,7 +9,7 @@ public class Pistol extends Weapon {
     private int bullets;
 
     public Pistol(String name, int minLevel, Character user) {
-        super(name, Dice.roll(2, 4), minLevel, DamageType.Piercing, user);
+        super(name, Dice.roll(2, 4) + 3 * minLevel, minLevel, DamageType.Piercing, user);
         this.bullets = 15;
     }
 

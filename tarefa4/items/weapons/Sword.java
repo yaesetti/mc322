@@ -9,8 +9,7 @@ public class Sword extends Weapon {
     private int sharpness;
 
     public Sword(String name, int minLevel, int sharpness, Character user) {
-        super(name, Dice.roll(1, 6) + sharpness + user.getStrength(), minLevel,
-              DamageType.Slashing, user);
+        super(name, Dice.roll(1, 6) + sharpness + user.getStrength() + 1 * minLevel, minLevel, DamageType.Slashing, user);
         this.sharpness = sharpness;
     }
 

@@ -9,6 +9,7 @@ import items.Weapon;
 import items.weapons.Gauntlet;
 import java.util.ArrayList;
 import levels.CombatLevel;
+import levels.Difficulty;
 import levels.builder.FixatedLevelBuilder;
 
 public class Main {
@@ -28,7 +29,7 @@ public class Main {
 
         // Generate the levels
         FixatedLevelBuilder levelBuilder = new FixatedLevelBuilder();
-        ArrayList<CombatLevel> levels = levelBuilder.generateLevels(hero, 3); 
+        ArrayList<CombatLevel> levels = levelBuilder.generateLevels(hero, 3, Difficulty.EASY); 
 
         // Loops for the amount of levels
         for (CombatLevel level: levels) {

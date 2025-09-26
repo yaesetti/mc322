@@ -1,17 +1,17 @@
 package levels.builder;
 
-import java.util.ArrayList;
-
-import levels.CombatLevel;
-import levels.scenarios.Scenario;
-import utils.Dice;
 import characters.Hero;
 import characters.Monster;
 import characters.monsters.*;
+import java.util.ArrayList;
+import levels.CombatLevel;
+import levels.Difficulty;
+import levels.scenarios.Scenario;
+import utils.Dice;
 
 public class FixatedLevelBuilder implements LevelBuilder{
     @Override
-    public ArrayList<CombatLevel> generateLevels(Hero hero, int num) {
+    public ArrayList<CombatLevel> generateLevels(Hero hero, int num, Difficulty difficulty) {
         ArrayList<CombatLevel> levels = new ArrayList<>();
 
         for (int i = 1; i < num + 1; i++) { 
@@ -21,12 +21,14 @@ public class FixatedLevelBuilder implements LevelBuilder{
             for (int j = 0; j < Dice.roll(1, i); j++) {
                 int rndMonster = Dice.roll(1, 2) - 1;
                 Monster monster;
+
                 if (rndMonster == 0) {
-                    monster = new ThugGang("Evil Laughers", 10, 5, 2, 1, 3);
+                    monster = new ThugGang("Evil Laughers", 7, 5, 2, 1, difficulty, 3);
                 }
                 else {
-                    monster = new TwistedMutant("Joke Maker", 15, 10, 1, 1);
+                    monster = new TwistedMutant("Joke Maker", 10, 10, 1, 1, difficulty);
                 }
+
                 levelMonsters.add(monster);
             }
 
