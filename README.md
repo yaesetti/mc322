@@ -11,7 +11,7 @@ Iago Lucini da Silva   - RA: 281244<br>
 ## Run Script
 Use the script to easily compile and run the RPG<br>
 ```console
-foo@bar:~$ ./run.sh
+foo@bar:~/tarefaX$ ./run.sh
 ```
 
 ## Disclaimer for Task 4
