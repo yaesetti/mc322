@@ -1,6 +1,8 @@
 package combat.actions;
 
 import combat.Combatant;
+import exceptions.CharacterKnocked;
+import exceptions.InsufficientWillPoints;
 import utils.Dice;
 
 public class SelfHeal extends Heal {
@@ -10,9 +12,13 @@ public class SelfHeal extends Heal {
     }
     
     @Override
-    public void execute(Combatant actor, Combatant target) {
-        if (!this.canExecute(actor)) {
-            return;
+    public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked{
+        if (actor.getIsKnocked()) {
+            throw new CharacterKnocked();
+        }
+
+        if (actor.getWillPoints() < 1) {
+            throw new InsufficientWillPoints();
         }
 
         int healing = Dice.roll(1, 6) + 2;

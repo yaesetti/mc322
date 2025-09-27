@@ -2,6 +2,9 @@ package characters.heroes;
 
 import characters.*;
 import combat.Combatant;
+import exceptions.CharacterKnocked;
+import exceptions.InsufficientCharacterLevel;
+import exceptions.InsufficientWillPoints;
 import items.Weapon;
 import items.weapons.*;
 
@@ -14,7 +17,7 @@ public class Specialist extends Hero{
     private final int prefferedWeapon;
     private int weaponIndex;
     private final Weapon[] specialistWeapons = {
-        new Sword("Specialist Sword", 1, 4, this),
+        new Sword("Specialist Sword", 1, 7, this),
         new Gauntlet("Specialist Gauntlets", 1, 4, this),
         new Pistol("Specialist Pistol", 1, this)
     };
@@ -36,6 +39,29 @@ public class Specialist extends Hero{
             }
 
         return damage;
+    }
+
+    @Override
+    public void setWeapon(Weapon newWeapon) {
+        try {
+            super.setWeapon(newWeapon);
+        } catch (InsufficientCharacterLevel e) {
+            System.err.println(e.getMessage());
+        }
+
+        // If the player chooses to equip another Weapon
+        // the new Weapon will replace it's equivalent
+        // in the specialistWeapons list, in order to
+        // not have duplicates in the list
+        if (newWeapon instanceof Sword) {
+            specialistWeapons[0] = newWeapon;
+        }
+        else if (newWeapon instanceof Gauntlet) {
+            specialistWeapons[1] = newWeapon;
+        }
+        else if (newWeapon instanceof Pistol) {
+            specialistWeapons[2] = newWeapon;
+        }
     }
 
     @Override
@@ -65,6 +91,11 @@ public class Specialist extends Hero{
         System.out.printf("%s changed to %s, dealt 2 points of damage to %s and will attack!\n", this.getName(), this.getWeapon().getName(), target.getName());
 
         // Attacks
-        this.actions.get("Attack").execute(this, target);
+        try {
+            this.actions.get("Attack").execute(this, target);
+        }
+        catch (InsufficientWillPoints | CharacterKnocked e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

@@ -1,9 +1,10 @@
 package combat;
 
+import exceptions.CharacterKnocked;
+import exceptions.InsufficientWillPoints;
+
 public interface CombatAction {
     public String getName();
 
-    public boolean canExecute(Combatant actor);
-
-    public void execute(Combatant actor, Combatant target);
+    public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked;
 }

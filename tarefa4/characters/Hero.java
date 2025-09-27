@@ -1,6 +1,7 @@
 package characters;
 
 import combat.actions.UseSpecialSkill;
+import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 
 public abstract class Hero extends Character {
@@ -64,12 +65,12 @@ public abstract class Hero extends Character {
     }
 
     @Override
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(Weapon weapon) throws InsufficientCharacterLevel {
         if (this.getLevel() >= weapon.getMinLevel()) {
             super.setWeapon(weapon);
         }
         else {
-            System.out.println("-> Level too low to equip this weapon.");
+            throw new InsufficientCharacterLevel();
         }
     }
 }

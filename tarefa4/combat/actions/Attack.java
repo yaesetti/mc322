@@ -3,6 +3,8 @@ package combat.actions;
 import characters.Hero;
 import combat.CombatAction;
 import combat.Combatant;
+import exceptions.CharacterKnocked;
+import exceptions.InsufficientWillPoints;
 import items.weapons.Pistol;
 import items.weapons.Sword;
 import utils.Dice;
@@ -12,38 +14,28 @@ public class Attack implements CombatAction {
     public String getName() {
         return "Attack";
     }
-
+    
     @Override
-    public boolean canExecute(Combatant actor) {
-        if (actor.getWillPoints() < 1) {
-            System.out.printf("%s doesn't have enough Will Points to attack!\n", this.getName());
-            return false;
-        }
+    public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked {
         if (actor.getIsKnocked()) {
-            System.out.printf("%s is knocked, so they can't attack!\n", this.getName());
-            return false;
+            throw new CharacterKnocked();
         }
-        return true;
-    }
 
-    @Override
-    public void execute(Combatant actor, Combatant target) {
-        if (!this.canExecute(actor)) {
-            return;
+        if (actor.getWillPoints() < 1) {
+            throw new InsufficientWillPoints();
         }
-        
+
         // Attack Damage is calculated differently for each class of Combatant
         int damage = actor.getAttackDamage();
         target.receiveDamage(damage);
+        actor.setWillPoints(actor.getWillPoints() - 1);
 
         // Print the ammount of damage dealt and if it was enough to get them knocked.
         if (target.getIsKnocked()) {
-            System.out.printf("%s dealt %d point(s) of damage to %s and knocked them!\n",
-                                actor.getName(), damage, target.getName());
+            System.out.printf("%s dealt %d point(s) of damage to %s and knocked them!\n", actor.getName(), damage, target.getName());
         }
         else {
-            System.out.printf("%s dealt %d point(s) of damage to %s!\n",
-                                actor.getName(), damage, target.getName());
+            System.out.printf("%s dealt %d point(s) of damage to %s!\n", actor.getName(), damage, target.getName());
         }
 
         if (actor instanceof Hero) {

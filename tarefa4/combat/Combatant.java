@@ -1,8 +1,8 @@
 package combat;
 
-import java.util.HashMap;
-
+import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
+import java.util.HashMap;
 
 public interface Combatant {
     public String getName();
@@ -25,7 +25,7 @@ public interface Combatant {
 
     public Weapon getWeapon();
 
-    public void setWeapon(Weapon newWeapon);
+    public void setWeapon(Weapon newWeapon) throws InsufficientCharacterLevel;
 
     public boolean getLuck();
 

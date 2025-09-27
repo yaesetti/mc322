@@ -16,14 +16,15 @@ public class InputManager {
                 input = Integer.parseInt(buffer);
 
                 if (input < min || input > max) {
-                    System.out.printf("Invalid Input: Integer must be in the range [%d, %d]\n", min, max);
+                    System.err.printf("Invalid Input: Integer must be in the range [%d, %d]\n", min, max);
                 }
                 else {
                     return input;
                 }
 
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid Input: Input must be an Integer");
+            }
+            catch (NumberFormatException e) {
+                System.err.println("Invalid Input: Input must be an Integer");
             }
         }
     }
@@ -37,7 +38,7 @@ public class InputManager {
             input = scanner.nextLine().trim();
 
             if (input.isEmpty()) {
-                System.out.println("Invalid Input: Input cannot be empty");
+                System.err.println("Invalid Input: Input cannot be empty");
             }
             else {
                 return input;
@@ -56,10 +57,10 @@ public class InputManager {
             input_char = input.charAt(0);
             
             if (input.isEmpty()) {
-                System.out.println("Invalid Input: Input cannot be empty");
+                System.err.println("Invalid Input: Input cannot be empty");
             }
             else if (input_char != 'y' && input_char != 'n') {
-                System.out.println("Invalid Input: Input must be 'y' or 'n'");                
+                System.err.println("Invalid Input: Input must be 'y' or 'n'");                
             }
             else {
                 return input_char == 'y';

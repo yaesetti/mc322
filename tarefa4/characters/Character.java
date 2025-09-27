@@ -3,6 +3,7 @@ package characters;
 import combat.CombatAction;
 import combat.Combatant;
 import combat.actions.*;
+import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,7 +85,7 @@ public abstract class Character implements Combatant{
     }
 
     @Override
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(Weapon weapon) throws InsufficientCharacterLevel{
         this.weapon = weapon;
         weapon.setUser(this);
     }
