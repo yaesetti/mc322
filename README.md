@@ -15,7 +15,7 @@ foo@bar:~$ ./run.sh
 ```
 
 ## Disclaimer for Task 4
-Despite the Task Description actively discouraging unnecessary keyboard interactions, most outputs made by the program currently require the user to press Enter to continue in order to improve readability and overall aesthetics.
+Even tough the Task Description actively discourage unnecessary keyboard interactions, most outputs made by the program currently require the user to press `Enter` to continue, in order to improve readability and overall aesthetics.
 
 ## Current Classes
 Hero Classes: Mutant, Specialist<br>
