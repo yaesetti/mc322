@@ -18,7 +18,7 @@ import utils.Dice;
 public class GameManager {
     public static void playGame(Difficulty difficulty) {
         // Instantiating our Hero Singed and his Weapon
-        Mutant hero = new Mutant("Singed", 30, 25, 3);
+        Mutant hero = new Mutant("Singed", 50, 25, 3);
         Gauntlet poisonGauntlet = new Gauntlet("Singed's Poison Gauntlets",1, 3, hero);
         try {
             hero.setWeapon(poisonGauntlet);
@@ -41,10 +41,10 @@ public class GameManager {
         for (CombatLevel level: levels) {
             System.out.printf("----------------------={LEVEL %d}=----------------\n", levels.indexOf(level) + 1);
 
-            // Prints the informations of the level and apply the Scenario effect
+            // Prints the information of the level and apply the Scenario effect
             level.start();
 
-            // Loops for the ammount of monsters
+            // Loops for the amount of monsters
             ArrayList<Monster> levelMonsters = level.getMonsters();
             for (Monster enemy: levelMonsters){
 
