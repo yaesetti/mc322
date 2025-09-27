@@ -131,9 +131,8 @@ public class MainMenu {
                     if (!confirmation) {
                         continue;
                     }
-                    
-                    System.out.println("Thank you for playing U-Energy RPG and keeping our world more secure!");
-                    
+                    System.out.println("\nThank you for playing U-Energy RPG and keeping our world more secure!\n");
+
                     InputManager.closeScanner();
                     
                     return;
