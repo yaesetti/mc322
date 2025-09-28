@@ -48,22 +48,27 @@ public class InputManager {
 
     public static boolean readBoolean(String message) {
         String input;
-        char input_char;
 
         while (true) {
             System.out.print(message + " (y/n): ");
 
             input = scanner.nextLine().trim().toLowerCase();
-            input_char = input.charAt(0);
             
             if (input.isEmpty()) {
                 System.err.println("Invalid Input: Input cannot be empty");
+                continue;
             }
-            else if (input_char != 'y' && input_char != 'n') {
-                System.err.println("Invalid Input: Input must be 'y' or 'n'");                
+
+            if (input.equals("y") || input.equals("yes")) {
+                return true;
             }
+
+            if (input.equals("n") || input.equals("no")) {
+                return false;
+            }
+
             else {
-                return input_char == 'y';
+                System.err.println("Invalid Input: Input must be 'y' or 'n'");
             }
         }
     }
