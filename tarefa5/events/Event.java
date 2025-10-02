@@ -1,0 +1,10 @@
+package events;
+
+import characters.Hero;
+import levels.CombatLevel;
+
+public interface Event {
+    public void checkTrigger(Hero hero, CombatLevel level);
+
+    public void execute(Hero hero, CombatLevel level);
+}
