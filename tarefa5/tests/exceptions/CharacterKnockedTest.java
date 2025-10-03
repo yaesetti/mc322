@@ -34,6 +34,7 @@ public class CharacterKnockedTest {
         } catch (InsufficientCharacterLevel e) {
             // Ignoring this exception now because Test Sword's
             // min level is 0
+            System.err.println(e.getMessage());
         }
 
         hero.receiveDamage(100);
@@ -46,6 +47,7 @@ public class CharacterKnockedTest {
         catch (InsufficientWillPoints e) {
             // Ignoring this exception for this test since
             // the Test Hero has 100 Will Points
+            System.err.println(e.getMessage());
         }
         catch (CharacterKnocked e) {
             System.err.println(e.getMessage());

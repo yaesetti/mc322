@@ -34,6 +34,7 @@ public class InsufficientWillPointsTest {
         } catch (InsufficientCharacterLevel e) {
             // Ignoring this exception now because Test Sword's
             // min level is 0
+            System.err.println(e.getMessage());
         }
 
         ThugGang monster = new ThugGang("Test Target", 80, 30, 15, 1, Difficulty.EASY, 3);
@@ -45,6 +46,7 @@ public class InsufficientWillPointsTest {
             // Ignoring this exception because the
             // Test Hero didn't receive any damage
             // and is not Knocked
+            System.err.println(e.getMessage());
         }
         catch (InsufficientWillPoints e) {
             System.err.println(e.getMessage());
