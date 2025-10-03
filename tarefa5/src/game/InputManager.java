@@ -1,11 +1,11 @@
 package game;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class InputManager {
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static int readInteger(String message, int min, int max) {
+        Scanner scanner = new Scanner(System.in);
         int input;
 
         while (true) {
@@ -19,6 +19,7 @@ public class InputManager {
                     System.err.printf("Invalid Input: Integer must be in the range [%d, %d]\n", min, max);
                 }
                 else {
+                    scanner.close();
                     return input;
                 }
 
@@ -26,10 +27,14 @@ public class InputManager {
             catch (NumberFormatException e) {
                 System.err.println("Invalid Input: Input must be an Integer");
             }
+            catch (NoSuchElementException e) {
+                System.err.println("Invalid Input: Input must not be empty");
+            }
         }
     }
 
     public static String readString(String message) {
+        Scanner scanner = new Scanner(System.in);
         String input;
 
         while (true) {
@@ -38,15 +43,17 @@ public class InputManager {
             input = scanner.nextLine().trim();
 
             if (input.isEmpty()) {
-                System.err.println("Invalid Input: Input cannot be empty");
+                System.err.println("Invalid Input: Input must not be empty");
             }
             else {
+                scanner.close();
                 return input;
             }
         }
     }
 
     public static boolean readBoolean(String message) {
+        Scanner scanner = new Scanner(System.in);
         String input;
 
         while (true) {
@@ -55,15 +62,17 @@ public class InputManager {
             input = scanner.nextLine().trim().toLowerCase();
             
             if (input.isEmpty()) {
-                System.err.println("Invalid Input: Input cannot be empty");
+                System.err.println("Invalid Input: Input must not be empty");
                 continue;
             }
 
             if (input.equals("y") || input.equals("yes")) {
+                scanner.close();
                 return true;
             }
 
             if (input.equals("n") || input.equals("no")) {
+                scanner.close();
                 return false;
             }
 
@@ -74,6 +83,7 @@ public class InputManager {
     }
 
     public static void readEnter() {
+        Scanner scanner = new Scanner(System.in);
         String input;
 
         while (true) {
@@ -82,12 +92,9 @@ public class InputManager {
             input = scanner.nextLine();
 
             if (input.isEmpty()) {
+                scanner.close();
                 return;
             }
         }
-    }
-
-    public static void closeScanner() {
-        scanner.close();
     }
 }

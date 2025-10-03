@@ -1,67 +1,133 @@
-package tests.game;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
+package game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import game.InputManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public class InputManagerTest {
     private final InputStream originalSystemIn = System.in;
-    private final PrintStream originalOut = System.out;
+    private final PrintStream originalSystemOut = System.out;
+    private final PrintStream originalSystemErr = System.err;
     private ByteArrayInputStream testIn;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
     @AfterEach
-    /*
-     * Restaura a entrada e saida padrao. 
-     * Boa pratica que todo e qualquer teste que mude System.in ou System.out deve fazer,
-     * pois evita problemas em outros testes.
-     */
     void restoreStreams() {
         System.setIn(originalSystemIn);
-        System.setOut(originalOut);
+        System.setOut(originalSystemOut);
+        System.setErr(originalSystemErr);
     }
 
-    /*
-     * Simula a entrada do usuario
-     * @param data String representando a entrada a ser testada.
-     */
     private void provideInput(String data) {
         testIn = new ByteArrayInputStream(data.getBytes());
         System.setIn(testIn);
     }
 
     @Test
-    public void testLerInteiro_ValidInput() {
-        provideInput("5\n");
+    public void testReadStringValid() {
+        provideInput("Helena\n");
 
-        int resultado = InputManager.readInteger("Digite um numero", 1, 10);
-        assertEquals(5, resultado);
+        String result = InputManager.readString("Input a string: ");
+        assertEquals("Helena", result);
     }
 
     @Test
-    public void testLerInteiro_InvalidInput_nao_inteiro() {
-        System.setOut(new PrintStream(outContent));
+    public void testReadStringInvalid() {
+        System.setErr(new PrintStream(errContent));
 
-        provideInput("palavras\n");
+        // Provides a valid input "Helena\n" after the
+        // invalid input "\n" in order to stop the while
+        // loop inside readString() after the test
+        provideInput("\nHelena\n");
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> 
-        InputManager.readInteger("Digite um numero", 1, 10));
-
-        // Entrada invalida faz com que o InputManager espere nova entrada (nao existe entao da erro)
-        assertEquals("Entrada nao disponivel.", exception.getMessage());
-
-        // Verifica se a mensagem de entrada errada foi exibida
-        assertEquals("Digite um numero (1 - 10): Valor invalido. Digite um numero inteiro.\n"+
-                    "Digite um numero (1 - 10): No line found\n", outContent.toString());
+        String result = InputManager.readString("Input a string: ");
         
+        // readString() must ignore the invalid input
+        // and return the valid input that was inserted after
+        assertEquals("Helena", result);
+        
+        // Checks if the "Invalid Input" message was displayed
+        // in the Error Stream after trying to provide an invalid input
+        String errorOutput = errContent.toString();
+        assertTrue(errorOutput.contains("Invalid Input: Input must not be empty"));
+    }
+
+    @Test
+    public void testReadBooleanValid() {
+        // Provides 4 variations of valid inputs.
+        // The first two must return true and
+        // the last two must return false
+        boolean result; 
+
+        provideInput("y\n");
+        result = InputManager.readBoolean("Question");
+        assertTrue(result);
+
+        provideInput("YeS\n");
+        result = InputManager.readBoolean("Question");
+        assertTrue(result);
+
+        provideInput("n\n");
+        result = InputManager.readBoolean("Question");
+        assertFalse(result);
+
+        provideInput("nO\n");
+        result = InputManager.readBoolean("Question");
+        assertFalse(result);
+
+    }
+
+    @Test
+    public void testReadBooleanInvalidEmpty() {
+        System.setErr(new PrintStream(errContent));
+
+        // Provides a valid input "y\n" after the
+        // invalid input "\n" in order to stop the while
+        // loop inside readString() after the test
+        provideInput("\ny\n");
+
+        boolean result = InputManager.readBoolean("Question");
+        
+        // readBoolean() must ignore the invalid input
+        // and return the boolean that represents the
+        // valid input provided after
+        assertTrue(result);
+        
+        // Checks if the "Invalid Input: Input must no be empty"
+        // message was displayed in the Error Stream after
+        // trying to provide an empty input
+        String errorOutput = errContent.toString();
+        assertTrue(errorOutput.contains("Invalid Input: Input must not be empty"));
+    }
+
+    @Test
+    public void testReadBooleanInvalidNotYN() {
+        System.setErr(new PrintStream(errContent));
+
+        // Provides a valid input "y\n" after the
+        // invalid input "sim\n" in order to stop the while
+        // loop inside readString() after the test
+        provideInput("sim\ny\n\n");
+
+        boolean result = InputManager.readBoolean("Question");
+        
+        // readBoolean() must ignore the invalid input
+        // and return the boolean that represents the
+        // valid input provided after
+        assertTrue(result);
+        
+        // Checks if the "Invalid Input: Input must be 'y' or 'n'"
+        // message was displayed in the Error Stream after
+        // trying to provide an invalid input
+        String errorOutput = errContent.toString();
+        assertTrue(errorOutput.contains("Invalid Input: Input must be 'y' or 'n'"));
     }
 }
