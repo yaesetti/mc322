@@ -1,8 +1,12 @@
 # Ignore compiled Java class files
 *.class
 
-# Ignore the bin directory (compiler output)
+# Ignore the bin and target directories (compiler output)
+target/
 bin/
+
+# Ignore lib directory, according to the instructions in tarefa5
+lib/
 
 # Ignore common OS/editor junk
 .DS_Store
