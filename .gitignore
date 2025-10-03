@@ -5,9 +5,6 @@
 target/
 bin/
 
-# Ignore lib directory, according to the instructions in tarefa5
-lib/
-
 # Ignore common OS/editor junk
 .DS_Store
 *.swp
