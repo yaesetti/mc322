@@ -4,6 +4,11 @@ import combat.actions.UseSpecialSkill;
 import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 
+/*
+ * Representa o heroi principal
+ * 
+ * Herda os atributos e comportamento
+ */
 public abstract class Hero extends Character {
     private int level;
     private int exp;
