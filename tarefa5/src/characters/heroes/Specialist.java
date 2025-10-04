@@ -13,6 +13,11 @@ import items.weapons.*;
 // Real life examples would be: Batman, Hawkeye, Green Arrow...
 
 // This whole class depends on the weapons.
+/*
+ * Subclasse de {@link Hero}:Specialist
+ * 
+ * adiciona preferredWeapon:
+ */
 public class Specialist extends Hero{
     private final int preferredWeapon;
     private int weaponIndex;
@@ -29,6 +34,10 @@ public class Specialist extends Hero{
         this.preferredWeapon = preferredWeapon;
     }
 
+    /*
+     * 
+     * @return damage
+     */
     @Override
     public int getAttackDamage() {
         int damage = this.getWeapon().getDamage();

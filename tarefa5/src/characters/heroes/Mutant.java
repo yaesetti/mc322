@@ -9,9 +9,9 @@ import combat.Combatant;
 
 // The most important attribute for this class is their Mutant Energy (ME)
 /*
- * Subclasse de hero: Mutant
+ * Subclasse de {@link Hero}: Mutant
  * 
- * 
+ * adiciona mutantEnergy: pode causar mais dano usando ela
  */
 public class Mutant extends Hero {
     private int mutantEnergy;
@@ -41,6 +41,8 @@ public class Mutant extends Hero {
     /*
      * Metodo que calcula o dano que o monstro dara
      * com arma equipada mais usando sua habilidade especial
+     * 
+     * @return damage dano que Mutant causou
      */
     @Override
     public int getAttackDamage() {
