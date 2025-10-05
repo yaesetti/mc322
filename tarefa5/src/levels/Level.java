@@ -17,11 +17,17 @@ public interface Level {
     public boolean getIsCompleted();
 
     /*
-     * 
+     * Da o cenario do level
      */
     public Scenario getScenario();
 
+    /*
+     * Da quantos turnos tem
+     */
     public int getTurnCounter();
 
+    /*
+     * Adiciona 1 ao contador de turno
+     */
     public void incrementTurnCounter();
 }
