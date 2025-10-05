@@ -6,7 +6,7 @@ import levels.CombatLevel;
 import levels.Difficulty;
 
 /*
- * Gera uma lista com niveis de combate
+ * Uma lista de CombatLevel
  * 
  * @param hero heroi que esta enfrentando os desafios
  * @param num numero de cenarios
