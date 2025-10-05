@@ -3,6 +3,9 @@ package events;
 import characters.Hero;
 import levels.CombatLevel;
 
+/*
+ * 
+ */
 public class Ambush implements Event {
     private final String description;
 
