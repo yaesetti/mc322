@@ -4,9 +4,22 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * 
+ * Classe responsavel por gerenciar as entradas do usuario no console.
+ * Possui metodos para diferentes tipos de entradas: String, Int, Boolean ou confirmacao por enter.
+ * Trata erros e/ou valores invalidos na entrada para que o programa nao quebre
  */
 public class InputManager {
+
+    /**
+     * Le um inteiro em um intervalo especifico
+     * 
+     * @param message mensagem exibida ao usuario solicitando uma entrada
+     * @param min valor minimo aceito
+     * @param max valor maximo aceito
+     * @return o numero inteiro valido que o usuario deu
+     * @throws NumberFormatException caso a entrada nao possa ser transforma em inteiro
+     * @throws NoSuchElementException se a entrada nao tiver nada, apenas enter
+     */
     public static int readInteger(String message, int min, int max) {
         Scanner scanner = new Scanner(System.in);
         int input;
@@ -36,6 +49,13 @@ public class InputManager {
         }
     }
 
+    /**
+     * Le uma string nao vazia
+     * 
+     * @param message mensagem solicitando a entrada
+     * @return a string digitada pelo usuario(sem espaco no final)
+     * @throws NoSuchElementException se a entrada for nula
+     */
     public static String readString(String message) {
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -55,6 +75,15 @@ public class InputManager {
         }
     }
 
+    /**
+     * Le uma resposta booleana do usuario:
+     * Yes ou No, e suas possiveis variacooes.
+     * Y ou N, aceita elas minusuclas tambem
+     * 
+     * @param message
+     * @return {@code true} se a entrada for 'y' ou 'yes'
+     *         {@code false} se a entrada for 'n' ou 'no'
+     */
     public static boolean readBoolean(String message) {
         Scanner scanner = new Scanner(System.in);
         String input;
