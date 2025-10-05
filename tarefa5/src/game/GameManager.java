@@ -26,8 +26,8 @@ public class GameManager {
      * Inicia a execucao do jogo
      * 
      * @param difficulty nivel da dificiculdade selecionada (facil, medio ou dificil)
-     * @throws InufficientCharacterLevel caso o heroi nao tenha nivel o suficiente para equipar uma arma
-     * @throws CharacterKnocker caso o personagem, tanto heroi ou monstro, esteja derrubado
+     * @throws InsufficientCharacterLevel caso o heroi nao tenha nivel o suficiente para equipar uma arma
+     * @throws CharacterKnocked caso o personagem, tanto heroi ou monstro, esteja derrubado
      * @throws InsufficientWillPoints caso um personagem nao tenha pontos de vontade suficiente 
      */
 
