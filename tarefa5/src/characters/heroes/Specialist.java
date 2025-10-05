@@ -13,7 +13,7 @@ import items.weapons.*;
 // Real life examples would be: Batman, Hawkeye, Green Arrow...
 
 // This whole class depends on the weapons.
-/*
+/**
  * Subclasse de {@link Hero}:Specialist
  * 
  * adiciona preferredWeapon: causa mais dano se esta equipado com arma de preferencia
@@ -27,7 +27,7 @@ public class Specialist extends Hero{
         new Pistol("Specialist Pistol", 1, this)
     };
 
-    /*
+    /**
      * {@inheritDoc}
      * 
      * Inicia com 0 armas equipadas e quantidade de armas que prefere
@@ -39,7 +39,7 @@ public class Specialist extends Hero{
         this.preferredWeapon = preferredWeapon;
     }
 
-    /*
+    /**
      * Caso a arma que ele tiver equipado for igual a arma de preferencia causa +4
      * de dano
      * 
@@ -57,7 +57,7 @@ public class Specialist extends Hero{
         return damage;
     }
 
-    /*
+    /**
      * Equipa uma arma para o Specialist e
      * muda para uma equivalente da specialistWeapons list
      * 
@@ -86,7 +86,7 @@ public class Specialist extends Hero{
         }
     }
 
-    /*
+    /**
      * Metodo para habilidade especial:
      * Caso ele estiver com sorte(critico) e a arma equipada for diferente da arma preferida troca
      * sem critar equipa a arma, tambem verifica se pode equipar e nao extrapolar o quantidade maxima

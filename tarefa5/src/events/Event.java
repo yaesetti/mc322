@@ -3,11 +3,11 @@ package events;
 import characters.Hero;
 import levels.CombatLevel;
 
-/*
+/**
  * Define se o evento estao apto
  */
 public interface Event {
-    /*
+    /**
      * Checa se o evento pode ocorrer
      * 
      * @param hero heroi que ativou o evento
@@ -15,7 +15,7 @@ public interface Event {
      */
     public void checkTrigger(Hero hero, CombatLevel level);
 
-    /*
+    /**
      * Realiza/executa o evento
      * 
      * @param hero heroi alvo

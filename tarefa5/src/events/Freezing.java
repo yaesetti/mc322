@@ -3,7 +3,7 @@ package events;
 import characters.Hero;
 import levels.CombatLevel;
 
-/*
+/**
  * Evento de estar congelado
  * Comeca a tomar dano
  */
@@ -17,7 +17,7 @@ public class Freezing implements Event {
         """;
     }
 
-    /*
+    /**
      * Verifica se o evento pode acontecer:
      * Se o turno for divisivel por 5
      * se sim executa o evento
@@ -33,7 +33,7 @@ public class Freezing implements Event {
         }
     }
 
-    /*
+    /**
      * Printa no console o evento que esta o ocorrendo
      * 
      * @param hero heroi que ativa a armadilha

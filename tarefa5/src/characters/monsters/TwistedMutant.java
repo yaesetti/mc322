@@ -6,14 +6,14 @@ import utils.Dice;
 
 //"Twisted mutants are those who tampered with their own
 // genes in a ruthless quest for power."
-/*
+/**
  * Subclasse de {@link Monster}: TwistedMutant
  * Classe que quando fica com pouca vida da mais dano
  */
 public class TwistedMutant extends Monster {
     private final int maxHealthPoints;
 
-    /*
+    /**
      * {@inheritDoc}
      * Inicializa o TwistedMutant com uma vida maxima
      */
@@ -22,7 +22,7 @@ public class TwistedMutant extends Monster {
         this.maxHealthPoints = healthPoints;
     }
 
-    /*
+    /**
      * Causa dano normal, porem quando sua vida com para menos de 40 porcento causa +4 de dnao
      * @return damage dano causado pelo TwistedMutant
      */

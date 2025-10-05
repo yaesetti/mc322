@@ -5,12 +5,12 @@ import exceptions.CharacterKnocked;
 import exceptions.InsufficientWillPoints;
 import utils.Dice;
 
-/*
+/**
  * Acao de curar a si proprio
  */
 public class SelfHeal extends Heal {
 
-    /* 
+    /**
      * Da nome a acao
      * @return "Self Heal"
      */
@@ -19,7 +19,7 @@ public class SelfHeal extends Heal {
         return "Self Heal";
     }
     
-    /*
+    /**
      * Realiza a cura.
      * Onde o alvo e ele proprio
      * 

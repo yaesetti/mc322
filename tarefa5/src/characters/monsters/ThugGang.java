@@ -5,14 +5,14 @@ import levels.Difficulty;
 import utils.Dice;
 
 // Thugs always stick together!
-/*
+/**
  * Subclasse de {@link Monster}: ThugGang
  * Essa subclasse anda em grupo e seu dano depende da quantidade de unidades tem
  */
 public class ThugGang extends Monster {
     private final int groupSize; // How many members in the Gang
 
-    /*
+    /**
      * {@inheritDoc}
      * Construtor inicializa o groupSize ou tamanho do grupo
      */
@@ -21,7 +21,7 @@ public class ThugGang extends Monster {
         this.groupSize = groupSize;
     }
 
-    /*
+    /**
      * Metodo para retornar o dano que a classe causa
      * @return dano que o grupo da baseado no numero de individuos
      */

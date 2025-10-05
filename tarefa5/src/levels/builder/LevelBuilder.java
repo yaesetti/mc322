@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import levels.CombatLevel;
 import levels.Difficulty;
 
-/*
+/**
  * Uma lista de CombatLevel
  * 
  * @param hero heroi que esta enfrentando os desafios

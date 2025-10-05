@@ -8,7 +8,7 @@ import items.weapons.*;
 import levels.Difficulty;
 import utils.Dice;
 
-/*
+/**
  * Classe dos monstros que serao enfretados pelo heroi.
  * 
  * Herda os comportamentos e atributos de {@link Character} e
@@ -24,7 +24,7 @@ public abstract class Monster extends Character implements Lootable {
 
     private Item[] drops = {};
 
-    /*
+    /**
      * Atributos que guardam a lista de drops
      * de nivel facil, medio e facil
      */
@@ -48,7 +48,7 @@ public abstract class Monster extends Character implements Lootable {
 
     private boolean luck;
     
-    /*
+    /**
      * {@inheritDoc}
      * 
      * @param dangerRanting o nivel de perigo do monstro (usado para calcular a experiencia dada)
@@ -94,7 +94,7 @@ public abstract class Monster extends Character implements Lootable {
         this.luck = newLuck;
     }
 
-    /*
+    /**
      * Metodo para ver qual item o monstro deixara para o heroi poder pegar
      *
      * @return retorna o que o monstro dropara da lista de drops baseado na dificuldade
@@ -104,7 +104,7 @@ public abstract class Monster extends Character implements Lootable {
         return drops[Dice.roll(1, drops.length) - 1];
     }
 
-    /*
+    /**
      * Metodo para printar status do monstro:
      * Danger Rating e
      * Experience value
@@ -116,7 +116,7 @@ public abstract class Monster extends Character implements Lootable {
         System.out.printf("Experience Value: %d\n", this.expValue);
     }
 
-    /*
+    /**
      * Metodo para qual acao o monstro vai escolher:
      * Caso sua vida caia para certo nivel ele se curara
      * Caso contrario ira atacar o heroi
@@ -131,8 +131,10 @@ public abstract class Monster extends Character implements Lootable {
         }
     }
 
-    /*
+    /**
+     * Usar a habilidade especial da classe
      * 
+     * @param target alvo da habilidade especial
      */
     @Override
     public void useSpecialSkill(Combatant target) {

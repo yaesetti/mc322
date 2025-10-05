@@ -14,6 +14,9 @@ import levels.Difficulty;
 import levels.builder.FixatedLevelBuilder;
 import utils.Dice;
 
+/*
+ * 
+ */
 public class GameManager {
     public static void playGame(Difficulty difficulty) {
         // Instantiating our Hero Singed and his Weapon

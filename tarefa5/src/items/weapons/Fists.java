@@ -4,13 +4,13 @@ import characters.Character;
 import combat.DamageType;
 import items.Weapon;
 
-/*
+/**
  * Subclasse de {@link Weapon}
  * Arma com tipo de dano de impacto
  */
 public class Fists extends Weapon {
 
-    /*
+    /**
      * Inicializa a arma 
      */
     public Fists(Character user) {
@@ -18,7 +18,7 @@ public class Fists extends Weapon {
               DamageType.Bludgeoning, user);
     }
     
-    /*
+    /**
      * Printa no console so atributos
      */
     @Override

@@ -3,16 +3,16 @@ package combat;
 import exceptions.CharacterKnocked;
 import exceptions.InsufficientWillPoints;
 
-/*
+/**
  * Define acoes basicas de combate um personagem pode realizar em combate.
  */
 public interface CombatAction {
-    /*
+    /**
      * Da nome a essa acao
      */
     public String getName();
 
-    /*
+    /**
      * Executa a acao
      * @param actor quem realiza a acao
      * @param target quem sofre a acao

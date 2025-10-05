@@ -7,7 +7,7 @@ import events.Event;
 import events.Freezing;
 import events.NatureBlessing;
 
-/*
+/**
  * Descricao e efeitos que os possiveis cenarios dao.
  * Tambem eventos que ocorrem ao entrar no cenario
  */
@@ -57,7 +57,7 @@ public enum Scenario {
     private final String description;
     private final Event event;
 
-    /*
+    /**
      * Construtor do cenario
      * 
      * @param name nome do cenario
@@ -82,7 +82,7 @@ public enum Scenario {
         return this.event;
     }
 
-    /*
+    /**
      * Aplica o feito do cenario no heroi
      * 
      * @param hero personagem afetado pelo cenario

@@ -4,7 +4,7 @@ import combat.actions.UseSpecialSkill;
 import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 
-/*
+/**
  * Representa o heroi principal
  * 
  * Herda os atributos e comportamento de {@link Character}
@@ -20,7 +20,7 @@ public abstract class Hero extends Character {
     private final int[] expPerLevel = {0, 0, 300, 900, 2700, 6500, 14000, 23000,
                                        34000, 48000, 64000};
 
-    /*
+    /**
      * {@inheritDoc}
      * 
      * No heroi, inicializa ele no level 1,
@@ -51,7 +51,7 @@ public abstract class Hero extends Character {
         this.luck = luck;
     }
 
-    /*
+    /**
      * Metodo para dar exp para o heroi.
      * Verifica
      */
@@ -75,7 +75,7 @@ public abstract class Hero extends Character {
         this.setStrength(this.getStrength() + 1);
     }
 
-    /*
+    /**
      * Printa os status do heroi sendo eles
      * Level atual e
      * Experiencia atual
@@ -87,7 +87,7 @@ public abstract class Hero extends Character {
         System.out.printf("Experience: %d\n", this.exp);
     }
 
-    /*
+    /**
      * Defini a arma a ser equipada no heroi
      * 
      * @param weapon arma a ser equipada

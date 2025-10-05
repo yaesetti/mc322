@@ -1,6 +1,6 @@
 package items;
 
-/*
+/**
  * Cria um item
  */
 public interface Item {

@@ -2,13 +2,13 @@ package utils;
 
 import java.util.Random;
 
-/*
+/**
  * Classe de dados
  * Roda n dados com m lados
  */
 public class Dice {
 
-    /*
+    /**
      * Soma o numero que os dados derao
      * 
      * @param amount quantidade de dados que serao "rolados"

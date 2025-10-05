@@ -6,12 +6,12 @@ import exceptions.CharacterKnocked;
 import exceptions.InsufficientWillPoints;
 import utils.Dice;
 
-/*
+/**
  * Acao de cura do personagem
  */
 public class Heal implements CombatAction {
 
-    /*
+    /**
      * Da nome a acao
      * @return "Heal"
      */
@@ -20,7 +20,7 @@ public class Heal implements CombatAction {
         return "Heal";
     }
     
-    /*
+    /**
      * Realiza a cura e
      * diminui a quantidade de pontos de vontade atual
      * 

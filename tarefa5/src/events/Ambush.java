@@ -3,7 +3,7 @@ package events;
 import characters.Hero;
 import levels.CombatLevel;
 
-/*
+/**
  * Evento de emboscada
  */
 public class Ambush implements Event {
@@ -16,7 +16,7 @@ public class Ambush implements Event {
                 """;
     }
 
-    /*
+    /**
      * Verifica se o evento pode acontecer:
      * O heroi esta sem sorte e
      * o contador de turno e 5
@@ -31,7 +31,7 @@ public class Ambush implements Event {
         }
     }
 
-    /*
+    /**
      * Printa no console o evento que esta o ocorrendo
      * 
      * @param hero heroi que ativa a armadilha

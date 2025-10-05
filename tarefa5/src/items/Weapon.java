@@ -4,7 +4,7 @@ import characters.Character;
 import combat.DamageType;
 import utils.Dice;
 
-/*
+/**
  * Classe com o construtor de Weapon
  */
 public abstract class Weapon implements Item{
@@ -14,7 +14,7 @@ public abstract class Weapon implements Item{
     private DamageType damageType;
     private Character user;
 
-    /*
+    /**
      * Construtor da arma
      * 
      * @param name Nome da arma
@@ -41,7 +41,7 @@ public abstract class Weapon implements Item{
         return this.damage;
     }
 
-    /*
+    /**
      * Dano que sera dano baseado na rolagem de um dado
      */
     public void setDamage(int[] damageDice, int damageBonus) {
@@ -60,14 +60,14 @@ public abstract class Weapon implements Item{
         return this.user;
     }
 
-    /*
+    /**
      * Define quem estara utilizando essa arma
      */
     public void setUser(Character newUser) {
         this.user = newUser;
     }
 
-    /*
+    /**
      * Define qual tipo de dano a arma dara
      */
     public void setDamageType(DamageType newDamageType) {

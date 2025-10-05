@@ -5,12 +5,12 @@ import combat.Combatant;
 import exceptions.CharacterKnocked;
 import exceptions.InsufficientWillPoints;
 
-/*
+/**
  * Acao de usar a habilidade especial
  */
 public class UseSpecialSkill implements CombatAction{
 
-    /*
+    /**
      * Da o nome da acao
      * @return "Special Skill"
      */
@@ -19,7 +19,7 @@ public class UseSpecialSkill implements CombatAction{
         return "Special Skill";
     }
 
-    /*
+    /**
      * Usa a habilidade especial
      * @param actor quem ira realizar a acao
      * @param target quem ira sofrer dessa acao

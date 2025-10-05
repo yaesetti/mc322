@@ -1,6 +1,6 @@
 package combat;
 
-/*
+/**
  * Tipos de danos que podem ser aplicados
  */
 public enum DamageType {

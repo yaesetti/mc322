@@ -3,7 +3,7 @@ package events;
 import characters.Hero;
 import levels.CombatLevel;
 
-/*
+/**
  * Evento de fortalecimento
  */
 public class NatureBlessing implements Event {
@@ -16,7 +16,7 @@ public class NatureBlessing implements Event {
                 """;
     }
     
-    /*
+    /**
      * Verifica se o evento pode ocorrer:
      * caso tenha sorte e o contador de turno for 8
      * o evento ocorrer
@@ -31,7 +31,7 @@ public class NatureBlessing implements Event {
         }
     }
 
-    /*
+    /**
      * Printa no console o evento que esta o ocorrendo
      * 
      * @param hero heroi que ativa o evento

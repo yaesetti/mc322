@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import utils.Dice;
 
-/*
+/**
  * Classe que representa o Personagem do RPG (Heroi ou Monstro),
  * armazenando os atributos principais.
  * Fornece metodos para interagir com outros personagens
@@ -28,7 +28,7 @@ public abstract class Character implements Combatant{
 
     protected final HashMap<String, CombatAction> actions = new HashMap<>();
 
-    /*
+    /**
      * Construtor para inicializar o personagem
      * 
      * @param name O nome do personagem.
@@ -98,7 +98,7 @@ public abstract class Character implements Combatant{
         return this.weapon;
     }
 
-    /*
+    /**
      * Metodo para personagem equipar uma arma,
      * caso nao tiver nivel o suficiente gera uma excecao
      */
@@ -108,7 +108,7 @@ public abstract class Character implements Combatant{
         weapon.setUser(this);
     }
 
-    /*
+    /**
      * Retorna um mapa de acoes possiveis.
      * String identifica a acao
      * CombatAction contem a logica da acao
@@ -120,12 +120,11 @@ public abstract class Character implements Combatant{
         return this.actions;
     }
 
-    /*
+    /**
      * Dano que o personagem ira receber. 
      * Garante tambem que se for negativa sera igual a zero no minimo
      * 
      * @param damage dano que ira receber
-     * @throws Se a vida do personagem for menor ou igual a zero ele sera derrubado
      */
     @Override
     public void receiveDamage(int damage) {
@@ -139,7 +138,7 @@ public abstract class Character implements Combatant{
         this.healthPoints -= damage;
     }
 
-    /*
+    /**
      * Cura que o personagem ira receber
      * 
      * @param healing quantidade de cura que ira receber
@@ -150,7 +149,7 @@ public abstract class Character implements Combatant{
     }
 
     // Its not necessary to print the isKnocked attribute.
-    /*
+    /**
      * Imprime no console os principais atributos do personagem:
      * nome,
      * pontos de vida,
@@ -167,7 +166,7 @@ public abstract class Character implements Combatant{
     // Did not make it abstract, even with the document instructing
     // to do so, because the behavior will be common to all characters,
     // so it makes sense to be implemented here.
-    /*
+    /**
      * Metodo para o personagem escolher uma acao
      * 
      * @param target alvo da acao

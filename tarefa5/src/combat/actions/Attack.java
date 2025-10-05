@@ -9,11 +9,11 @@ import items.weapons.Pistol;
 import items.weapons.Sword;
 import utils.Dice;
 
-/*
+/**
  * Acao de ataque do personagem
  */
 public class Attack implements CombatAction {
-    /*
+    /**
      * Da nome a acao
      * @return "Attack"
      */
@@ -22,7 +22,7 @@ public class Attack implements CombatAction {
         return "Attack";
     }
     
-    /*
+    /**
      * Realiza a acao de ataque.
      * Atualiza as informacoes das armas:
      * caso seja uma espada ela perde afiacao

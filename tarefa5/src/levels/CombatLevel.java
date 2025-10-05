@@ -5,7 +5,7 @@ import characters.Monster;
 import java.util.ArrayList;
 import levels.scenarios.Scenario;
 
-/*
+/**
  * Classe que gera um level para o combate
  */
 public class CombatLevel implements Level {
@@ -15,7 +15,7 @@ public class CombatLevel implements Level {
     private final ArrayList<Monster> monsters;
     private int turnCounter;
 
-    /*
+    /**
      * Construtor do level de combate
      * 
      * @param hero heroi que entra no level
@@ -44,7 +44,7 @@ public class CombatLevel implements Level {
         return this.monsters;
     }
 
-    /*
+    /**
      * Se todos os monstros da lista estiverem derrubados a fase estara completa
      */
     @Override
