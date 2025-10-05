@@ -16,7 +16,7 @@ import items.weapons.*;
 /*
  * Subclasse de {@link Hero}:Specialist
  * 
- * adiciona preferredWeapon:
+ * adiciona preferredWeapon: causa mais dano se esta equipado com arma de preferencia
  */
 public class Specialist extends Hero{
     private final int preferredWeapon;
@@ -27,6 +27,11 @@ public class Specialist extends Hero{
         new Pistol("Specialist Pistol", 1, this)
     };
 
+    /*
+     * {@inheritDoc}
+     * 
+     * Inicia com 0 armas equipadas e quantidade de armas que prefere
+     */
     public Specialist(String nome, int healthPoints, int willPoints,
                       int strength, int preferredWeapon) {
         super(nome, healthPoints, willPoints, strength);
@@ -35,8 +40,10 @@ public class Specialist extends Hero{
     }
 
     /*
+     * Caso a arma que ele tiver equipado for igual a arma de preferencia causa +4
+     * de dano
      * 
-     * @return damage
+     * @return damage dano causado pelo Specialist
      */
     @Override
     public int getAttackDamage() {
@@ -50,6 +57,12 @@ public class Specialist extends Hero{
         return damage;
     }
 
+    /*
+     * Equipa uma arma para o Specialist e
+     * muda para uma equivalente da specialistWeapons list
+     * 
+     * @param newWeapon nova arma
+     */
     @Override
     public void setWeapon(Weapon newWeapon) {
         try {
@@ -73,6 +86,13 @@ public class Specialist extends Hero{
         }
     }
 
+    /*
+     * Metodo para habilidade especial:
+     * Caso ele estiver com sorte(critico) e a arma equipada for diferente da arma preferida troca
+     * sem critar equipa a arma, tambem verifica se pode equipar e nao extrapolar o quantidade maxima
+     * 
+     * @param target alvo da habilidade
+     */
     @Override
     public void useSpecialSkill(Combatant target) {
         // Name: Versatility
