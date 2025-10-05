@@ -14,11 +14,25 @@ import levels.Difficulty;
 import levels.builder.FixatedLevelBuilder;
 import utils.Dice;
 
-/*
+/**
+ * Classe responsavel por gerenciar a execucao principal do jogo
  * 
+ * O {@code GameManager} cria o heroi, as fase de combate, organiza os turnos,
+ * se o heroi ganhou ou perdeu. Tambem verifica os eventos e recompensas.
  */
 public class GameManager {
+
+    /**
+     * Inicia a execucao do jogo
+     * 
+     * @param difficulty nivel da dificiculdade selecionada (facil, medio ou dificil)
+     * @throws InufficientCharacterLevel caso o heroi nao tenha nivel o suficiente para equipar uma arma
+     * @throws CharacterKnocker caso o personagem, tanto heroi ou monstro, esteja derrubado
+     * @throws InsufficientWillPoints caso um personagem nao tenha pontos de vontade suficiente 
+     */
+
     public static void playGame(Difficulty difficulty) {
+
         // Instantiating our Hero Singed and his Weapon
         Mutant hero = new Mutant("Singed", 50, 25, 3);
         Gauntlet poisonGauntlet = new Gauntlet("Singed's Poison Gauntlets",1, 3, hero);

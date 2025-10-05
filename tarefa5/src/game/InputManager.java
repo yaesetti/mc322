@@ -3,6 +3,9 @@ package game;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * 
+ */
 public class InputManager {
     public static int readInteger(String message, int min, int max) {
         Scanner scanner = new Scanner(System.in);

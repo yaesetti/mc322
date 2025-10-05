@@ -1,7 +1,7 @@
 package game;
 
 /**
- * Classe main
+ * Classe main para iniciar o programa
  */
 public class Main {
     /**
