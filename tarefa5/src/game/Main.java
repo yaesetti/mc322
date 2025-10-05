@@ -5,7 +5,7 @@ package game;
  */
 public class Main {
     /**
-     * Entrada do programa
+     * Entrada do programa para inicializar ele
      * 
      * @param args argumentos da linha de comando
      */
