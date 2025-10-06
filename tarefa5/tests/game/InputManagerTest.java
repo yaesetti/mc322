@@ -1,15 +1,14 @@
 package game;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class InputManagerTest {
@@ -20,7 +19,7 @@ public class InputManagerTest {
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
     @AfterEach
-    void restoreStreams() {
+    public void restoreStreams() {
         System.setIn(originalSystemIn);
         System.setOut(originalSystemOut);
         System.setErr(originalSystemErr);
@@ -29,6 +28,7 @@ public class InputManagerTest {
     private void provideInput(String data) {
         testIn = new ByteArrayInputStream(data.getBytes());
         System.setIn(testIn);
+        InputManager.resetScanner(); // Reset scanner to use new System.in
     }
 
     @Test
