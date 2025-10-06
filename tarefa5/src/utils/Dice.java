@@ -9,7 +9,7 @@ import java.util.Random;
 public class Dice {
 
     /**
-     * Soma o numero que os dados derao
+     * Soma o numero que os dados deram
      * 
      * @param amount quantidade de dados que serao "rolados"
      * @param faces quantidade de lado dos dados

@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 import characters.Monster;
 import characters.heroes.Mutant;
 import characters.monsters.TwistedMutant;
@@ -8,7 +10,6 @@ import exceptions.InsufficientCharacterLevel;
 import exceptions.InsufficientWillPoints;
 import items.Item;
 import items.weapons.Gauntlet;
-import java.util.ArrayList;
 import levels.CombatLevel;
 import levels.Difficulty;
 import levels.builder.FixatedLevelBuilder;
@@ -26,9 +27,6 @@ public class GameManager {
      * Inicia a execucao do jogo
      * 
      * @param difficulty nivel da dificiculdade selecionada (facil, medio ou dificil)
-     * @throws InsufficientCharacterLevel caso o heroi nao tenha nivel o suficiente para equipar uma arma
-     * @throws CharacterKnocked caso o personagem, tanto heroi ou monstro, esteja derrubado
-     * @throws InsufficientWillPoints caso um personagem nao tenha pontos de vontade suficiente 
      */
 
     public static void playGame(Difficulty difficulty) {

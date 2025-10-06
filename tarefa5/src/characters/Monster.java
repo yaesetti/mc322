@@ -4,7 +4,9 @@ import combat.CombatAction;
 import combat.Combatant;
 import items.Item;
 import items.Lootable;
-import items.weapons.*;
+import items.weapons.Gauntlet;
+import items.weapons.Pistol;
+import items.weapons.Sword;
 import levels.Difficulty;
 import utils.Dice;
 
@@ -51,7 +53,7 @@ public abstract class Monster extends Character implements Lootable {
     /**
      * {@inheritDoc}
      * 
-     * @param dangerRanting o nivel de perigo do monstro (usado para calcular a experiencia dada)
+     * @param dangerRating o nivel de perigo do monstro (usado para calcular a experiencia dada)
      * @param difficulty a dificuldade do jogo, afeta os atributos do monstro
      * 
      * Os atributos {@code healthPoints}, {@code willPoints} e {@code strength} sao multiplicados pelo fator da dificuldade.

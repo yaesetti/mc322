@@ -17,7 +17,7 @@ public interface CombatAction {
      * @param actor quem realiza a acao
      * @param target quem sofre a acao
      * @throws InsufficientWillPoints se pontos de vontade nao for o suficiente
-     * @throws CharacterKnocker se o personagem esta derrubado
+     * @throws CharacterKnocked se o personagem esta derrubado
      */
     public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked;
 }

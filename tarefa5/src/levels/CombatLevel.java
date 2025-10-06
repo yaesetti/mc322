@@ -1,8 +1,9 @@
 package levels;
 
+import java.util.ArrayList;
+
 import characters.Hero;
 import characters.Monster;
-import java.util.ArrayList;
 import levels.scenarios.Scenario;
 
 /**
@@ -21,7 +22,7 @@ public class CombatLevel implements Level {
      * @param hero heroi que entra no level
      * @param scenario descricao do cenario e/ou debbufs/buffs dele
      * @param challenge nivel do desafio
-     * @param monster array com lista de monstros a serem enfrentados
+     * @param monsters array com lista de monstros a serem enfrentados
      */
     public CombatLevel(Hero hero, Scenario scenario, int challenge, ArrayList<Monster> monsters) {
         this.hero = hero;

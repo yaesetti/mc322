@@ -1,8 +1,9 @@
 package combat;
 
+import java.util.HashMap;
+
 import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
-import java.util.HashMap;
 
 /**
  * Define acoes que um personagem pode sofrer ou realizar
@@ -88,9 +89,6 @@ public interface Combatant {
 
     /**
      * Mapa com o nome da acao
-     * 
-     * @param String
-     * @param CombatAction
      */
     public HashMap<String, CombatAction> getActions();
 
