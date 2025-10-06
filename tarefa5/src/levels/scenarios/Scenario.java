@@ -1,12 +1,17 @@
 package levels.scenarios;
 
 import characters.Hero;
-import characters.heroes.*;
+import characters.heroes.Mutant;
+import characters.heroes.Specialist;
 import events.Ambush;
 import events.Event;
 import events.Freezing;
 import events.NatureBlessing;
 
+/**
+ * Descricao e efeitos que os possiveis cenarios dao.
+ * Tambem eventos que ocorrem ao entrar no cenario
+ */
 public enum Scenario {
     DOWNTOWN("Downtown", """
             In the heart of the most populated city of the country
@@ -53,6 +58,13 @@ public enum Scenario {
     private final String description;
     private final Event event;
 
+    /**
+     * Construtor do cenario
+     * 
+     * @param name nome do cenario
+     * @param descricao do cenario
+     * @param event evento que ocorre no cenario
+     */
     private Scenario(String name, String description, Event event) {
         this.name = name;
         this.description = description;
@@ -71,5 +83,10 @@ public enum Scenario {
         return this.event;
     }
 
+    /**
+     * Aplica o feito do cenario no heroi
+     * 
+     * @param hero personagem afetado pelo cenario
+     */
     public abstract void applyEffect(Hero hero);
 }

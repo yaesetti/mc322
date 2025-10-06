@@ -3,6 +3,9 @@ package events;
 import characters.Hero;
 import levels.CombatLevel;
 
+/**
+ * Evento de emboscada
+ */
 public class Ambush implements Event {
     private final String description;
 
@@ -13,6 +16,14 @@ public class Ambush implements Event {
                 """;
     }
 
+    /**
+     * Verifica se o evento pode acontecer:
+     * O heroi esta sem sorte e
+     * o contador de turno e 5
+     * 
+     * @param hero heroi que ativa a armadilha
+     * @param level fase
+     */
     @Override
     public void checkTrigger(Hero hero, CombatLevel level) {
         if (!hero.getLuck() && level.getTurnCounter() == 5) {
@@ -20,6 +31,12 @@ public class Ambush implements Event {
         }
     }
 
+    /**
+     * Printa no console o evento que esta o ocorrendo
+     * 
+     * @param hero heroi que ativa a armadilha
+     * @param level nivel da emboscada
+     */
     @Override
     public void execute(Hero hero, CombatLevel level) {
         System.out.println("************** Ambush ***************");

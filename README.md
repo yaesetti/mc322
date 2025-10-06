@@ -17,6 +17,10 @@ foo@bar:~/tarefaX$ ./run.sh
 ## Disclaimer for Task 4
 Even tough the Task Description actively discourage unnecessary keyboard interactions, most outputs made by the program currently require the user to press `Enter` to continue, in order to improve readability and overall aesthetics.
 
+## Disclaimer for Task 5
+Documentation is temporally implemented in Brazilian Portuguese. Will be changed later on.
+Getters and Setters are intentionally not documented because are too simple.
+
 ## Current Classes
 Hero Classes: Mutant, Specialist<br>
 <br>

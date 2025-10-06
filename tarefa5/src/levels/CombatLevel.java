@@ -1,10 +1,14 @@
 package levels;
 
+import java.util.ArrayList;
+
 import characters.Hero;
 import characters.Monster;
-import java.util.ArrayList;
 import levels.scenarios.Scenario;
 
+/**
+ * Classe que gera um level para o combate
+ */
 public class CombatLevel implements Level {
     private final Hero hero;
     private final Scenario scenario;
@@ -12,6 +16,14 @@ public class CombatLevel implements Level {
     private final ArrayList<Monster> monsters;
     private int turnCounter;
 
+    /**
+     * Construtor do level de combate
+     * 
+     * @param hero heroi que entra no level
+     * @param scenario descricao do cenario e/ou debbufs/buffs dele
+     * @param challenge nivel do desafio
+     * @param monsters array com lista de monstros a serem enfrentados
+     */
     public CombatLevel(Hero hero, Scenario scenario, int challenge, ArrayList<Monster> monsters) {
         this.hero = hero;
         this.scenario = scenario;
@@ -33,6 +45,9 @@ public class CombatLevel implements Level {
         return this.monsters;
     }
 
+    /**
+     * Se todos os monstros da lista estiverem derrubados a fase estara completa
+     */
     @Override
     public boolean getIsCompleted() {
         for (Monster monster: monsters) {

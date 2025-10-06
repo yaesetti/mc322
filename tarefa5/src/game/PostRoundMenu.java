@@ -6,7 +6,22 @@ import exceptions.InsufficientCharacterLevel;
 import items.Item;
 import items.Weapon;
 
+/**
+ * Classe responsavel por exibir o pos round
+ * 
+ * {@code PostRoundMenu}:
+ *      Continuar o jogo.
+ *      Pegar o loot do monstro.
+ *      Ver os status do jogador/heroi.
+ *      Sair do jogo.
+ */
 public class PostRoundMenu {
+
+    /**
+     * Exibe o menu de continuacao no console para o jogador
+     * 
+     * Impressao estatica das opcoes
+     */
     private static void printMenu() {
         String menu = """
 
@@ -25,6 +40,15 @@ public class PostRoundMenu {
                 System.out.println(menu);
     }
 
+    /**
+     * Gerencia o menu para continuar o jogo e trata as escolhas do jogador
+     * 
+     * @param hero heroi que esta no jogo
+     * @param enemy inimigo enfretado
+     * @param droppedItem item que esse inimigo dropou
+     * @return {@code 0} para o jogador continuar o jogo
+     *         {@code 1} para p jogador sair do jogo
+     */         
     public static int manageMenu(Hero hero, Monster enemy, Item droppedItem) {
         while (true) { 
             printMenu();

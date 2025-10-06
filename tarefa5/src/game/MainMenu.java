@@ -2,7 +2,22 @@ package game;
 
 import levels.Difficulty;
 
+/**
+ * Classe responsavel por exibir o menu principal
+ * 
+ * {@code MainMenu}:
+ *      Inicia um novo jogo em uma dificuldade escolhida
+ *      Vizualizar as informacoes das classes de herois
+ *      Vizualizar as informacoes das classes de monstros
+ *      Encerrar o jogo
+ */
 public class MainMenu {
+
+    /**
+     * Exibe o menu do jogo no console
+     * 
+     * Impressao estatica das opcoes
+     */
     private static void printMenu() {
         String menu = """
 
@@ -20,6 +35,9 @@ public class MainMenu {
                 System.out.println(menu);
     }
 
+    /**
+     * Exibe no console as informacoes de classe de herois disponiveis
+     */
     private static void printHeroClasses() {
         String message = """
         ==--==--==--==--==--==--== MUTANT ==--==--==--==--==--==--==
@@ -54,6 +72,9 @@ public class MainMenu {
         System.out.println(message);
     }
 
+    /**
+     * Exibe no console as informacoes de classe de monstros disponiveis
+     */
     private static void printMonsterClasses() {
         String message = """
         ==--==--==--==--==--== TWISTED MUTANT ==--==--==--==--==--==
@@ -81,6 +102,9 @@ public class MainMenu {
         System.out.println(message);
     }
 
+    /**
+     * Exibe as opcoes de dificuldade de jogo
+     */
     private static void printDiffMenu() {
         String menu = """
 
@@ -97,6 +121,15 @@ public class MainMenu {
         System.out.println(menu);
     }
 
+    /**
+     * Gerencia o menu principal do jogo e trata as escolhas do jogador
+     * 
+     * Implementa um loop que:
+     *      Exibe o menu principal.
+     *      Le a escolha do jogador.
+     *      Executa a acao correspondente, como iniciar o jogo,
+     *      exibir informacoes de classe ou encerrar o jogo
+     */
     public static void manageMenu() {
         while (true) { 
             printMenu();

@@ -4,14 +4,24 @@ import characters.Character;
 import combat.DamageType;
 import items.Weapon;
 
+/**
+ * Subclasse de {@link Weapon}
+ * arma com tipo de dano de forca
+ */
 public class Gauntlet extends Weapon {
     private final int strengthAmp;
 
+    /**
+     * Inicializa a arma
+     */
     public Gauntlet(String name, int minLevel, int strengthAmp, Character user) {
         super(name, new int[]{1, 6}, user.getStrength() * strengthAmp + 1 * minLevel, minLevel, DamageType.Bludgeoning, user);
         this.strengthAmp = strengthAmp;
     }
 
+    /**
+     * Printa no console so atributos
+     */
     @Override
     public void printStatus() {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");

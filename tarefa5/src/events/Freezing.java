@@ -3,6 +3,10 @@ package events;
 import characters.Hero;
 import levels.CombatLevel;
 
+/**
+ * Evento de estar congelado
+ * Comeca a tomar dano
+ */
 public class Freezing implements Event {
     private final String description;
 
@@ -13,6 +17,14 @@ public class Freezing implements Event {
         """;
     }
 
+    /**
+     * Verifica se o evento pode acontecer:
+     * Se o turno for divisivel por 5
+     * se sim executa o evento
+     * 
+     * @param hero
+     * @param level
+     */
     @Override
     public void checkTrigger(Hero hero, CombatLevel level) {
         // Triggers every 5 turns
@@ -21,6 +33,12 @@ public class Freezing implements Event {
         }
     }
 
+    /**
+     * Printa no console o evento que esta o ocorrendo
+     * 
+     * @param hero heroi que ativa a armadilha
+     * @param level nivel do congelamento
+     */
     @Override
     public void execute(Hero hero, CombatLevel level) {
         System.out.println("************* Freezing **************");

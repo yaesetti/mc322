@@ -1,5 +1,8 @@
 package levels;
 
+/**
+ * Niveis de dificuldade
+ */
 public enum Difficulty {
     EASY(1),
     MEDIUM(2),
@@ -7,10 +10,20 @@ public enum Difficulty {
 
     private final int multiplier;
 
+    /**
+     * Multiplicador da dificuldade
+     * 
+     * @param multiplier multiplicador do nivel
+     */
     private Difficulty(int multiplier) {
         this.multiplier = multiplier;
     }
 
+    /**
+     * Da o multiplicador 
+     * 
+     * @return retorna o multiplicador
+     */
     public int getMultiplier() {
         return this.multiplier;
     }

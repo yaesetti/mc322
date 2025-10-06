@@ -5,12 +5,30 @@ import exceptions.CharacterKnocked;
 import exceptions.InsufficientWillPoints;
 import utils.Dice;
 
+/**
+ * Acao de curar a si proprio
+ */
 public class SelfHeal extends Heal {
+
+    /**
+     * Da nome a acao
+     * @return "Self Heal"
+     */
     @Override
     public String getName() {
         return "Self Heal";
     }
     
+    /**
+     * Realiza a cura.
+     * Onde o alvo e ele proprio
+     * 
+     * @param actor quem ira realizar a acao
+     * @param target quem ira sofrer dessa acao
+     * 
+     * @throws InsufficientWillPoints pontos de vontade nao sao suficientes para realizar a acao
+     * @throws CharacterKnocked caso o personagem esteja derrubado
+     */
     @Override
     public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked{
         if (actor.getIsKnocked()) {

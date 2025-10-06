@@ -8,22 +8,42 @@ import combat.Combatant;
 // Real life examples would be: Flash, Superman, Cyclops, Storm...
 
 // The most important attribute for this class is their Mutant Energy (ME)
+/**
+ * Subclasse de {@link Hero}: Mutant
+ * 
+ * adiciona mutantEnergy: pode causar mais dano usando ela
+ */
 public class Mutant extends Hero {
     private int mutantEnergy;
     private int maxMutantEnergy;
 
+    /**
+     * {@inheritDoc}
+     * 
+     * Construtor de mutante inicializa sua energia mutante baseado no seu nivel
+     */
     public Mutant(String name, int healthPoints, int willPoints, int strength) {
         super(name, healthPoints, willPoints, strength);
         this.mutantEnergy = 2 * this.getLevel();
         this.maxMutantEnergy = mutantEnergy;
     }
 
+    /**
+     * Metodo para dar a exp para o mutante e
+     * aumentar sua energia mutante
+     */
     @Override
     public void gainExp(int exp) {
         super.gainExp(exp);
         maxMutantEnergy = 2 * this.getLevel(); // Updates the maxMutantEnergy per level.
     }
 
+    /**
+     * Metodo que calcula o dano que o monstro dara
+     * com arma equipada mais usando sua habilidade especial
+     * 
+     * @return damage dano que Mutant causou
+     */
     @Override
     public int getAttackDamage() {
         int damage = this.getWeapon().getDamage();
@@ -48,6 +68,14 @@ public class Mutant extends Hero {
         return this.maxMutantEnergy;
     }
 
+    /**
+     * Metodo para usar a habilidade especial com 2 casos.
+     * Primeiro se ele estiver com sorte critara seu dano.
+     * Se nao usara sua habilidade normalmente gastando sua energia, e a restaurando
+     * caso na restauracao for maior q a maxima, iguala a maxima
+     * 
+     * @param target alvo da habilidade
+    */
     @Override
     public void useSpecialSkill(Combatant target) {
         // Name: Restore Energy
