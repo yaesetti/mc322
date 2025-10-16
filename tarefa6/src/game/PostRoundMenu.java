@@ -1,27 +1,11 @@
 package game;
 
 import characters.Hero;
-import characters.Monster;
 import exceptions.InsufficientCharacterLevel;
 import items.Item;
 import items.Weapon;
 
-/**
- * Classe responsavel por exibir o pos round
- * 
- * {@code PostRoundMenu}:
- *      Continuar o jogo.
- *      Pegar o loot do monstro.
- *      Ver os status do jogador/heroi.
- *      Sair do jogo.
- */
 public class PostRoundMenu {
-
-    /**
-     * Exibe o menu de continuacao no console para o jogador
-     * 
-     * Impressao estatica das opcoes
-     */
     private static void printMenu() {
         String menu = """
 
@@ -32,27 +16,21 @@ public class PostRoundMenu {
 
                  [2] Loot the slayed enemy
                  [3] View Hero Status
-                 [4] Exit to Main Menu
+                 [4] Save Game
+                 [5] Exit to Main Menu
 
                 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
                 """;
         
                 System.out.println(menu);
     }
-
-    /**
-     * Gerencia o menu para continuar o jogo e trata as escolhas do jogador
-     * 
-     * @param hero heroi que esta no jogo
-     * @param enemy inimigo enfretado
-     * @param droppedItem item que esse inimigo dropou
-     * @return {@code 0} para o jogador continuar o jogo
-     *         {@code 1} para p jogador sair do jogo
-     */         
-    public static int manageMenu(Hero hero, Monster enemy, Item droppedItem) {
+        
+    public static int manageMenu(Item droppedItem, Battle battle) {
+        Hero hero = battle.getHero();
+        
         while (true) { 
             printMenu();
-            int input = InputManager.readInteger("Insert your option: ", 1, 4);
+            int input = InputManager.readInteger("Insert your option: ", 1, 5);
 
             switch (input) {
                 case 1 -> {
@@ -91,6 +69,12 @@ public class PostRoundMenu {
                     InputManager.readEnter();
                 }
                 case 4 -> {
+                    String name = InputManager.readString("Name of the Save: ");
+                    PersistenceManager.saveBattle(battle, name);
+
+                    InputManager.readEnter();
+                }
+                case 5 -> {
                     boolean confirmation = InputManager.readBoolean("-> Are you sure?");
                     if (confirmation) {
                         System.out.println("-> Exiting game...");

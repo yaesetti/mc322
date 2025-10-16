@@ -6,30 +6,21 @@ import characters.Hero;
 import characters.Monster;
 import levels.scenarios.Scenario;
 
-/**
- * Classe que gera um level para o combate
- */
 public class CombatLevel implements Level {
     private final Hero hero;
     private final Scenario scenario;
     private final int challenge;
     private final ArrayList<Monster> monsters;
     private int turnCounter;
+    private int currentMonsterIndex;
 
-    /**
-     * Construtor do level de combate
-     * 
-     * @param hero heroi que entra no level
-     * @param scenario descricao do cenario e/ou debbufs/buffs dele
-     * @param challenge nivel do desafio
-     * @param monsters array com lista de monstros a serem enfrentados
-     */
     public CombatLevel(Hero hero, Scenario scenario, int challenge, ArrayList<Monster> monsters) {
         this.hero = hero;
         this.scenario = scenario;
         this.challenge = challenge;
         this.monsters = monsters;
         this.turnCounter = 1;
+        this.currentMonsterIndex = 0;
     }
 
     public int getChallenge() {
@@ -45,9 +36,6 @@ public class CombatLevel implements Level {
         return this.monsters;
     }
 
-    /**
-     * Se todos os monstros da lista estiverem derrubados a fase estara completa
-     */
     @Override
     public boolean getIsCompleted() {
         for (Monster monster: monsters) {
@@ -66,6 +54,16 @@ public class CombatLevel implements Level {
     @Override
     public void incrementTurnCounter() {
         this.turnCounter++;
+    }
+
+    @Override
+    public int getCurrentMonsterIndex() {
+        return this.currentMonsterIndex;
+    }
+
+    @Override
+    public void incrementCurrentMonsterIndex() {
+        this.currentMonsterIndex++;
     }
 
     @Override

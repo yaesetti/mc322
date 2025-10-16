@@ -68,14 +68,6 @@ public class Mutant extends Hero {
         return this.maxMutantEnergy;
     }
 
-    /**
-     * Metodo para usar a habilidade especial com 2 casos.
-     * Primeiro se ele estiver com sorte critara seu dano.
-     * Se nao usara sua habilidade normalmente gastando sua energia, e a restaurando
-     * caso na restauracao for maior q a maxima, iguala a maxima
-     * 
-     * @param target alvo da habilidade
-    */
     @Override
     public void useSpecialSkill(Combatant target) {
         // Name: Restore Energy

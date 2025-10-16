@@ -1,44 +1,21 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import characters.Hero;
 import characters.Monster;
 import characters.heroes.Mutant;
 import characters.monsters.TwistedMutant;
 import exceptions.CharacterKnocked;
-import exceptions.InsufficientCharacterLevel;
 import exceptions.InsufficientWillPoints;
 import items.Item;
-import items.weapons.Gauntlet;
 import levels.CombatLevel;
-import levels.Difficulty;
-import levels.builder.FixatedLevelBuilder;
 import utils.Dice;
 
-/**
- * Classe responsavel por gerenciar a execucao principal do jogo
- * 
- * O {@code GameManager} cria o heroi, as fase de combate, organiza os turnos,
- * se o heroi ganhou ou perdeu. Tambem verifica os eventos e recompensas.
- */
 public class GameManager {
-
-    /**
-     * Inicia a execucao do jogo
-     * 
-     * @param difficulty nivel da dificiculdade selecionada (facil, medio ou dificil)
-     */
-
-    public static void playGame(Difficulty difficulty) {
-
-        // Instantiating our Hero Singed and his Weapon
-        Mutant hero = new Mutant("Singed", 50, 25, 3);
-        Gauntlet poisonGauntlet = new Gauntlet("Singed's Poison Gauntlets",1, 3, hero);
-        try {
-            hero.setWeapon(poisonGauntlet);
-        } catch (InsufficientCharacterLevel e) {
-            System.err.println("Min Level defined for the first Hero Weapon is too high!");
-        }
+    public static void playGame(Battle battle) {
+        // Getting the hero that is in the battle
+        Hero hero = battle.getHero();
 
         // Prints Hero's Stats
         System.out.println();
@@ -47,19 +24,26 @@ public class GameManager {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
 
-        // Generate the levels
-        FixatedLevelBuilder levelBuilder = new FixatedLevelBuilder();
-        ArrayList<CombatLevel> levels = levelBuilder.generateLevels(hero, 3, difficulty); 
+        // Getting the levels from the battle
+        int currentLevelIndex = battle.getCurrentLevelIndex();
+        List<CombatLevel> levels = battle.getLevels().subList(currentLevelIndex, battle.getLevels().size());
+
+        if (currentLevelIndex > 0 || levels.get(0).getCurrentMonsterIndex() > 0) {
+            if (PostRoundMenu.manageMenu(null, battle) == 1) {
+                return;
+            }
+        }
 
         // Loops for the amount of levels
         for (CombatLevel level: levels) {
-            System.out.printf("----------------------={LEVEL %d}=----------------\n", levels.indexOf(level) + 1);
+            System.out.printf("----------------------={LEVEL %d}=----------------\n", currentLevelIndex + 1);
 
             // Prints the information of the level and apply the Scenario effect
             level.start();
 
             // Loops for the amount of monsters
-            ArrayList<Monster> levelMonsters = level.getMonsters();
+            int currentMonsterIndex = level.getCurrentMonsterIndex();
+            List<Monster> levelMonsters = level.getMonsters().subList(currentMonsterIndex, level.getMonsters().size());
             for (Monster enemy: levelMonsters){
 
                 // Loops while the enemy still is alive
@@ -128,13 +112,19 @@ public class GameManager {
                     droppedItem = enemy.dropLoot();
                 }
 
+                // Increments the current monster in the battle
+                level.incrementCurrentMonsterIndex();
+                
                 // Runs the Post Round Menu and checks if the user
                 // choose the option to abort the current game and
                 // go back to the Main Menu
-                if (PostRoundMenu.manageMenu(hero, enemy, droppedItem) == 1) {
+                if (PostRoundMenu.manageMenu(droppedItem, battle) == 1) {
                     return;
                 }
-        }
+            }
+            // Increments the current level saved in the battle
+            battle.incrementCurrentLevelIndex();
+            currentLevelIndex++;
     }
     System.out.println();
     System.out.println("                     -=[VICTORY]=-");

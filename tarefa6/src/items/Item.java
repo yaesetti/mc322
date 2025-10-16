@@ -1,9 +1,11 @@
 package items;
 
+import java.io.Serializable;
+
 /**
  * Cria um item
  */
-public interface Item {
+public interface Item extends Serializable {
 
     /** Da nome ao item */
     public String getName();

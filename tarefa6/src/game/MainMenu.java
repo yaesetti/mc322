@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 import levels.Difficulty;
 
 /**
@@ -25,9 +27,10 @@ public class MainMenu {
                 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
                  [1] Start New Game
-                 [2] View Hero Classes
-                 [3] View Monster Classes
-                 [4] Exit to Desktop
+                 [2] Load Game
+                 [3] View Hero Classes
+                 [4] View Monster Classes
+                 [5] Exit to Desktop
 
                 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
                 """;
@@ -133,7 +136,7 @@ public class MainMenu {
     public static void manageMenu() {
         while (true) { 
             printMenu();
-            int input = InputManager.readInteger("Insert your option: ", 1, 4);
+            int input = InputManager.readInteger("Insert your option: ", 1, 5);
 
             switch (input) {
                 case 1 -> {
@@ -146,18 +149,48 @@ public class MainMenu {
                         case 3 -> difficulty = Difficulty.HARD;
                         default -> difficulty = Difficulty.EASY;
                     }
-                    // Runs a New Game in the selected difficulty
-                    GameManager.playGame(difficulty);
+                    Battle battle = new Battle(difficulty);
+                    GameManager.playGame(battle);
                 }
                 case 2 -> {
+                    ArrayList<String> battleNames = PersistenceManager.listSavedBattles();
+
+                    if (battleNames.isEmpty()) {
+                        System.out.println("\n-> No Saves available, try starting a New Game");
+                        break;
+                    }
+                    System.out.println();
+                    System.out.println("                    Saves");
+                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                    System.out.println(" [1] Go back\n");
+                    for (int i = 0; i < battleNames.size(); i++) {
+                        String name = battleNames.get(i).replaceFirst("\\.bin$", "");
+                        System.out.printf(" [%d] %s\n", i+2, name);
+                    }
+                    System.out.println();
+                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                    input = InputManager.readInteger("Insert your option: ", 1, battleNames.size() + 1) - 2;
+                    if (input == -1) {
+                        break;
+                    }
+
+                    int selectedBattle = input;
+                    
+                    Battle battle = PersistenceManager.loadBattle(battleNames.get(selectedBattle));
+
+                    System.out.println("-> Loading save...");
+
+                    GameManager.playGame(battle);
+                }
+                case 3 -> {
                     printHeroClasses();
                     InputManager.readEnter();
                 }
-                case 3 -> {
+                case 4 -> {
                     printMonsterClasses();
                     InputManager.readEnter();
                 }
-                case 4 -> {
+                case 5 -> {
                     boolean confirmation = InputManager.readBoolean("-> Are you sure?");
                     
                     // if the user answered 'no', then the loop continues

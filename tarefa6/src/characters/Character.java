@@ -1,5 +1,6 @@
 package characters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,12 +12,7 @@ import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 import utils.Dice;
 
-/**
- * Classe que representa o Personagem do RPG (Heroi ou Monstro),
- * armazenando os atributos principais.
- * Fornece metodos para interagir com outros personagens
- */
-public abstract class Character implements Combatant{
+public abstract class Character implements Combatant, Serializable{
     private final String name;
     private int healthPoints;
     private boolean isKnocked; // If a character's HP is <= 0.
@@ -30,14 +26,6 @@ public abstract class Character implements Combatant{
 
     protected final HashMap<String, CombatAction> actions = new HashMap<>();
 
-    /**
-     * Construtor para inicializar o personagem
-     * 
-     * @param name O nome do personagem.
-     * @param healthPoints A quantidade de vida inicial do personagem
-     * @param willPoints A quantidade de pontos de vontade do personagem
-     * @param strength O valor base de forca do personagem
-     */
     public Character(String name, int healthPoints, int willPoints,
                      int strength) {
         this.name = name;

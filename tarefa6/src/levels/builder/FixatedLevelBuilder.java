@@ -11,22 +11,8 @@ import levels.Difficulty;
 import levels.scenarios.Scenario;
 import utils.Dice;
 
-/**
- * Gera uma lista de niveis de combade
- * 
- * 
- */
 public class FixatedLevelBuilder implements LevelBuilder{
     @Override
-
-    /**
-     * Responsavel por gerar a lista de niveis de combate com as dificuldades, com os monstros
-     * 
-     * @param hero
-     * @param num
-     * @param difficulty
-     * @return levels
-     */
     public ArrayList<CombatLevel> generateLevels(Hero hero, int num, Difficulty difficulty) {
         ArrayList<CombatLevel> levels = new ArrayList<>();
 
