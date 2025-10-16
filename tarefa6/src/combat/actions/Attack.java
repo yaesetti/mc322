@@ -9,33 +9,12 @@ import items.weapons.Pistol;
 import items.weapons.Sword;
 import utils.Dice;
 
-/**
- * Acao de ataque do personagem
- */
 public class Attack implements CombatAction {
-    /**
-     * Da nome a acao
-     * @return "Attack"
-     */
     @Override
     public String getName() {
         return "Attack";
     }
-    
-    /**
-     * Realiza a acao de ataque.
-     * Atualiza as informacoes das armas:
-     * caso seja uma espada ela perde afiacao
-     * se for uma arma e realizou a acao perde municao.
-     * 
-     * Rola um dado para verificar se tera sorte 
-     * 
-     * @param actor quem ira realizar a acao
-     * @param target quem ira sofrer dessa acao
-     * 
-     * @throws InsufficientWillPoints pontos de vontade nao sao suficientes para realizar a acao
-     * @throws CharacterKnocked caso o personagem esteja derrubado
-     */
+
     @Override
     public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked {
         if (actor.getIsKnocked()) {
