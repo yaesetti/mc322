@@ -13,7 +13,29 @@ import items.Item;
 import levels.CombatLevel;
 import utils.Dice;
 
+/**
+ * Manages the execution of a battle session.
+ * <p>
+ * Controls the game loop, including level progression, combat turns,
+ * experience gain, loot drops, and victory or defeat conditions.
+ */
 public class GameManager {
+    
+    /**
+     * Starts and runs the game using the provided {@link Battle} instance.
+     * <p>
+     * The game proceeds through each level and monster encounter, executing
+     * combat actions for both the hero and enemies. It handles:
+     * <ul>
+     *   <li>Hero and enemy turns</li>
+     *   <li>Combat status updates</li>
+     *   <li>Event triggers</li>
+     *   <li>Experience and loot rewards</li>
+     *   <li>Game over and victory conditions</li>
+     * </ul>
+     *
+     * @param battle the current battle session to play
+     */
     public static void playGame(Battle battle) {
         // Getting the hero that is in the battle
         Hero hero = battle.getHero();

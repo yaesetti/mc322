@@ -4,29 +4,38 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Classe responsavel por gerenciar as entradas do usuario no console.
- * Possui metodos para diferentes tipos de entradas: String, Int, Boolean ou confirmacao por enter.
- * Trata erros e/ou valores invalidos na entrada para que o programa nao quebre
+ * Manages user input from the console.
+ * <p>
+ * Provides utility methods for reading and validating different types of input:
+ * integers within a range, non-empty strings, boolean confirmations, and ENTER prompts.
+ * Handles invalid or malformed input gracefully to prevent runtime errors.
  */
 public class InputManager {
 
     /**
-     * Le um inteiro em um intervalo especifico
-     * 
-     * @param message mensagem exibida ao usuario solicitando uma entrada
-     * @param min valor minimo aceito
-     * @param max valor maximo aceito
-     * @return o numero inteiro valido que o usuario deu
-     * @throws NumberFormatException caso a entrada nao possa ser transforma em inteiro
-     * @throws NoSuchElementException se a entrada nao tiver nada, apenas enter
+     * Scanner instance used for reading console input.
      */
-
     private static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Resets the scanner instance.
+     * Useful when input stream needs to be refreshed.
+     */
     public static void resetScanner() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Reads an integer from the user within a specified range.
+     * Re-prompts until a valid integer is entered.
+     *
+     * @param message the prompt message shown to the user
+     * @param min     the minimum acceptable value
+     * @param max     the maximum acceptable value
+     * @return a valid integer within the specified range
+     * @throws NumberFormatException    if the input cannot be parsed as an integer
+     * @throws NoSuchElementException   if the input is empty
+     */
     public static int readInteger(String message, int min, int max) {
         int input;
 
@@ -55,11 +64,12 @@ public class InputManager {
     }
 
     /**
-     * Le uma string nao vazia
-     * 
-     * @param message mensagem solicitando a entrada
-     * @return a string digitada pelo usuario(sem espaco no final)
-     * @throws NoSuchElementException se a entrada for nula
+     * Reads a non-empty string from the user.
+     * Re-prompts until a valid string is entered.
+     *
+     * @param message the prompt message shown to the user
+     * @return the trimmed string entered by the user
+     * @throws NoSuchElementException if the input is empty
      */
     public static String readString(String message) {
         String input;
@@ -79,13 +89,11 @@ public class InputManager {
     }
 
     /**
-     * Le uma resposta booleana do usuario:
-     * Yes ou No, e suas possiveis variacooes.
-     * Y ou N, aceita elas minusuclas tambem
-     * 
-     * @param message
-     * @return {@code true} se a entrada for 'y' ou 'yes'
-     *         {@code false} se a entrada for 'n' ou 'no'
+     * Reads a boolean confirmation from the user.
+     * Accepts variations of "yes" or "no" (case-insensitive).
+     *
+     * @param message the prompt message shown to the user
+     * @return {@code true} if input is "y" or "yes", {@code false} if "n" or "no"
      */
     public static boolean readBoolean(String message) {
         String input;
@@ -114,6 +122,10 @@ public class InputManager {
         }
     }
 
+    /**
+     * Waits for the user to press ENTER to continue.
+     * Re-prompts until ENTER is pressed.
+     */
     public static void readEnter() {
         String input;
 
@@ -128,6 +140,10 @@ public class InputManager {
         }
     }
 
+    /**
+     * Closes the scanner instance.
+     * Should be called when input is no longer needed.
+     */
     public static void closeScanner() {
         scanner.close();
     }

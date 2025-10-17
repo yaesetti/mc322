@@ -9,10 +9,16 @@ import events.Freezing;
 import events.NatureBlessing;
 
 /**
- * Descricao e efeitos que os possiveis cenarios dao.
- * Tambem eventos que ocorrem ao entrar no cenario
+ * Represents the possible scenarios in the game, each with a unique description,
+ * associated event, and specific effects applied to the hero upon entering.
+ * Scenarios may enhance or reduce hero attributes depending on their type.
  */
 public enum Scenario {
+
+    /**
+     * Urban scenario with high crime and pollution.
+     * Specialists gain +1 Strength in this environment.
+     */
     DOWNTOWN("Downtown", """
             In the heart of the most populated city of the country
             the criminals run free! Violence is out of control!
@@ -27,6 +33,10 @@ public enum Scenario {
                 }
             },
 
+    /**
+     * Natural forest setting with hidden dangers.
+     * Mutants gain +10 Health Points in this environment.
+     */
     FOREST("Forest", """
             The view is pretty and green, but the crime is evil and
             red. Why the villains are here? Maybe camping? Not sure!
@@ -41,6 +51,10 @@ public enum Scenario {
                 }
             },
 
+    /**
+     * Cold and isolated cave scenario.
+     * All heroes lose 2 Will Points due to the freezing conditions.
+     */
     ICE_CAVE("Ice Cave", """
             It's so cold you can see smoke coming out of your breath.
             For sure the comfort of a warm bed would be 100 times better,
@@ -54,16 +68,27 @@ public enum Scenario {
                 }
             };
     
+    /**
+     * The name of the scenario.
+     */
     private final String name;
+
+    /**
+     * A descriptive text explaining the scenario's atmosphere and context.
+     */
     private final String description;
+
+    /**
+     * The event triggered when entering the scenario.
+     */
     private final Event event;
 
     /**
-     * Construtor do cenario
-     * 
-     * @param name nome do cenario
-     * @param descricao do cenario
-     * @param event evento que ocorre no cenario
+     * Constructs a scenario with its name, description, and associated event.
+     *
+     * @param name        the name of the scenario
+     * @param description the narrative description of the scenario
+     * @param event       the event triggered upon entering the scenario
      */
     private Scenario(String name, String description, Event event) {
         this.name = name;
@@ -71,22 +96,38 @@ public enum Scenario {
         this.event = event;
     }
 
+    /**
+     * Returns the name of the scenario.
+     *
+     * @return the scenario name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Returns the description of the scenario.
+     *
+     * @return the scenario description
+     */
     public String getDescription () {
         return this.description;
     }
 
+    /**
+     * Returns the event associated with the scenario.
+     *
+     * @return the scenario's event
+     */
     public Event getEvent() {
         return this.event;
     }
 
     /**
-     * Aplica o feito do cenario no heroi
-     * 
-     * @param hero personagem afetado pelo cenario
+     * Applies the scenario's effect to the given hero.
+     * Effects may vary depending on the hero's class or attributes.
+     *
+     * @param hero the hero affected by the scenario
      */
     public abstract void applyEffect(Hero hero);
 }

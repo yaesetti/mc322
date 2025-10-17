@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import levels.Difficulty;
 
 /**
- * Classe responsavel por exibir o menu principal
- * 
- * {@code MainMenu}:
- *      Inicia um novo jogo em uma dificuldade escolhida
- *      Vizualizar as informacoes das classes de herois
- *      Vizualizar as informacoes das classes de monstros
- *      Encerrar o jogo
+ * Handles the main menu interface for the U-Energy RPG game.
+ * <p>
+ * The {@code MainMenu} class allows players to:
+ * <ul>
+ *   <li>Start a new game with a chosen difficulty</li>
+ *   <li>Load a previously saved game</li>
+ *   <li>View information about hero classes</li>
+ *   <li>View information about monster classes</li>
+ *   <li>Exit the game</li>
+ * </ul>
  */
 public class MainMenu {
 
     /**
-     * Exibe o menu do jogo no console
-     * 
-     * Impressao estatica das opcoes
+     * Displays the main menu options in the console.
      */
     private static void printMenu() {
         String menu = """
@@ -39,7 +40,8 @@ public class MainMenu {
     }
 
     /**
-     * Exibe no console as informacoes de classe de herois disponiveis
+     * Displays information about available hero classes.
+     * Includes descriptions and special skills for Mutant and Specialist.
      */
     private static void printHeroClasses() {
         String message = """
@@ -76,7 +78,8 @@ public class MainMenu {
     }
 
     /**
-     * Exibe no console as informacoes de classe de monstros disponiveis
+     * Displays information about available monster classes.
+     * Includes descriptions and traits for Twisted Mutant and Thug Gang.
      */
     private static void printMonsterClasses() {
         String message = """
@@ -106,7 +109,8 @@ public class MainMenu {
     }
 
     /**
-     * Exibe as opcoes de dificuldade de jogo
+     * Displays the difficulty selection menu.
+     * Options include Easy, Medium, and Hard.
      */
     private static void printDiffMenu() {
         String menu = """
@@ -125,13 +129,15 @@ public class MainMenu {
     }
 
     /**
-     * Gerencia o menu principal do jogo e trata as escolhas do jogador
-     * 
-     * Implementa um loop que:
-     *      Exibe o menu principal.
-     *      Le a escolha do jogador.
-     *      Executa a acao correspondente, como iniciar o jogo,
-     *      exibir informacoes de classe ou encerrar o jogo
+     * Manages the main menu loop and handles player choices.
+     * <p>
+     * Based on the selected option, this method will:
+     * <ul>
+     *   <li>Start a new game with chosen difficulty</li>
+     *   <li>Load a saved game from disk</li>
+     *   <li>Display hero or monster class information</li>
+     *   <li>Exit the game with confirmation</li>
+     * </ul>
      */
     public static void manageMenu() {
         while (true) { 

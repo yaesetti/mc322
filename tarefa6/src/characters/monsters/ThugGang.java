@@ -4,26 +4,41 @@ import characters.Monster;
 import levels.Difficulty;
 import utils.Dice;
 
-// Thugs always stick together!
 /**
- * Subclasse de {@link Monster}: ThugGang
- * Essa subclasse anda em grupo e seu dano depende da quantidade de unidades tem
+ * Represents a subclass of {@link Monster} called ThugGang.
+ * 
+ * ThugGang monsters operate in groups, and their attack damage scales
+ * based on the number of members in the gang.
  */
 public class ThugGang extends Monster {
-    private final int groupSize; // How many members in the Gang
 
     /**
-     * {@inheritDoc}
-     * Construtor inicializa o groupSize ou tamanho do grupo
+     * Number of individuals in the gang.
      */
-    public ThugGang(String name, int healthPoints, int willPoints, int strength, int dangerRanting, Difficulty difficulty, int groupSize) {
+    private final int groupSize;
+
+    /**
+     * Constructs a ThugGang monster with the specified attributes.
+     *
+     * @param name          the name of the gang
+     * @param healthPoints  the initial health points
+     * @param willPoints    the initial will points
+     * @param strength      the strength value
+     * @param dangerRanting the danger rating of the gang
+     * @param difficulty    the difficulty level of the encounter
+     * @param groupSize     the number of members in the gang
+     */
+    public ThugGang(String name, int healthPoints, int willPoints, int strength,
+                    int dangerRanting, Difficulty difficulty, int groupSize) {
         super(name, healthPoints, willPoints, strength, dangerRanting, difficulty);
         this.groupSize = groupSize;
     }
 
     /**
-     * Metodo para retornar o dano que a classe causa
-     * @return dano que o grupo da baseado no numero de individuos
+     * Calculates the attack damage dealt by the gang.
+     * Damage is based on the number of members and a random roll.
+     *
+     * @return the total damage dealt
      */
     @Override
     public int getAttackDamage() {

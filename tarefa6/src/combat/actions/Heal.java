@@ -7,31 +7,33 @@ import exceptions.InsufficientWillPoints;
 import utils.Dice;
 
 /**
- * Acao de cura do personagem
+ * Represents a healing action that can be performed by a {@link Combatant}.
+ * This action restores health to a target and consumes one will point from the actor.
  */
 public class Heal implements CombatAction {
 
     /**
-     * Da nome a acao
-     * @return "Heal"
+     * Returns the name of the action.
+     *
+     * @return the string "Heal"
      */
     @Override
     public String getName() {
         return "Heal";
     }
-    
+
     /**
-     * Realiza a cura e
-     * diminui a quantidade de pontos de vontade atual
+     * Executes the healing action from the actor onto the target.
      * 
-     * @param actor quem ira realizar a acao
-     * @param target quem ira sofrer dessa acao
-     * 
-     * @throws InsufficientWillPoints pontos de vontade nao sao suficientes para realizar a acao
-     * @throws CharacterKnocked caso o personagem esteja derrubado
+     * @param actor  the combatant performing the healing
+     * @param target the combatant receiving the healing
+     * @throws InsufficientWillPoints if the actor has less than 1 will point
+     * @throws CharacterKnocked       if the actor is currently knocked out
      */
     @Override
-    public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked{
+    public void execute(Combatant actor, Combatant target)
+            throws InsufficientWillPoints, CharacterKnocked {
+
         if (actor.getIsKnocked()) {
             throw new CharacterKnocked();
         }
@@ -43,6 +45,8 @@ public class Heal implements CombatAction {
         int healing = Dice.roll(1, 6) + 2;
         target.receiveHealing(healing);
         actor.setWillPoints(actor.getWillPoints() - 1);
-        System.out.printf("%s healed %s %d Health Points!\n", actor.getName(), target.getName(), healing);
+
+        System.out.printf("%s healed %s %d Health Points!\n",
+                actor.getName(), target.getName(), healing);
     }
 }

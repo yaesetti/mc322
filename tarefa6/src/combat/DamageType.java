@@ -1,27 +1,30 @@
 package combat;
 
 /**
- * Tipos de danos que podem ser aplicados
+ * Represents the types of damage that can be inflicted during combat.
+ * Each damage type may interact differently with character resistances,
+ * vulnerabilities, or environmental effects.
  */
 public enum DamageType {
-    /** Dano por impacto */
+
+    /** Physical damage caused by blunt force or impact. */
     Bludgeoning,
 
-    /** Dano cortante */
+    /** Physical damage caused by cutting or slicing. */
     Slashing,
 
-    /** Dano perfurante */
+    /** Physical damage caused by piercing or stabbing. */
     Piercing,
 
-    /** Dano de energia */
+    /** Magical or kinetic energy-based damage. */
     Force,
 
-    /* Dano de fogo/calor */
+    /** Damage caused by heat or fire. */
     Fire,
 
-    /** Dano eletrico */
+    /** Damage caused by electricity or lightning. */
     Thunder,
 
-    /** Dano de gelo/frio */
+    /** Damage caused by cold or freezing temperatures. */
     Cold;
 }

@@ -5,35 +5,54 @@ import java.io.Serializable;
 import levels.scenarios.Scenario;
 
 /**
- * Interface de level
+ * Represents a game level interface.
+ * Defines the structure and behavior expected from any level implementation,
+ * including scenario details, turn tracking, and completion status.
  */
 public interface Level extends Serializable {
+
     /**
-     * Comeca a fase
+     * Starts the level.
+     * Typically used to initialize the scenario and prepare the game state.
      */
     public void start();
 
     /**
-     * Se o level esta completo ou nao
+     * Checks whether the level is completed.
+     * A level is considered complete when its objectives are fulfilled.
+     *
+     * @return true if the level is completed, false otherwise
      */
     public boolean getIsCompleted();
 
     /**
-     * Da o cenario do level
+     * Returns the scenario associated with the level.
+     *
+     * @return the Scenario object
      */
     public Scenario getScenario();
 
     /**
-     * Da quantos turnos tem
+     * Returns the current turn count.
+     *
+     * @return the number of turns elapsed
      */
     public int getTurnCounter();
 
     /**
-     * Adiciona 1 ao contador de turno
+     * Increments the turn counter by one.
      */
     public void incrementTurnCounter();
 
+    /**
+     * Returns the index of the current monster being engaged.
+     *
+     * @return the current monster index
+     */
     public int getCurrentMonsterIndex();
 
+    /**
+     * Increments the current monster index by one.
+     */
     public void incrementCurrentMonsterIndex();
 }

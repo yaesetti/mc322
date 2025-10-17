@@ -11,20 +11,58 @@ import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 import utils.Dice;
 
+/**
+ * Abstract base class representing a character in the game.
+ * 
+ * Implements the {@link Combatant} interface and provides shared attributes and behaviors
+ * for all playable and non-playable characters, including health, will points, strength,
+ * weapon handling, and combat actions.
+ */
 public abstract class Character implements Combatant, Serializable{
-    private final String name;
-    private int healthPoints;
-    private boolean isKnocked; // If a character's HP is <= 0.
-    private int willPoints; // Kind of the Mana/Energy that will be used. WIP.
-    private int strength;
-    private Weapon weapon;
-    
-    // We are not using List<CombatAction>, instead, we are using
-    // HashMap<String, CombatAction> in order to make it easier and more
-    // scalable.
 
+    /**
+     * The character's name.
+     */
+    private final String name;
+
+    /**
+     * Current health points of the character.
+     */
+    private int healthPoints;
+
+    /**
+     * Indicates whether the character is knocked out (HP ≤ 0).
+     */
+    private boolean isKnocked;
+
+    /**
+     * Will points used to perform actions (similar to energy or mana).
+     */
+    private int willPoints;
+
+    /**
+     * Strength attribute used in damage calculations.
+     */
+    private int strength;
+
+    /**
+     * Weapon currently equipped by the character.
+     */
+    private Weapon weapon;
+
+    /**
+     * Map of available combat actions, keyed by action name.
+     */
     protected final HashMap<String, CombatAction> actions = new HashMap<>();
 
+    /**
+     * Constructs a character with the given attributes and initializes default actions.
+     *
+     * @param name         the character's name
+     * @param healthPoints initial health points
+     * @param willPoints   initial will points
+     * @param strength     initial strength value
+     */
     public Character(String name, int healthPoints, int willPoints,
                      int strength) {
         this.name = name;
@@ -37,71 +75,96 @@ public abstract class Character implements Combatant, Serializable{
         actions.put("SelfHeal", CombatActionRegistry.SELF_HEAL);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getHealthPoints() {
         return this.healthPoints;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean getIsKnocked() {
         return this.isKnocked;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setIsKnocked(boolean newIsKnocked) {
         this.isKnocked = newIsKnocked;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getWillPoints() {
         return this.willPoints;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setWillPoints(int newWillPoints) {
         this.willPoints = newWillPoints;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getStrength() {
         return this.strength;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setStrength(int newStrength) {
         this.strength = newStrength;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setHealthPoints(int newHealthPoints) {
         this.healthPoints = newHealthPoints;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Weapon getWeapon() {
         return this.weapon;
     }
 
+    /**
+     * Equips a weapon to the character and sets the weapon's user.
+     *
+     * @param weapon the weapon to equip
+     * @throws InsufficientCharacterLevel if the character's level is too low for the weapon
+     */
     @Override
-    public void setWeapon(Weapon weapon) throws InsufficientCharacterLevel{
+    public void setWeapon(Weapon weapon) throws InsufficientCharacterLevel {
         this.weapon = weapon;
         weapon.setUser(this);
     }
 
+    /**
+     * Returns the map of available combat actions.
+     *
+     * @return a map of action names to {@link CombatAction} instances
+     */
     @Override
     public HashMap<String, CombatAction> getActions() {
         return this.actions;
     }
 
+    /**
+     * Applies damage to the character and updates knockout status.
+     * Health cannot drop below zero.
+     *
+     * @param damage the amount of damage received
+     */
     @Override
     public void receiveDamage(int damage) {
-        // If the damage is enough to knock a character, the healthPoints will be set to 0,
-        // because the HP can not go below 0, and the attribute isKnocked will be set to true.
         if (this.healthPoints - damage <= 0) {
             this.healthPoints = 0;
             this.isKnocked = true;
@@ -110,12 +173,20 @@ public abstract class Character implements Combatant, Serializable{
         this.healthPoints -= damage;
     }
 
+    /**
+     * Applies healing to the character.
+     *
+     * @param healing the amount of health restored
+     */
     @Override
     public void receiveHealing(int healing) {
         this.healthPoints += healing;
     }
 
-    // Its not necessary to print the isKnocked attribute.
+    /**
+     * Prints the character's current status to the console.
+     * Includes name, health points, will points, and strength.
+     */
     public void printStatus() {
         System.out.printf("Name: %s\n", this.name);
         System.out.printf("Health Points: %d\n", this.healthPoints);
@@ -123,9 +194,12 @@ public abstract class Character implements Combatant, Serializable{
         System.out.printf("Strength: %d\n", this.strength);
     }
 
-    // Did not make it abstract, even with the document instructing
-    // to do so, because the behavior will be common to all characters,
-    // so it makes sense to be implemented here.
+    /**
+     * Randomly selects an available combat action to perform.
+     *
+     * @param target the target of the action
+     * @return the chosen {@link CombatAction}
+     */
     @Override
     public CombatAction chooseAction(Combatant target) {
         ArrayList<CombatAction> actionsList = new ArrayList<>(this.getActions().values());

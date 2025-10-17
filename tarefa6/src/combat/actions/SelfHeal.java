@@ -6,31 +6,34 @@ import exceptions.InsufficientWillPoints;
 import utils.Dice;
 
 /**
- * Acao de curar a si proprio
+ * Represents a healing action where the actor heals themselves.
+ * This action restores health to the actor and consumes one will point.
+ * It extends the {@link Heal} action with a self-targeting behavior.
  */
 public class SelfHeal extends Heal {
 
     /**
-     * Da nome a acao
-     * @return "Self Heal"
+     * Returns the name of the action.
+     *
+     * @return the string "Self Heal"
      */
     @Override
     public String getName() {
         return "Self Heal";
     }
-    
+
     /**
-     * Realiza a cura.
-     * Onde o alvo e ele proprio
-     * 
-     * @param actor quem ira realizar a acao
-     * @param target quem ira sofrer dessa acao
-     * 
-     * @throws InsufficientWillPoints pontos de vontade nao sao suficientes para realizar a acao
-     * @throws CharacterKnocked caso o personagem esteja derrubado
+     * Executes the self-healing action.
+     *
+     * @param actor  the combatant performing the healing
+     * @param target the combatant receiving the healing (should be the actor themselves)
+     * @throws InsufficientWillPoints if the actor has less than 1 will point
+     * @throws CharacterKnocked       if the actor is currently knocked out
      */
     @Override
-    public void execute(Combatant actor, Combatant target) throws InsufficientWillPoints, CharacterKnocked{
+    public void execute(Combatant actor, Combatant target)
+            throws InsufficientWillPoints, CharacterKnocked {
+
         if (actor.getIsKnocked()) {
             throw new CharacterKnocked();
         }
@@ -41,9 +44,9 @@ public class SelfHeal extends Heal {
 
         int healing = Dice.roll(1, 6) + 2;
         target.receiveHealing(healing);
-
         actor.setWillPoints(actor.getWillPoints() - 1);
 
-        System.out.printf("%s healed themself %d Health Points!\n", actor.getName(), healing);
+        System.out.printf("%s healed themself %d Health Points!\n",
+                actor.getName(), healing);
     }
 }

@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"utils","l":"Dice"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"levels","l":"CombatLevel"},{"p":"levels","l":"Difficulty"},{"p":"levels.builder","l":"FixatedLevelBuilder"},{"p":"levels","l":"Level"},{"p":"levels.builder","l":"LevelBuilder"},{"p":"levels.scenarios","l":"Scenario"}];updateSearchResults();

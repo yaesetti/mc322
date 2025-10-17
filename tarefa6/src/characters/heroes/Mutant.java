@@ -3,24 +3,35 @@ package characters.heroes;
 import characters.Hero;
 import combat.Combatant;
 
-// Mutants are meta-humans that, for whatever reason, have abilities and power
-// beyond the common beings and use them to save people.
-// Real life examples would be: Flash, Superman, Cyclops, Storm...
-
-// The most important attribute for this class is their Mutant Energy (ME)
 /**
- * Subclasse de {@link Hero}: Mutant
+ * Represents a subclass of {@link Hero} called Mutant.
  * 
- * adiciona mutantEnergy: pode causar mais dano usando ela
+ * Mutants are meta-humans with extraordinary powers used to protect others.
+ * Real-world analogs include characters like Flash, Superman, Cyclops, and Storm.
+ * 
+ * The key attribute of this class is Mutant Energy (ME), which enhances attack damage
+ * and fuels the use of special abilities.
  */
 public class Mutant extends Hero {
+    /**
+     * Current amount of Mutant Energy available.
+     */
     private int mutantEnergy;
+
+    /**
+     * Maximum capacity of Mutant Energy based on the hero's level.
+     */
+
     private int maxMutantEnergy;
 
     /**
-     * {@inheritDoc}
-     * 
-     * Construtor de mutante inicializa sua energia mutante baseado no seu nivel
+     * Constructs a Mutant hero with the given attributes.
+     * Initializes Mutant Energy based on the hero's level.
+     *
+     * @param name         the name of the mutant
+     * @param healthPoints the initial health points
+     * @param willPoints   the initial will points
+     * @param strength     the initial strength value
      */
     public Mutant(String name, int healthPoints, int willPoints, int strength) {
         super(name, healthPoints, willPoints, strength);
@@ -29,8 +40,10 @@ public class Mutant extends Hero {
     }
 
     /**
-     * Metodo para dar a exp para o mutante e
-     * aumentar sua energia mutante
+     * Grants experience to the mutant and updates their maximum Mutant Energy
+     * based on the new level.
+     *
+     * @param exp the amount of experience gained
      */
     @Override
     public void gainExp(int exp) {
@@ -39,10 +52,10 @@ public class Mutant extends Hero {
     }
 
     /**
-     * Metodo que calcula o dano que o monstro dara
-     * com arma equipada mais usando sua habilidade especial
-     * 
-     * @return damage dano que Mutant causou
+     * Calculates the attack damage dealt by the mutant.
+     * If Mutant Energy is available, adds +2 damage and consumes 1 energy.
+     *
+     * @return the total damage dealt
      */
     @Override
     public int getAttackDamage() {
@@ -56,18 +69,38 @@ public class Mutant extends Hero {
         return damage;
     }
 
+    /**
+     * Returns the current Mutant Energy.
+     *
+     * @return the current energy value
+     */
     public int getMutantEnergy() {
         return this.mutantEnergy;
     }
 
+    /**
+     * Sets the current Mutant Energy.
+     *
+     * @param newMutantEnergy the new energy value
+     */
     public void setMutantEnergy(int newMutantEnergy) {
         this.mutantEnergy = newMutantEnergy;
     }
 
+    /**
+     * Returns the maximum Mutant Energy capacity.
+     *
+     * @return the maximum energy value
+     */
     public int getMaxMutantEnergy() {
         return this.maxMutantEnergy;
     }
 
+    /**
+     * Executes the mutant's special skill: "Restore Energy".
+     *
+     * @param target the combatant receiving the damage
+     */
     @Override
     public void useSpecialSkill(Combatant target) {
         // Name: Restore Energy

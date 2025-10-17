@@ -10,19 +10,32 @@ import items.weapons.Gauntlet;
 import items.weapons.Pistol;
 import items.weapons.Sword;
 
-// Specialists are humans that, even without having any super powers, fight for what
-// is right. They normally depend on weapons, and are proficient in many of them.
-// Real life examples would be: Batman, Hawkeye, Green Arrow...
-
-// This whole class depends on the weapons.
 /**
- * Subclasse de {@link Hero}:Specialist
+ * Represents a subclass of {@link Hero} called Specialist.
  * 
- * adiciona preferredWeapon: causa mais dano se esta equipado com arma de preferencia
+ * Specialists are highly trained humans who fight for justice without superpowers.
+ * They rely heavily on weapons and are proficient in multiple types.
+ * Real-world analogs include Batman, Hawkeye, and Green Arrow.
+ * 
+ * This class introduces a preferred weapon mechanic, granting bonus damage
+ * when the Specialist uses their favored weapon type.
  */
-public class Specialist extends Hero{
+public class Specialist extends Hero {
+
+    /**
+     * Index of the preferred weapon type in the {@code specialistWeapons} array.
+     */
     private final int preferredWeapon;
+
+    /**
+     * Index of the currently equipped weapon in the {@code specialistWeapons} array.
+     */
     private int weaponIndex;
+
+    /**
+     * Array of weapon options available to the Specialist.
+     * Includes a sword, gauntlet, and pistol by default.
+     */
     private final Weapon[] specialistWeapons = {
         new Sword("Specialist Sword", 1, 7, this),
         new Gauntlet("Specialist Gauntlets", 1, 4, this),
@@ -30,9 +43,13 @@ public class Specialist extends Hero{
     };
 
     /**
-     * {@inheritDoc}
-     * 
-     * Inicia com 0 armas equipadas e quantidade de armas que prefere
+     * Constructs a Specialist hero with the given attributes and preferred weapon type.
+     *
+     * @param nome            the name of the Specialist
+     * @param healthPoints    initial health points
+     * @param willPoints      initial will points
+     * @param strength        initial strength value
+     * @param preferredWeapon index of the preferred weapon (0 = Sword, 1 = Gauntlet, 2 = Pistol)
      */
     public Specialist(String nome, int healthPoints, int willPoints,
                       int strength, int preferredWeapon) {
@@ -42,28 +59,27 @@ public class Specialist extends Hero{
     }
 
     /**
-     * Caso a arma que ele tiver equipado for igual a arma de preferencia causa +4
-     * de dano
-     * 
-     * @return damage dano causado pelo Specialist
+     * Calculates the attack damage dealt by the Specialist.
+     * Adds +4 damage if the equipped weapon matches the preferred weapon type.
+     *
+     * @return the total damage dealt
      */
     @Override
     public int getAttackDamage() {
         int damage = this.getWeapon().getDamage();
-        
-        if (this.getWeapon().getClass().equals(this.specialistWeapons[
-            preferredWeapon].getClass())) {
-                damage += 4;
-            }
+
+        if (this.getWeapon().getClass().equals(this.specialistWeapons[preferredWeapon].getClass())) {
+            damage += 4;
+        }
 
         return damage;
     }
 
     /**
-     * Equipa uma arma para o Specialist e
-     * muda para uma equivalente da specialistWeapons list
-     * 
-     * @param newWeapon nova arma
+     * Equips a new weapon and updates the corresponding entry in the Specialist's weapon list.
+     * Prevents duplicate weapon types in the internal array.
+     *
+     * @param newWeapon the weapon to equip
      */
     @Override
     public void setWeapon(Weapon newWeapon) {
@@ -73,59 +89,39 @@ public class Specialist extends Hero{
             System.err.println(e.getMessage());
         }
 
-        // If the player chooses to equip another Weapon
-        // the new Weapon will replace it's equivalent
-        // in the specialistWeapons list, in order to
-        // not have duplicates in the list
         if (newWeapon instanceof Sword) {
             specialistWeapons[0] = newWeapon;
-        }
-        else if (newWeapon instanceof Gauntlet) {
+        } else if (newWeapon instanceof Gauntlet) {
             specialistWeapons[1] = newWeapon;
-        }
-        else if (newWeapon instanceof Pistol) {
+        } else if (newWeapon instanceof Pistol) {
             specialistWeapons[2] = newWeapon;
         }
     }
 
     /**
-     * Metodo para habilidade especial:
-     * Caso ele estiver com sorte(critico) e a arma equipada for diferente da arma preferida troca
-     * sem critar equipa a arma, tambem verifica se pode equipar e nao extrapolar o quantidade maxima
-     * 
-     * @param target alvo da habilidade
+     * Executes the Specialist's special skill: "Versatility".
+     *
+     * @param target the combatant receiving the damage
      */
     @Override
     public void useSpecialSkill(Combatant target) {
-        // Name: Versatility
-        // Description: Surprise an enemy by suddenly changing the kind of weapon
-        //              being used, while also dealing 2 damage.
-
-        // Critical instance of the Special Skill because the Hero is lucky
         if (this.getLuck() && this.weaponIndex != this.preferredWeapon) {
             this.weaponIndex = this.preferredWeapon;
-        }
-        // Normal instance of the Special Skill
-        else {
+        } else {
             this.weaponIndex++;
-            
-            // Verifies if the weaponIndex is bigger than the amount of possible weapons.
             if (this.weaponIndex > this.specialistWeapons.length - 1) {
                 this.weaponIndex = 0;
             }
         }
 
-        // Deals the 2 points of damage;
         target.receiveDamage(2);
-        
-        // Prints what happened
-        System.out.printf("%s changed to %s, dealt 2 points of damage to %s and will attack!\n", this.getName(), this.getWeapon().getName(), target.getName());
 
-        // Attacks
+        System.out.printf("%s changed to %s, dealt 2 points of damage to %s and will attack!\n",
+                this.getName(), this.getWeapon().getName(), target.getName());
+
         try {
             this.actions.get("Attack").execute(this, target);
-        }
-        catch (InsufficientWillPoints | CharacterKnocked e) {
+        } catch (InsufficientWillPoints | CharacterKnocked e) {
             System.err.println(e.getMessage());
         }
     }
