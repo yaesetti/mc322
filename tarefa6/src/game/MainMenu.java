@@ -5,24 +5,24 @@ import java.util.ArrayList;
 import levels.Difficulty;
 
 /**
- * Classe responsavel por exibir o menu principal
- * 
- * {@code MainMenu}:
- *      Inicia um novo jogo em uma dificuldade escolhida
- *      Vizualizar as informacoes das classes de herois
- *      Vizualizar as informacoes das classes de monstros
- *      Encerrar o jogo
+ * Handles the main menu interface for the U-Energy RPG game.
+ * <p>
+ * The {@code MainMenu} class allows players to:
+ * <ul>
+ *   <li>Start a new game with a chosen difficulty</li>
+ *   <li>Load a previously saved game</li>
+ *   <li>View information about hero classes</li>
+ *   <li>View information about monster classes</li>
+ *   <li>Exit the game</li>
+ * </ul>
  */
 public class MainMenu {
 
     /**
-     * Exibe o menu do jogo no console
-     * 
-     * Impressao estatica das opcoes
+     * Displays the main menu options in the console.
      */
     private static void printMenu() {
         String menu = """
-
                                U-Energy | RPG
                 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -34,12 +34,12 @@ public class MainMenu {
 
                 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
                 """;
-        
-                System.out.println(menu);
+        System.out.println(menu);
     }
 
     /**
-     * Exibe no console as informacoes de classe de herois disponiveis
+     * Displays information about available hero classes.
+     * Includes descriptions and special skills for Mutant and Specialist.
      */
     private static void printHeroClasses() {
         String message = """
@@ -51,7 +51,6 @@ public class MainMenu {
 
          The most important attribute for this class is their
          Mutant Energy (ME).
-
 
          Special Skill: Restore Energy
          -> Focus your inner powers and restore 2 Mutant Energy
@@ -71,19 +70,19 @@ public class MainMenu {
             weapon being used, while also dealing 2 damage.
         ==--==--==--==--==--==--==--=--=--==--==--==--==--==--==--==
                 """;
-
         System.out.println(message);
     }
 
     /**
-     * Exibe no console as informacoes de classe de monstros disponiveis
+     * Displays information about available monster classes.
+     * Includes descriptions and traits for Twisted Mutant and Thug Gang.
      */
     private static void printMonsterClasses() {
         String message = """
         ==--==--==--==--==--== TWISTED MUTANT ==--==--==--==--==--==
          Twisted Mutants also are meta-humans that gained powers
          by whatever reason, but unlike the Mutants, they turned
-         out evil and using their powers to steal, murder and
+         out evil and use their powers to steal, murder and
          inflict pain.
          Real life examples: Magneto, Killer Croc, Sinister...
 
@@ -94,23 +93,22 @@ public class MainMenu {
         ==--==--==--==--==--==-- THUG GANG --==--==--==--==--==--==-
          Thug Gangs are made of thieves, bullies and scammers.
          They do not have powers, but have the advantage of
-         always be in groups.
+         always being in groups.
          Real life examples: Joker's Gang, KingPin's Gang...
 
          Thug Gangs deal more damage based on the number of
          gang members.
         ==--==--==--==--==--==--==--=--=--==--==--==--==--==--==--==
                 """;
-
         System.out.println(message);
     }
 
     /**
-     * Exibe as opcoes de dificuldade de jogo
+     * Displays the difficulty selection menu.
+     * Options include Easy, Medium, and Hard.
      */
     private static void printDiffMenu() {
         String menu = """
-
                                 Difficulty
                 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -120,21 +118,22 @@ public class MainMenu {
 
                 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
                 """;
-        
         System.out.println(menu);
     }
 
     /**
-     * Gerencia o menu principal do jogo e trata as escolhas do jogador
-     * 
-     * Implementa um loop que:
-     *      Exibe o menu principal.
-     *      Le a escolha do jogador.
-     *      Executa a acao correspondente, como iniciar o jogo,
-     *      exibir informacoes de classe ou encerrar o jogo
+     * Manages the main menu loop and handles player choices.
+     * <p>
+     * Based on the selected option, this method will:
+     * <ul>
+     *   <li>Start a new game with chosen difficulty</li>
+     *   <li>Load a saved game from disk</li>
+     *   <li>Display hero or monster class information</li>
+     *   <li>Exit the game with confirmation</li>
+     * </ul>
      */
     public static void manageMenu() {
-        while (true) { 
+        while (true) {
             printMenu();
             int input = InputManager.readInteger("Insert your option: ", 1, 5);
 
@@ -142,13 +141,12 @@ public class MainMenu {
                 case 1 -> {
                     printDiffMenu();
                     input = InputManager.readInteger("Insert your option: ", 1, 3);
-                    Difficulty difficulty;
-                    switch (input) {
-                        case 1 -> difficulty = Difficulty.EASY;
-                        case 2 -> difficulty = Difficulty.MEDIUM;
-                        case 3 -> difficulty = Difficulty.HARD;
-                        default -> difficulty = Difficulty.EASY;
-                    }
+                    Difficulty difficulty = switch (input) {
+                        case 1 -> Difficulty.EASY;
+                        case 2 -> Difficulty.MEDIUM;
+                        case 3 -> Difficulty.HARD;
+                        default -> Difficulty.EASY;
+                    };
                     Battle battle = new Battle(difficulty);
                     GameManager.playGame(battle);
                 }
@@ -159,27 +157,23 @@ public class MainMenu {
                         System.out.println("\n-> No Saves available, try starting a New Game");
                         break;
                     }
+
                     System.out.println();
                     System.out.println("                    Saves");
                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                     System.out.println(" [1] Go back\n");
                     for (int i = 0; i < battleNames.size(); i++) {
                         String name = battleNames.get(i).replaceFirst("\\.bin$", "");
-                        System.out.printf(" [%d] %s\n", i+2, name);
+                        System.out.printf(" [%d] %s\n", i + 2, name);
                     }
                     System.out.println();
                     System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+
                     input = InputManager.readInteger("Insert your option: ", 1, battleNames.size() + 1) - 2;
-                    if (input == -1) {
-                        break;
-                    }
+                    if (input == -1) break;
 
-                    int selectedBattle = input;
-                    
-                    Battle battle = PersistenceManager.loadBattle(battleNames.get(selectedBattle));
-
+                    Battle battle = PersistenceManager.loadBattle(battleNames.get(input));
                     System.out.println("-> Loading save...");
-
                     GameManager.playGame(battle);
                 }
                 case 3 -> {
@@ -192,18 +186,14 @@ public class MainMenu {
                 }
                 case 5 -> {
                     boolean confirmation = InputManager.readBoolean("-> Are you sure?");
-                    
-                    // if the user answered 'no', then the loop continues
-                    if (!confirmation) {
-                        continue;
-                    }
-                    System.out.println("\nThank you for playing U-Energy RPG and keeping our world more secure!\n");
-                    
-                    InputManager.closeScanner();
+                    if (!confirmation) continue;
 
+                    System.out.println("\nThank you for playing U-Energy RPG and keeping our world more secure!\n");
+                    InputManager.closeScanner();
                     return;
                 }
                 default -> {
+                    // No action needed
                 }
             }
         }
