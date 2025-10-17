@@ -1,7 +1,9 @@
 package levels;
 
 /**
- * Niveis de dificuldade
+ * Represents difficulty levels for a game stage.
+ * Each level has an associated multiplier that can be used
+ * to scale challenges, rewards, or other mechanics.
  */
 public enum Difficulty {
     EASY(1),
@@ -11,18 +13,18 @@ public enum Difficulty {
     private final int multiplier;
 
     /**
-     * Multiplicador da dificuldade
-     * 
-     * @param multiplier multiplicador do nivel
+     * Constructs a difficulty level with a specific multiplier.
+     *
+     * @param multiplier the numeric multiplier associated with the difficulty
      */
     private Difficulty(int multiplier) {
         this.multiplier = multiplier;
     }
 
     /**
-     * Da o multiplicador 
-     * 
-     * @return retorna o multiplicador
+     * Returns the multiplier value of the difficulty level.
+     *
+     * @return the difficulty multiplier
      */
     public int getMultiplier() {
         return this.multiplier;

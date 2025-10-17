@@ -6,6 +6,11 @@ import characters.Hero;
 import characters.Monster;
 import levels.scenarios.Scenario;
 
+/**
+ * Represents a combat level in the game, where a hero faces a group of monsters
+ * within a specific scenario. Tracks the challenge rating, turn progression,
+ * and combat completion status.
+ */
 public class CombatLevel implements Level {
     private final Hero hero;
     private final Scenario scenario;
@@ -14,6 +19,14 @@ public class CombatLevel implements Level {
     private int turnCounter;
     private int currentMonsterIndex;
 
+    /**
+     * Constructs a CombatLevel with the given hero, scenario, challenge rating, and monsters.
+     *
+     * @param hero      the hero participating in the combat
+     * @param scenario  the scenario/environment of the level
+     * @param challenge the difficulty rating of the level
+     * @param monsters  the list of monsters to fight
+     */
     public CombatLevel(Hero hero, Scenario scenario, int challenge, ArrayList<Monster> monsters) {
         this.hero = hero;
         this.scenario = scenario;
@@ -23,22 +36,43 @@ public class CombatLevel implements Level {
         this.currentMonsterIndex = 0;
     }
 
+    /**
+     * Returns the challenge rating of the level.
+     *
+     * @return the challenge value
+     */
     public int getChallenge() {
         return this.challenge;
     }
 
+    /**
+     * Returns the scenario of the level.
+     *
+     * @return the scenario object
+     */
     @Override
     public Scenario getScenario() {
         return this.scenario;
     }
 
+    /**
+     * Returns the list of monsters in the level.
+     *
+     * @return the list of Monster objects
+     */
     public ArrayList<Monster> getMonsters() {
         return this.monsters;
     }
 
+    /**
+     * Checks whether the level is completed.
+     * A level is completed when all monsters are knocked out.
+     *
+     * @return true if all monsters are knocked out, false otherwise
+     */
     @Override
     public boolean getIsCompleted() {
-        for (Monster monster: monsters) {
+        for (Monster monster : monsters) {
             if (!monster.getIsKnocked()) {
                 return false;
             }
@@ -46,26 +80,45 @@ public class CombatLevel implements Level {
         return true;
     }
 
+    /**
+     * Returns the current turn counter.
+     *
+     * @return the number of turns elapsed
+     */
     @Override
     public int getTurnCounter() {
         return this.turnCounter;
     }
 
+    /**
+     * Increments the turn counter by one.
+     */
     @Override
     public void incrementTurnCounter() {
         this.turnCounter++;
     }
 
+    /**
+     * Returns the index of the current monster being engaged.
+     *
+     * @return the current monster index
+     */
     @Override
     public int getCurrentMonsterIndex() {
         return this.currentMonsterIndex;
     }
 
+    /**
+     * Increments the current monster index by one.
+     */
     @Override
     public void incrementCurrentMonsterIndex() {
         this.currentMonsterIndex++;
     }
 
+    /**
+     * Starts the level by displaying its details and applying the scenario effect to the hero.
+     */
     @Override
     public void start() {
         System.out.printf("Level Challenge: %d\n", this.challenge);
@@ -73,7 +126,7 @@ public class CombatLevel implements Level {
         System.out.printf("Level Description: \n%s\n", this.scenario.getDescription());
         this.scenario.applyEffect(this.hero);
         System.out.printf("Number of Monsters: %d\n", this.monsters.size());
-        for (Monster monster: monsters) {
+        for (Monster monster : monsters) {
             System.out.printf("-> %s\n", monster.getName());
         }
     }
