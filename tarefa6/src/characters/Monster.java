@@ -16,7 +16,8 @@ public abstract class Monster extends Character implements Lootable {
                                         1400, 1600, 1900};
     private final int expValue;
     private boolean luck;
-    private final List<Function<Monster, Item>> drops;
+    private final Difficulty difficulty;
+    private transient List<Function<Monster, Item>> drops;
     
     public Monster(String name, int healthPoints, int willPoints, int strength, int dangerRating, Difficulty difficulty) {
 
@@ -25,6 +26,7 @@ public abstract class Monster extends Character implements Lootable {
         this.dangerRating = dangerRating;
         this.expValue = expValueList[this.dangerRating];
         this.luck = false;
+        this.difficulty = difficulty;
         this.drops = switch (difficulty) {
             case EASY -> LootFactory.EASY_LOOT;
             case MEDIUM -> LootFactory.MEDIUM_LOOT;
@@ -52,6 +54,16 @@ public abstract class Monster extends Character implements Lootable {
             return null;
         }
         return this.drops;
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        this.drops = switch (this.difficulty) {
+            case EASY -> LootFactory.EASY_LOOT;
+            case MEDIUM -> LootFactory.MEDIUM_LOOT;
+            case HARD -> LootFactory.HARD_LOOT;
+        };
     }
 
     @Override

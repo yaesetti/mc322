@@ -1,6 +1,5 @@
 package items;
 
-import java.io.;
 import java.util.List;
 import java.util.function.Function;
 
@@ -9,7 +8,7 @@ import items.weapons.Gauntlet;
 import items.weapons.Pistol;
 import items.weapons.Sword;
 
-public final class LootFactory implements Transient {
+public final class LootFactory {
     public static final List<Function<Monster, Item>> EASY_LOOT = List.of(
         owner -> new Sword("Rusted Sword", 2, 3, owner),
         owner -> new Gauntlet("Rusted Gauntlet", 2, 2, owner),
