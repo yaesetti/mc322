@@ -1,6 +1,6 @@
 package characters;
 
-import combat.actions.UseSpecialSkill;
+import combat.CombatActionRegistry;
 import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 
@@ -34,7 +34,7 @@ public abstract class Hero extends Character {
         this.exp = 0;
         this.luck = false;
 
-        this.actions.put("Special Skill", new UseSpecialSkill());
+        this.actions.put("Special Skill", CombatActionRegistry.USE_SPECIAL_SKILL);
     }
 
     public int getLevel() {

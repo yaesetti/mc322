@@ -4,19 +4,11 @@ import characters.Character;
 import combat.DamageType;
 import items.Weapon;
 
-/**
- * Subclasse de {@link Weapon}
- * arma com dano do tipo cortante
- */
 public class Sword extends Weapon {
     private int sharpness;
 
-    /**
-     * Inicializa a arma com dano cortante,
-     * dano bonus por dano cortante e na forca do heroi e o level
-     */
     public Sword(String name, int minLevel, int sharpness, Character user) {
-        super(name, new int[]{1, 6}, sharpness + user.getStrength() + 1 * minLevel, minLevel, DamageType.Slashing, user);
+        super(name, new int[]{1, 6}, sharpness + 1 * minLevel, minLevel, DamageType.Slashing, user);
         this.sharpness = sharpness;
     }
 
@@ -28,9 +20,17 @@ public class Sword extends Weapon {
         this.sharpness = sharpness;
     }
 
-    /**
-     * Printa no console so atributos
-     */
+    @Override
+    public void setUser(Character newUser) {
+        super.setUser(newUser);
+        int userStr = 0;
+        if (newUser != null) {
+            userStr = newUser.getStrength();
+        }
+        int bonus = this.sharpness + userStr + 1 * this.getMinLevel();
+        this.setDamage(new int[]{1, 6}, bonus);
+    }
+
     @Override
     public void printStatus() {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");

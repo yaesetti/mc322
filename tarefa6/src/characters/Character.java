@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import combat.CombatAction;
+import combat.CombatActionRegistry;
 import combat.Combatant;
-import combat.actions.Attack;
-import combat.actions.SelfHeal;
 import exceptions.InsufficientCharacterLevel;
 import items.Weapon;
 import utils.Dice;
@@ -34,8 +33,8 @@ public abstract class Character implements Combatant, Serializable{
         this.willPoints = willPoints;
         this.strength = strength;
 
-        actions.put("Attack", new Attack());
-        actions.put("SelfHeal", new SelfHeal());
+        actions.put("Attack", CombatActionRegistry.ATTACK);
+        actions.put("SelfHeal", CombatActionRegistry.SELF_HEAL);
     }
 
     @Override
@@ -88,34 +87,17 @@ public abstract class Character implements Combatant, Serializable{
         return this.weapon;
     }
 
-    /**
-     * Metodo para personagem equipar uma arma,
-     * caso nao tiver nivel o suficiente gera uma excecao
-     */
     @Override
     public void setWeapon(Weapon weapon) throws InsufficientCharacterLevel{
         this.weapon = weapon;
         weapon.setUser(this);
     }
 
-    /**
-     * Retorna um mapa de acoes possiveis.
-     * String identifica a acao
-     * CombatAction contem a logica da acao
-     * 
-     * @return mapa de acoes possiveis para o personagem 
-     */
     @Override
     public HashMap<String, CombatAction> getActions() {
         return this.actions;
     }
 
-    /**
-     * Dano que o personagem ira receber. 
-     * Garante tambem que se for negativa sera igual a zero no minimo
-     * 
-     * @param damage dano que ira receber
-     */
     @Override
     public void receiveDamage(int damage) {
         // If the damage is enough to knock a character, the healthPoints will be set to 0,
@@ -128,24 +110,12 @@ public abstract class Character implements Combatant, Serializable{
         this.healthPoints -= damage;
     }
 
-    /**
-     * Cura que o personagem ira receber
-     * 
-     * @param healing quantidade de cura que ira receber
-     */
     @Override
     public void receiveHealing(int healing) {
         this.healthPoints += healing;
     }
 
     // Its not necessary to print the isKnocked attribute.
-    /**
-     * Imprime no console os principais atributos do personagem:
-     * nome,
-     * pontos de vida,
-     * pontos de vontade,
-     * forca.
-     */
     public void printStatus() {
         System.out.printf("Name: %s\n", this.name);
         System.out.printf("Health Points: %d\n", this.healthPoints);
@@ -156,12 +126,6 @@ public abstract class Character implements Combatant, Serializable{
     // Did not make it abstract, even with the document instructing
     // to do so, because the behavior will be common to all characters,
     // so it makes sense to be implemented here.
-    /**
-     * Metodo para o personagem escolher uma acao
-     * 
-     * @param target alvo da acao
-     * @return acao que sera tomada
-     */
     @Override
     public CombatAction chooseAction(Combatant target) {
         ArrayList<CombatAction> actionsList = new ArrayList<>(this.getActions().values());

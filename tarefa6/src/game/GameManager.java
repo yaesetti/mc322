@@ -1,6 +1,7 @@
 package game;
 
 import java.util.List;
+import java.util.function.Function;
 
 import characters.Hero;
 import characters.Monster;
@@ -109,7 +110,9 @@ public class GameManager {
                 // it is worth it for the Hero to take it
                 Item droppedItem = null;
                 if (hero.getLuck() || Dice.roll(1, 100) <= 25) {
-                    droppedItem = enemy.dropLoot();
+                    List<Function<Monster, Item>> lootTable = enemy.lootTable();
+                    int index = Dice.roll(1, lootTable.size()) - 1;
+                    droppedItem = lootTable.get(index).apply(null);
                 }
 
                 // Increments the current monster in the battle

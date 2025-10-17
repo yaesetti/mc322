@@ -1,9 +1,10 @@
 package items;
 
-/**
- * Se o item e lootavel
- */
+import java.util.List;
+import java.util.function.Function;
+
+import characters.Monster;
+
 public interface Lootable {
-    /** Item como drop */
-    public Item dropLoot();
+    public List<Function<Monster, Item>> lootTable();
 }

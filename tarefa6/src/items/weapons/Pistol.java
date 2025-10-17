@@ -11,38 +11,48 @@ import items.Weapon;
 public class Pistol extends Weapon {
     private int bullets;
 
-    /**
-     * Inicializa a pistola com 15 balas com dano bonus baseado apenas no level
-     */
     public Pistol(String name, int minLevel, Character user) {
         super(name, new int[]{2, 4}, 3 * minLevel, minLevel, DamageType.Piercing, user);
         this.bullets = 15;
     }
 
-    /**
-     * Da o numero de balas
-     */
     public int getBullet() {
         return this.bullets;
     }
 
-    /**
-     * Atualiza a quantidade de balas e o dano causado
-     */
     public void setBullet(int bullets) {
-        if (bullets <= 0) {
-            this.bullets = 0;
-            this.setDamage(new int[]{1, 3}, this.getUser().getStrength());
+        this.bullets = Math.max(0, bullets);
+        if (this.bullets == 0) {
+            int userStr = 0;
+            if (this.getUser() != null) {
+                userStr = this.getUser().getStrength();
+            }
+            this.setDamage(new int[]{1, 3}, userStr);
             this.setDamageType(DamageType.Bludgeoning);
         }
         else {
-            this.bullets = bullets;
+            this.setDamage(new int[]{2, 4}, 3 * this.getMinLevel());
+            this.setDamageType(DamageType.Piercing);
         }
     }
 
-    /**
-     * Printa no console so atributos
-     */
+    @Override
+    public void setUser(Character newUser) {
+        super.setUser(newUser);
+        if (this.bullets == 0) {
+            int userStr = 0;
+            if (newUser != null) {
+                userStr = newUser.getStrength();
+            }
+            this.setDamage(new int[]{1, 3}, userStr);
+            this.setDamageType(DamageType.Bludgeoning);
+        }
+        else {
+            this.setDamage(new int[]{2, 4}, 3 * this.getMinLevel());
+            this.setDamageType(DamageType.Piercing);
+        }
+    }
+
     @Override
     public void printStatus() {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
