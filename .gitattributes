@@ -1,0 +1,5 @@
+*.html linguist-detectable=false
+/docs/ linguist-detectable=false
+/javadoc/ linguist-detectable=false
+
+*.java linguist-detectable=true

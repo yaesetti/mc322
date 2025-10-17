@@ -20,5 +20,7 @@ public class UseSpecialSkill implements CombatAction{
         if (actor.getWillPoints() < 2) {
             throw new InsufficientWillPoints();
         }
+
+        actor.useSpecialSkill(target);
     }
 }
