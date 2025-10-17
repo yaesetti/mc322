@@ -1,5 +1,6 @@
 package characters;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -51,7 +52,7 @@ public abstract class Monster extends Character implements Lootable {
     @Override
     public List<Function<Monster, Item>> lootTable() {
         if (this.drops == null || this.drops.isEmpty()) {
-            return null;
+            return Collections.emptyList();
         }
         return this.drops;
     }
