@@ -12,21 +12,19 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 /**
- * Handles saving and loading game progress to and from disk.
+ * Manages saving and loading game progress for U-Energy RPG.
  * <p>
- * The {@code PersistenceManager} class provides methods to:
- * <ul>
- *   <li>Save a {@link Battle} object to a file</li>
- *   <li>Load a saved {@link Battle} from a file</li>
- *   <li>List all available saved battles</li>
- * </ul>
- * Saves are stored in the {@code saves/} directory using binary serialization.
+ * This class handles serialization of {@link Battle} objects to disk,
+ * loading saved sessions, and listing available save files.
+ * <p>
+ * All saves are stored in the {@code saves/} directory using binary format.
  */
 public class PersistenceManager {
 
     /**
      * Saves a {@link Battle} object to disk using the specified name.
-     * Creates the {@code saves/} directory if it doesn't exist.
+     * <p>
+     * Automatically creates the {@code saves/} directory if it doesn't exist.
      *
      * @param battle     the battle instance to save
      * @param battleName the name of the save file (without extension)
@@ -37,13 +35,11 @@ public class PersistenceManager {
 
         try {
             Files.createDirectories(dir);
-
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path.toFile()))) {
                 out.writeObject(battle);
                 System.out.println("-> Game successfully saved in: " + path);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -51,7 +47,7 @@ public class PersistenceManager {
     /**
      * Loads a saved {@link Battle} object from disk.
      *
-     * @param battleName the name of the save file (with extension)
+     * @param battleName the name of the save file (with extension, e.g. {@code save1.bin})
      * @return the loaded {@link Battle} object, or {@code null} if loading fails
      */
     public static Battle loadBattle(String battleName) {
@@ -61,10 +57,10 @@ public class PersistenceManager {
             System.err.println("File not found: " + path);
             return null;
         }
+
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path.toFile()))) {
             return (Battle) in.readObject();
-        }
-        catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.err.println(e.getMessage());
             return null;
         }
@@ -72,9 +68,10 @@ public class PersistenceManager {
 
     /**
      * Lists all saved battle files in the {@code saves/} directory.
-     * Filters out system files like {@code .DS_Store}.
+     * <p>
+     * Filters out system files such as {@code .DS_Store}.
      *
-     * @return a list of save file names
+     * @return a list of save file names (e.g. {@code save1.bin}, {@code heroQuest.bin})
      */
     public static ArrayList<String> listSavedBattles() {
         Path dir = Paths.get("saves");
@@ -84,14 +81,12 @@ public class PersistenceManager {
                 Files.createDirectories(dir);
             }
 
-            ArrayList<String> fileNames = Files.list(dir)
+            return Files.list(dir)
                 .filter(Files::isRegularFile)
                 .map(path -> path.getFileName().toString())
                 .filter(name -> !name.equals(".DS_Store"))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-            return fileNames;
-            
         } catch (IOException e) {
             System.err.println(e.getMessage());
             return new ArrayList<>();

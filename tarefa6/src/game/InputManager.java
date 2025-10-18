@@ -4,11 +4,16 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Manages user input from the console.
+ * Handles user input from the console for the U-Energy RPG game.
  * <p>
  * Provides utility methods for reading and validating different types of input:
- * integers within a range, non-empty strings, boolean confirmations, and ENTER prompts.
- * Handles invalid or malformed input gracefully to prevent runtime errors.
+ * <ul>
+ *   <li>Integers within a specified range</li>
+ *   <li>Non-empty strings</li>
+ *   <li>Boolean confirmations (yes/no)</li>
+ *   <li>ENTER prompts for continuation</li>
+ * </ul>
+ * All methods include error handling to ensure robust and user-friendly input processing.
  */
 public class InputManager {
 
@@ -19,7 +24,7 @@ public class InputManager {
 
     /**
      * Resets the scanner instance.
-     * Useful when input stream needs to be refreshed.
+     * Useful when the input stream needs to be refreshed.
      */
     public static void resetScanner() {
         scanner = new Scanner(System.in);
@@ -33,8 +38,6 @@ public class InputManager {
      * @param min     the minimum acceptable value
      * @param max     the maximum acceptable value
      * @return a valid integer within the specified range
-     * @throws NumberFormatException    if the input cannot be parsed as an integer
-     * @throws NoSuchElementException   if the input is empty
      */
     public static int readInteger(String message, int min, int max) {
         int input;
@@ -42,22 +45,18 @@ public class InputManager {
         while (true) {
             try {
                 System.out.print(message);
-                
                 String buffer = scanner.nextLine();
                 input = Integer.parseInt(buffer);
 
                 if (input < min || input > max) {
                     System.err.printf("Invalid Input: Integer must be in the range [%d, %d]\n", min, max);
-                }
-                else {
+                } else {
                     return input;
                 }
 
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.err.println("Invalid Input: Input must be an Integer");
-            }
-            catch (NoSuchElementException e) {
+            } catch (NoSuchElementException e) {
                 System.err.println("Invalid Input: Input must not be empty");
             }
         }
@@ -69,20 +68,17 @@ public class InputManager {
      *
      * @param message the prompt message shown to the user
      * @return the trimmed string entered by the user
-     * @throws NoSuchElementException if the input is empty
      */
     public static String readString(String message) {
         String input;
 
         while (true) {
             System.out.print(message);
-
             input = scanner.nextLine().trim();
 
             if (input.isEmpty()) {
                 System.err.println("Invalid Input: Input must not be empty");
-            }
-            else {
+            } else {
                 return input;
             }
         }
@@ -100,9 +96,8 @@ public class InputManager {
 
         while (true) {
             System.out.print(message + " (y/n): ");
-
             input = scanner.nextLine().trim().toLowerCase();
-            
+
             if (input.isEmpty()) {
                 System.err.println("Invalid Input: Input must not be empty");
                 continue;
@@ -116,9 +111,7 @@ public class InputManager {
                 return false;
             }
 
-            else {
-                System.err.println("Invalid Input: Input must be 'y' or 'n'");
-            }
+            System.err.println("Invalid Input: Input must be 'y' or 'n'");
         }
     }
 
@@ -130,8 +123,7 @@ public class InputManager {
         String input;
 
         while (true) {
-            System.out.printf("Press ENTER to continue...");
-
+            System.out.print("Press ENTER to continue...");
             input = scanner.nextLine();
 
             if (input.isEmpty()) {

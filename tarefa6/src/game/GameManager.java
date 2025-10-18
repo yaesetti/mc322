@@ -20,7 +20,7 @@ import utils.Dice;
  * experience gain, loot drops, and victory or defeat conditions.
  */
 public class GameManager {
-    
+
     /**
      * Starts and runs the game using the provided {@link Battle} instance.
      * <p>
@@ -37,99 +37,87 @@ public class GameManager {
      * @param battle the current battle session to play
      */
     public static void playGame(Battle battle) {
-        // Getting the hero that is in the battle
         Hero hero = battle.getHero();
 
-        // Prints Hero's Stats
+        // Display initial hero stats
         System.out.println();
         System.out.println("-=-=-=-=-=-=-=-=- HERO STATS =-=-=-=-=-=-=-=-=-");
         hero.printStatus();
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println();
 
-        // Getting the levels from the battle
         int currentLevelIndex = battle.getCurrentLevelIndex();
         List<CombatLevel> levels = battle.getLevels().subList(currentLevelIndex, battle.getLevels().size());
 
+        // Resume menu if returning mid-battle
         if (currentLevelIndex > 0 || levels.get(0).getCurrentMonsterIndex() > 0) {
-            if (PostRoundMenu.manageMenu(null, battle) == 1) {
-                return;
-            }
+            if (PostRoundMenu.manageMenu(null, battle) == 1) return;
         }
 
-        // Loops for the amount of levels
-        for (CombatLevel level: levels) {
+        // Iterate through each level
+        for (CombatLevel level : levels) {
             System.out.printf("----------------------={LEVEL %d}=----------------\n", currentLevelIndex + 1);
-
-            // Prints the information of the level and apply the Scenario effect
             level.start();
 
-            // Loops for the amount of monsters
             int currentMonsterIndex = level.getCurrentMonsterIndex();
             List<Monster> levelMonsters = level.getMonsters().subList(currentMonsterIndex, level.getMonsters().size());
-            for (Monster enemy: levelMonsters){
 
-                // Loops while the enemy still is alive
+            // Iterate through each monster
+            for (Monster enemy : levelMonsters) {
+
+                // Combat loop until enemy is defeated
                 while (!enemy.getIsKnocked()) {
                     System.out.println();
                     System.out.printf("--------------------[TURN %d]--------------------\n", level.getTurnCounter());
+
                     try {
                         hero.chooseAction(enemy).execute(hero, enemy);
-                    }
-                    catch (InsufficientWillPoints | CharacterKnocked e) {
-                        System.err.println(e.getMessage());
-                    }
-                    
-                    try {
-                        enemy.chooseAction(hero).execute(enemy, hero);
-                    }
-                    catch (InsufficientWillPoints | CharacterKnocked e) {
+                    } catch (InsufficientWillPoints | CharacterKnocked e) {
                         System.err.println(e.getMessage());
                     }
 
-                    // If hero's HP == 0 -> Game Over
+                    try {
+                        enemy.chooseAction(hero).execute(enemy, hero);
+                    } catch (InsufficientWillPoints | CharacterKnocked e) {
+                        System.err.println(e.getMessage());
+                    }
+
                     if (hero.getIsKnocked()) {
                         System.out.println();
                         System.out.println("          XXXXXXXXXXXXXXXXX");
                         System.out.println("          X   GAME OVER   X");
                         System.out.println("          XXXXXXXXXXXXXXXXX");
                         System.out.println();
-
                         InputManager.readEnter();
-
                         return;
                     }
 
-                    // Prints the status of both Combatants after every turn
+                    // Display status
                     System.out.println();
                     System.out.println("++++++++++++++++++++ HERO ++++++++++++++++++++");
                     hero.printStatus();
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println();
-
                     System.out.println("#################### ENEMY ###################");
                     enemy.printStatus();
                     System.out.println("##############################################");
                     System.out.println();
 
-                    // Checks if the Event will happen or not
+                    // Trigger scenario event
                     level.getScenario().getEvent().checkTrigger(hero, level);
 
-                    // Increments the Turn Counter
                     level.incrementTurnCounter();
                 }
 
-                // If a Mutant knocks a TwistedMutant, the Mutant gains more Exp
+                // Experience reward (bonus for Mutant vs TwistedMutant)
                 if (hero.getClass().equals(Mutant.class) &&
                     enemy.getClass().equals(TwistedMutant.class)) {
                     hero.gainExp(enemy.getExpValue() * 2);
-                }
-                else {
+                } else {
                     hero.gainExp(enemy.getExpValue());
                 }
-                
-                // Verifies if the Enemy will drop loot and if
-                // it is worth it for the Hero to take it
+
+                // Loot drop logic using functional loot table
                 Item droppedItem = null;
                 if (hero.getLuck() || Dice.roll(1, 100) <= 25) {
                     List<Function<Monster, Item>> lootTable = enemy.lootTable();
@@ -137,29 +125,25 @@ public class GameManager {
                     droppedItem = lootTable.get(index).apply(null);
                 }
 
-                // Increments the current monster in the battle
                 level.incrementCurrentMonsterIndex();
-                
-                // Runs the Post Round Menu and checks if the user
-                // choose the option to abort the current game and
-                // go back to the Main Menu
-                if (PostRoundMenu.manageMenu(droppedItem, battle) == 1) {
-                    return;
-                }
+
+                if (PostRoundMenu.manageMenu(droppedItem, battle) == 1) return;
             }
-            // Increments the current level saved in the battle
+
             battle.incrementCurrentLevelIndex();
             currentLevelIndex++;
-    }
-    System.out.println();
-    System.out.println("                     -=[VICTORY]=-");
-    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-    System.out.println();
-    System.out.printf ("       %s saved the day once again!\n", hero.getName());
-    System.out.println();
-    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-    System.out.println();
+        }
 
-    InputManager.readEnter();
+        // Victory message
+        System.out.println();
+        System.out.println("                     -=[VICTORY]=-");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        System.out.println();
+        System.out.printf("       %s saved the day once again!\n", hero.getName());
+        System.out.println();
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        System.out.println();
+
+        InputManager.readEnter();
     }
 }

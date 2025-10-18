@@ -1,14 +1,15 @@
 package game;
 
 /**
- * Entry point for the game application.
+ * Entry point for the U-Energy RPG game application.
  * <p>
- * Initializes and launches the main menu, allowing the player to start or manage a game session.
+ * This class launches the game by invoking the main menu, allowing players to start a new game,
+ * load a saved session, view class information, or exit the application.
  */
 public class Main {
 
     /**
-     * Main method that starts the game.
+     * Starts the game by displaying the main menu.
      * <p>
      * Delegates control to {@link MainMenu#manageMenu()} to handle user interaction.
      *
