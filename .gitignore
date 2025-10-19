@@ -7,7 +7,7 @@ bin/
 lib/
 
 # Ignore the saves directory
-src/saves/
+saves/
 
 # Ignore common OS/editor junk
 .DS_Store
