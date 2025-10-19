@@ -6,6 +6,9 @@ target/
 bin/
 lib/
 
+# Ignore the saves directory
+src/saves/
+
 # Ignore common OS/editor junk
 .DS_Store
 *.swp
