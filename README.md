@@ -1,4 +1,6 @@
 # MC322
+### Note to PEDs: Please read the Disclaimers for each Task
+
 ## U-Energy | Online RPG
 A super-hero themed Online RPG in Java<br>
 <br>
@@ -22,9 +24,9 @@ Documentation is temporally implemented in Brazilian Portuguese. Will be changed
 Getters and Setters are intentionally not documented because are too simple.
 
 ## Disclaimer for Task 6
-Documentation of directories `characters`, `combat`, `game`, and `levels` are now improved and in English.
+Documentation is now completely translated to US English and compiling correctly using Javadoc. Getters and Setters are documented too.
 
-The technology used to save and load different Game Saves was the Java Serializable interface, not the JAXB library. Thus, the Game Saves are made in `.bin` files and not in `.xml` files, and they are all under `tarefaX/src/saves`.
+The technology used to save and load different Game Saves was the Java Serializable interface, not the JAXB library. Thus, the Game Saves are made in `.bin` files, not in `.xml` files, and they are all under `tarefaX/src/saves` *(note that this directory is included in `.gitignore` so it will only be created after the first Game Save is made)*.
 
 The class `Battle` is only used to store the relevant data to the Game Save. The logic used to run the game is still in `GameManager` in order to maintain consistency.
 
