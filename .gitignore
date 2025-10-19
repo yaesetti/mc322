@@ -1,9 +1,10 @@
 # Ignore compiled Java class files
 *.class
 
-# Ignore the bin and target directories (compiler output)
+# Ignore the bin, lib and target directories (compiler output)
 target/
 bin/
+lib/
 
 # Ignore common OS/editor junk
 .DS_Store
