@@ -4,11 +4,21 @@ import characters.Hero;
 import levels.CombatLevel;
 
 /**
- * Evento de emboscada
+ * Represents an ambush event in the U-Energy RPG game.
+ * <p>
+ * The {@code Ambush} event is triggered when the hero lacks luck and the turn counter reaches 5.
+ * When activated, a thief ambushes the hero and deals damage.
  */
 public class Ambush implements Event {
+
+    /**
+     * Description of the ambush event displayed when triggered.
+     */
     private final String description;
 
+    /**
+     * Constructs a new {@code Ambush} event with a predefined description.
+     */
     public Ambush() {
         this.description = """
                 While you were distracted and fighting the crime forces,
@@ -17,12 +27,12 @@ public class Ambush implements Event {
     }
 
     /**
-     * Verifica se o evento pode acontecer:
-     * O heroi esta sem sorte e
-     * o contador de turno e 5
-     * 
-     * @param hero heroi que ativa a armadilha
-     * @param level fase
+     * Checks whether the ambush event should be triggered.
+     * <p>
+     * The event occurs if the hero does not have luck and the turn counter is exactly 5.
+     *
+     * @param hero  the hero involved in the event
+     * @param level the current combat level
      */
     @Override
     public void checkTrigger(Hero hero, CombatLevel level) {
@@ -32,10 +42,12 @@ public class Ambush implements Event {
     }
 
     /**
-     * Printa no console o evento que esta o ocorrendo
-     * 
-     * @param hero heroi que ativa a armadilha
-     * @param level nivel da emboscada
+     * Executes the ambush event and applies its effects.
+     * <p>
+     * Displays the event description and deals 3 damage to the hero.
+     *
+     * @param hero  the hero affected by the ambush
+     * @param level the level where the ambush occurs
      */
     @Override
     public void execute(Hero hero, CombatLevel level) {
@@ -46,7 +58,7 @@ public class Ambush implements Event {
         System.out.println("dealt 3 points of damage!");
         System.out.println();
         System.out.println("*************************************");
-        
+
         hero.receiveDamage(3);
     }
 }
